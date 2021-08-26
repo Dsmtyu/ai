@@ -8,7 +8,7 @@ from version.egg.Egg import Egg
 from version.egg.Zone import Zone
 from version.egg.CellGroup import CellGroup
 
-CLASSPATH='C:\\Users\\admin\\Desktop\\AI\\'
+CLASSPATH='C:\\Users\\admin\\Desktop\\AI\\'#根目录路径
 
 from tkinter import *
 
@@ -31,22 +31,23 @@ class Frog(object):
         self.moveRight=Zone(500,200,10)
         self.moveRandom=Zone(500,300,10)
 
-        self.x=x
-        self.y=y
-        self.xChange=0
-        self.yChange=0
-        self.egg=egg
-        self.energy=1000
-        self.canvas=canvas
-        self.alive=True
+        self.x=x#青蛙的x坐标
+        self.y=y#青蛙的y坐标
+        self.xChange=0#青蛙水平方向的移动
+        self.yChange=0#青蛙垂直方向的移动
+        self.egg=egg#蛋
+        self.energy=1000#青蛙的能量，能量耗尽时青蛙死亡
+        self.canvas=canvas#tkinter画布
+        self.alive=True#是否活着
         self.allowVariation=False#是否允许变异
-        self.moveCount=0
-        self.frogImageFile=PhotoImage(CLASSPATH+'frog.gif')
-        self.frogImage=canvas.create_image(self.x,self.y,anchor=NW,image=self.frogImageFile)
+        self.moveCount=0#移动计数
+        self.frogImageFile=PhotoImage(CLASSPATH+'frog.gif')#青蛙图像文件
+        self.frogImage=canvas.create_image(self.x,self.y,anchor=NW,image=self.frogImageFile)#显示在canvas上的图像
 
         if egg.cellgroups is None:
             raise RuntimeError("Illegal egg cellgroups argument!")
         self.brainRadius=egg.brainRadius
+
         for k in range(len(egg.cellgroups)):
             g=egg.cellgroups[k]
             for i in range(g.cellQty):
@@ -67,15 +68,15 @@ class Frog(object):
                     c.outputs.append(output)
                 self.cells.append(c)
 
-    def randomPosInZone(self,z):
+    def randomPosInZone(self,z):#在Zone区域中的随机点，即坐标在Zone内，半径为0的一个Zone
         return Zone(z.x-z.radius+z.radius*2*nextFloat(),z.y-z.radius+z.radius*2*nextFloat(),0)
 
-    def active(self,env):
-        if not self.alive:
+    def active(self,env):#青蛙是否存活
+        if not self.alive:#青蛙已死亡，返回False
             return False
         if self.x<0 or self.x>=env.ENV_XSIZE\
-        or self.y<0 or self.y>=env.ENV_YSIZE:
-            self.alive=False
+        or self.y<0 or self.y>=env.ENV_YSIZE:#青蛙的横纵坐标是否出界
+            self.alive=False#出界时青蛙死亡
             return False
 
         #移动青蛙
@@ -89,12 +90,12 @@ class Frog(object):
         return True
 
     def checkFoodAndEat(self,env):#如果Frog坐标与Food坐标重合，吃掉它
-        eatedFood=False
+        eatedFood=False#是否吃掉食物
         if self.x>=0 and self.x<env.ENV_XSIZE\
         and self.y>=0 and self.y<env.ENV_YSIZE:
             if env.foods[round(self.x)][round(self.y)]:
                 env.foods[round(self.x)][round(self.y)]=0
-                self.energy+=1000
+                self.energy+=1000#吃到食物青蛙能量增加1000
                 eatedFood=True
         if eatedFood: #TODO: 奖励措施未完成
             pass
@@ -168,4 +169,4 @@ class Frog(object):
     def show(self):
         if not self.alive:
             return None
-        self.canvas.move(self.frogImage,self.xChange,self.yChange)
+        self.canvas.move(self.frogImage,self.xChange,self.yChange)#对Frog进行移动
