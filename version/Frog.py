@@ -36,7 +36,6 @@ class Frog(object):
         self.canvas=canvas
         self.alive=True
         self.moveCount=0
-        self.frogImageFile=PhotoImage()
         self.frogImageFile=PhotoImage(Application().CLASSPATH+'frog.gif')
         self.frogImage=canvas.create_image(self.x,self.y,anchor=NW,image=self.frogImageFile)
 
