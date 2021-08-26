@@ -4,7 +4,9 @@
 
 from version.brain.Cell import Cell
 from version.brain.IO import Input,Output
+from version.egg.Egg import Egg
 from version.egg.Zone import Zone
+from version.egg.CellGroup import CellGroup
 from version.env.Application import Application
 
 from tkinter import *
@@ -141,4 +143,28 @@ class Frog(object):
             return f
         return float(f*(0.95*nextFloat()*0.10))
 
-    
+    def layEgg(self):
+        self.allowVariation=False if nextInt(100)>25 else True#变异率先控制在25%
+        #如果不允许变异，下的蛋就等于原来的蛋
+        newEgg=Egg()
+        newEgg.brainRadius=self.percet5(self.egg.brainRadius)
+        newEgg.cellgroups=[]
+        for i in range(len(self.egg.cellgroups)):
+            cellGroup=CellGroup()
+            oldGp=self.egg.cellgroups[i]
+            cellGroup.groupInputZone=Zone(self.percet5(oldGp.groupInputZone.x),self.percet5(oldGp.groupInputZone.y),
+                                          self.percet5(oldGp.groupInputZone.radius))
+            cellGroup.groupOutputZone=Zone(self.percet5(oldGp.groupInputZone.x),self.percet5(oldGp.groupInputZone.y),
+                                          self.percet5(oldGp.groupInputZone.radius))
+            cellGroup.cellQty=round(self.percet5(oldGp.cellQty))
+            cellGroup.cellInputRadius=self.percet1(oldGp.cellInputRadius)
+            cellGroup.cellOutputRadius=self.percet1(oldGp.cellOutputRadius)
+            cellGroup.inputQtyPerCell=round(self.percet5(oldGp.inputQtyPerCell))
+            cellGroup.outputQtyPerCell=round(self.percet5(oldGp.outputQtyPerCell))
+            newEgg.cellgroups.append(cellGroup)
+        return newEgg
+
+    def show(self):
+        if not self.alive:
+            return None
+        self.canvas.move(self.frogImage,self.xChange,self.yChange)
