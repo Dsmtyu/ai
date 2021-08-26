@@ -3,9 +3,8 @@
 
 from tkinter import *
 
-CLASSPATH='C:\\Users\\admin\\Desktop\\AI\\'
-
 class Application(object):
     def __init__(self):
+        self.CLASSPATH='C:\\Users\\admin\\Desktop\\AI\\'
         self.tk=Tk()
         self.canvas=Canvas(width=520,height=550,bd=0,highlightthickness=0)
