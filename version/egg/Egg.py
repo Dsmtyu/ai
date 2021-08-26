@@ -29,3 +29,5 @@ class Egg(object):
             cellGroup.cellOutputRadius=float(nextFloat()*0.001)
             cellGroup.inputQtyPerCell=nextInt(10)
             cellGroup.outputQtyPerCell=nextInt(5)
+            egg.cellgroups.append(cellGroup)
+        return egg
