@@ -53,6 +53,14 @@ class Frog(object):
                     Zone().copyXY(self.randomPosInZone(g.groupInputZone),input)
                     input.radius=g.cellInputRadius
                     c.inputs.append(input)
+                c.outputs=[]
+                for j in range(g.outputQtyPerCell):
+                    output=Output()
+                    output.cell=c
+                    Zone().copyXY(self.randomPosInZone(g.groupInputZone),output)
+                    output.radius=g.cellOutputRadius
+                    c.outputs.append(output)
+                self.cells.append(c)
 
     def randomPosInZone(self,z):
         return Zone(z.x-z.radius+z.radius*2*nextFloat(),z.y-z.radius+z.radius*2*nextFloat(),0)
