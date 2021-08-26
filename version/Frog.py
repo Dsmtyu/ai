@@ -3,6 +3,7 @@
 # 属性：坐标，能量，蛋，是否存活，是否允许变异，移动时间，青蛙图像
 
 from version.egg.Zone import Zone
+from version.env.Application import Application
 
 from tkinter import *
 
@@ -20,8 +21,12 @@ class Frog(object):
 
         self.x=x
         self.y=y
+        self.xChange=0
+        self.yChange=0
         self.egg=egg
         self.canvas=canvas
         self.alive=True
         self.moveCount=0
-        self.frogImageFile=PhotoImage()
+        self.frogImageFile=PhotoImage(Application().CLASSPATH+'frog.gif')
+        self.frogImage=canvas.create_image(self.x,self.y,anchor=NW,image=self.frogImageFile)
+        
