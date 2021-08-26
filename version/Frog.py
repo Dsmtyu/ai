@@ -64,3 +64,16 @@ class Frog(object):
 
     def randomPosInZone(self,z):
         return Zone(z.x-z.radius+z.radius*2*nextFloat(),z.y-z.radius+z.radius*2*nextFloat(),0)
+
+    def active(self,env):
+        if not self.alive:
+            return False
+        if self.x<0 or self.x>=env.ENV_XSIZE\
+        or self.y<0 or self.y>=env.ENV_YSIZE:
+            self.alive=False
+            return False
+
+        #移动青蛙
+        for cell in self.cells:
+            for output in cell.outputs:
+                pass
