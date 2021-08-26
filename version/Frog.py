@@ -33,6 +33,7 @@ class Frog(object):
         self.xChange=0
         self.yChange=0
         self.egg=egg
+        self.energy=1000
         self.canvas=canvas
         self.alive=True
         self.moveCount=0
@@ -76,4 +77,55 @@ class Frog(object):
         #移动青蛙
         for cell in self.cells:
             for output in cell.outputs:
-                pass
+                if self.moveUp.nearby(output):self.moveUp(env)
+                if self.moveDown.nearby(output):self.moveDown(env)
+                if self.moveLeft.nearby(output):self.moveLeft(env)
+                if self.moveRight.nearby(output):self.moveRight(env)
+                if self.moveRandom.nearby(output):self.moveRandom(env)
+        return True
+
+    def checkFoodAndEat(self,env):#如果Frog坐标与Food坐标重合，吃掉它
+        eatedFood=False
+        if self.x>=0 and self.x<env.ENV_XSIZE\
+        and self.y>=0 and self.y<env.ENV_YSIZE:
+            if env.foods[self.x][self.y]:
+                env.foods[self.x][self.y]=0
+                self.energy+=1000
+                eatedFood=True
+        if eatedFood: #TODO: 奖励措施未完成
+            pass
+
+    def moveUp(self,env):
+        self.yChange=-1
+        if self.y<0 or self.y>=env.ENV_YSIZE:
+            self.alive=False
+            return None
+        self.checkFoodAndEat(env)
+
+    def moveDown(self,env):
+        self.yChange=1
+        if self.y<0 or self.y>=env.ENV_YSIZE:
+            self.alive=False
+            return None
+        self.checkFoodAndEat(env)
+
+    def moveLeft(self,env):
+        self.xChange=-1
+        if self.x<0 or self.x>=env.ENV_XSIZE:
+            self.alive=False
+            return None
+        self.checkFoodAndEat(env)
+
+    def moveRight(self,env):
+        self.xChange=1
+        if self.x<0 or self.x>=env.ENV_XSIZE:
+            self.alive=False
+            return None
+        self.checkFoodAndEat(env)
+
+    def moveRandom(self,env):
+        rand=nextInt(4)
+        if rand==1:self.moveUp(env)
+        if rand==2:self.moveDown(env)
+        if rand==3:self.moveLeft(env)
+        if rand==4:self.moveRight(env)
