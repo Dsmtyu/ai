@@ -3,8 +3,10 @@
 
 from version.utils.EggTool import EggTool
 from version.Frog import Frog
+from Application import Application
 
 from random import randint
+import time
 
 def nextFloat(): return randint(1,100000)/100000
 
@@ -48,4 +50,39 @@ class Env(object):
                 self.foods[i][j]=0
         for i in range(len(self.eggs)):
             for j in range(4):
-                self.frogs.append()
+                self.frogs.append(Frog(self.ENV_XSIZE/2-45+nextInt(90),self.ENV_YSIZE/2-45+nextInt(90),self.eggs[i],self.canvas))
+        print("Created %d frogs"%4*len(self.eggs))
+        for i in range(self.FOOD_QTY):
+            self.foods[nextInt(self.ENV_XSIZE-3)][nextInt(self.ENV_YSIZE-3)]=1
+
+    def drawFood(self):
+        for x in range(self.ENV_XSIZE):
+            for y in range(self.ENV_YSIZE):
+                if self.foods[x][y]:
+                    food=self.canvas.create_oval(4,4,4,4,fill='black')
+                    self.canvas.move(food,x,y)
+
+    def run(self):
+        EggTool().loadEggs(self)
+        _round=1
+        while True:
+            t1=time.time()
+            self.rebuildFrogAndFood()
+            allDead=False
+            for i in range(self.STEPS_PER_ROUND):
+                if allDead:break
+                allDead=True
+                for frog in self.frogs:
+                    if frog.active(self):
+                        allDead=False
+                    if frog.alive and frog.moveCount==0 and i>100:
+                        frog.alive=False
+                if i%self.SHOW_SPEED:
+                    continue
+                for frog in self.frogs:
+                    frog.show()
+                self.drawFood()
+            EggTool().layEggs(self)
+            t2=time.time()
+            Application().tk.title('Frog test round:',_round,', time used:',(t2-t1),'s')
+            _round+=1
