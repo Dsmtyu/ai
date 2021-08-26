@@ -36,6 +36,7 @@ class Frog(object):
         self.energy=1000
         self.canvas=canvas
         self.alive=True
+        self.allowVariation=False#是否允许变异
         self.moveCount=0
         self.frogImageFile=PhotoImage(Application().CLASSPATH+'frog.gif')
         self.frogImage=canvas.create_image(self.x,self.y,anchor=NW,image=self.frogImageFile)
@@ -129,3 +130,15 @@ class Frog(object):
         if rand==2:self.moveDown(env)
         if rand==3:self.moveLeft(env)
         if rand==4:self.moveRight(env)
+
+    def percet1(self,f):
+        if not self.allowVariation:
+            return f
+        return float(f*(0.99*nextFloat()*0.02))
+
+    def percet5(self,f):
+        if not self.allowVariation:
+            return f
+        return float(f*(0.95*nextFloat()*0.10))
+
+    
