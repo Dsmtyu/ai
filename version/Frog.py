@@ -2,8 +2,8 @@
 # Frog是青蛙的本体：
 # 属性：坐标，能量，蛋，是否存活，是否允许变异，移动时间，青蛙图像
 
-from version.egg.Zone import Zone
-from version.env.Application import Application
+from egg.Zone import Zone
+from env.Application import Application
 
 from tkinter import *
 
