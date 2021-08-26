@@ -3,7 +3,7 @@
 # 这两个类继承了Zone，也就是说它们都是一块区域；
 # Input是细胞输入区，Output是细胞输出区
 
-from Cell import Cell
+from version.brain.Cell import Cell
 from version.egg.Zone import Zone
 
 class Input(Zone):

@@ -7,7 +7,8 @@ from version.brain.IO import Input,Output
 from version.egg.Egg import Egg
 from version.egg.Zone import Zone
 from version.egg.CellGroup import CellGroup
-from version.env.Application import Application
+
+CLASSPATH='C:\\Users\\admin\\Desktop\\AI\\'
 
 from tkinter import *
 
@@ -40,7 +41,7 @@ class Frog(object):
         self.alive=True
         self.allowVariation=False#是否允许变异
         self.moveCount=0
-        self.frogImageFile=PhotoImage(Application().CLASSPATH+'frog.gif')
+        self.frogImageFile=PhotoImage(CLASSPATH+'frog.gif')
         self.frogImage=canvas.create_image(self.x,self.y,anchor=NW,image=self.frogImageFile)
 
         if egg.cellgroups is None:
@@ -80,58 +81,58 @@ class Frog(object):
         #移动青蛙
         for cell in self.cells:
             for output in cell.outputs:
-                if self.moveUp.nearby(output):self.moveUp(env)
-                if self.moveDown.nearby(output):self.moveDown(env)
-                if self.moveLeft.nearby(output):self.moveLeft(env)
-                if self.moveRight.nearby(output):self.moveRight(env)
-                if self.moveRandom.nearby(output):self.moveRandom(env)
+                if self.moveUp.nearby(output):self._moveUp(env)
+                if self.moveDown.nearby(output):self._moveDown(env)
+                if self.moveLeft.nearby(output):self._moveLeft(env)
+                if self.moveRight.nearby(output):self._moveRight(env)
+                if self.moveRandom.nearby(output):self._moveRandom(env)
         return True
 
     def checkFoodAndEat(self,env):#如果Frog坐标与Food坐标重合，吃掉它
         eatedFood=False
         if self.x>=0 and self.x<env.ENV_XSIZE\
         and self.y>=0 and self.y<env.ENV_YSIZE:
-            if env.foods[self.x][self.y]:
-                env.foods[self.x][self.y]=0
+            if env.foods[round(self.x)][round(self.y)]:
+                env.foods[round(self.x)][round(self.y)]=0
                 self.energy+=1000
                 eatedFood=True
         if eatedFood: #TODO: 奖励措施未完成
             pass
 
-    def moveUp(self,env):
+    def _moveUp(self,env):
         self.yChange=-1
         if self.y<0 or self.y>=env.ENV_YSIZE:
             self.alive=False
             return None
         self.checkFoodAndEat(env)
 
-    def moveDown(self,env):
+    def _moveDown(self,env):
         self.yChange=1
         if self.y<0 or self.y>=env.ENV_YSIZE:
             self.alive=False
             return None
         self.checkFoodAndEat(env)
 
-    def moveLeft(self,env):
+    def _moveLeft(self,env):
         self.xChange=-1
         if self.x<0 or self.x>=env.ENV_XSIZE:
             self.alive=False
             return None
         self.checkFoodAndEat(env)
 
-    def moveRight(self,env):
+    def _moveRight(self,env):
         self.xChange=1
         if self.x<0 or self.x>=env.ENV_XSIZE:
             self.alive=False
             return None
         self.checkFoodAndEat(env)
 
-    def moveRandom(self,env):
+    def _moveRandom(self,env):
         rand=nextInt(4)
-        if rand==1:self.moveUp(env)
-        if rand==2:self.moveDown(env)
-        if rand==3:self.moveLeft(env)
-        if rand==4:self.moveRight(env)
+        if rand==1:self._moveUp(env)
+        if rand==2:self._moveDown(env)
+        if rand==3:self._moveLeft(env)
+        if rand==4:self._moveRight(env)
 
     def percet1(self,f):
         if not self.allowVariation:
