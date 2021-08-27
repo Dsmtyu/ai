@@ -4,7 +4,6 @@
 from version.env.Env import Env
 
 from tkinter import *
-import time
 
 class Application(object):
     def __init__(self):
@@ -18,4 +17,7 @@ class Application(object):
 
     def main(self):
         env=Env(self.tk,self.canvas)
-        env.run()
+        try:
+            env.run()
+        except TclError as e:
+            pass

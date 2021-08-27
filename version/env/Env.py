@@ -26,7 +26,7 @@ class Env(object):
         self.foods=[] #foods
         #foods[x][y]是一个布尔值，为True代表有食物，为False代表没有食物
 
-        self.FOOD_QTY=2000 #as name
+        self.FOOD_QTY=5000 #as name
         self.EGG_QTY=80 #as name
 
         self.frogs=[] #Frog
@@ -45,13 +45,15 @@ class Env(object):
                 self.foods[i].append(False)
 
     def rebuildFrogAndFood(self):
+        #先把背景画成白色
+        self.canvas.create_rectangle(0,0,self.canvas.winfo_width(),self.canvas.winfo_height(),fill='white')
         self.frogs.clear()#清空Frogs
         for i in range(self.ENV_XSIZE):
             for j in range(self.ENV_YSIZE):
                 self.foods[i][j]=0#清空食物
         for i in range(len(self.eggs)):
             for j in range(4):#一个Egg生出4个Frog
-                self.frogs.append(Frog(self.ENV_XSIZE/2-45+nextInt(90),self.ENV_YSIZE/2-45+nextInt(90),self.eggs[i],self.canvas))
+                self.frogs.append(Frog(self.ENV_XSIZE/2+nextInt(90),self.ENV_YSIZE/2+nextInt(90),self.eggs[i],self.canvas))
         print("Created %d frogs"%(4*len(self.eggs)))
         for i in range(self.FOOD_QTY):
             self.foods[nextInt(self.ENV_XSIZE-3)][nextInt(self.ENV_YSIZE-3)]=True
@@ -60,7 +62,7 @@ class Env(object):
         for x in range(self.ENV_XSIZE):
             for y in range(self.ENV_YSIZE):
                 if self.foods[x][y]:
-                    foodid=self.canvas.create_oval(2,2,2,2,fill='black')
+                    foodid=self.canvas.create_oval(x-2,y-2,x+2,y+2,fill='black')
                     self.canvas.move(foodid,x,y)
 
     def run(self):#运行
@@ -75,8 +77,8 @@ class Env(object):
                     break
                 allDead=True
                 for frog in self.frogs:
-                    if frog.active(self):
-                        allDead=False
+                    #if frog.active(self):
+                     #   allDead=False
                     if frog.alive and frog.moveCount==0 and i>100:#不移动的”懒惰青蛙“死亡
                         frog.alive=False
                 if i%self.SHOW_SPEED:#画青蛙会拖慢速度
