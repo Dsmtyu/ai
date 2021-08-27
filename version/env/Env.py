@@ -13,22 +13,24 @@ def nextInt(number): return randint(1,number)
 
 class Env(object):
     def __init__(self,tk,canvas):
+        #Speed of test
         self.SHOW_SPEED=1
-
+        #Steps of one test round
         self.STEPS_PER_ROUND=5000
 
-        self.DELETE_EGGS=True
-
+        self.DELETE_EGGS=True #每次运行是否先删除保存的蛋
+        #屏幕的长和宽
         self.ENV_XSIZE=300
         self.ENV_YSIZE=300
 
-        self.foods=[]
+        self.foods=[] #foods
+        #foods[x][y]是一个布尔值，为True代表有食物，为False代表没有食物
 
-        self.FOOD_QTY=2000
-        self.EGG_QTY=80
+        self.FOOD_QTY=2000 #as name
+        self.EGG_QTY=80 #as name
 
-        self.frogs=[]
-        self.eggs=[]
+        self.frogs=[] #Frog
+        self.eggs=[] #Egg
 
         self.tk=tk#Tk()
         self.canvas=canvas#Canvas()
@@ -40,49 +42,49 @@ class Env(object):
         for i in range(self.ENV_XSIZE):
             self.foods.append([])
             for j in range(self.ENV_YSIZE):
-                self.foods[i].append(0)
+                self.foods[i].append(False)
 
     def rebuildFrogAndFood(self):
-        self.frogs.clear()
+        self.frogs.clear()#清空Frogs
         for i in range(self.ENV_XSIZE):
             for j in range(self.ENV_YSIZE):
-                self.foods[i][j]=0
+                self.foods[i][j]=0#清空食物
         for i in range(len(self.eggs)):
             for j in range(4):#一个Egg生出4个Frog
                 self.frogs.append(Frog(self.ENV_XSIZE/2-45+nextInt(90),self.ENV_YSIZE/2-45+nextInt(90),self.eggs[i],self.canvas))
         print("Created %d frogs"%(4*len(self.eggs)))
         for i in range(self.FOOD_QTY):
-            self.foods[nextInt(self.ENV_XSIZE-3)][nextInt(self.ENV_YSIZE-3)]=1
+            self.foods[nextInt(self.ENV_XSIZE-3)][nextInt(self.ENV_YSIZE-3)]=True
 
-    def drawFood(self):
+    def drawFood(self):#画食物
         for x in range(self.ENV_XSIZE):
             for y in range(self.ENV_YSIZE):
                 if self.foods[x][y]:
                     foodid=self.canvas.create_oval(2,2,2,2,fill='black')
                     self.canvas.move(foodid,x,y)
 
-    def run(self):
-        EggTool().loadEggs(self)
-        _round=1
+    def run(self):#运行
+        EggTool().loadEggs(self)#导入或新建一批Egg
+        _round=1#运行次数
         while True:
-            t1=time.time()
+            t1=time.time()#开始时间
             self.rebuildFrogAndFood()
-            allDead=False
+            allDead=False#青蛙是否全部死亡
             for i in range(self.STEPS_PER_ROUND):
-                if allDead:
+                if allDead:#全部死亡就可以提前结束
                     break
                 allDead=True
                 for frog in self.frogs:
                     if frog.active(self):
                         allDead=False
-                    if frog.alive and frog.moveCount==0 and i>100:
+                    if frog.alive and frog.moveCount==0 and i>100:#不移动的”懒惰青蛙“死亡
                         frog.alive=False
-                if i%self.SHOW_SPEED:
+                if i%self.SHOW_SPEED:#画青蛙会拖慢速度
                     continue
-                for frog in self.frogs:
-                    frog.show()
-                self.drawFood()
-            EggTool().layEggs(self)
-            t2=time.time()
+                for frog in self.frogs:#画青蛙
+                    frog.show()#青蛙移动
+                self.drawFood()#画食物
+            EggTool().layEggs(self)#保存蛋
+            t2=time.time()#结束时间
             self.tk.title('Frog test round:',_round,', time used:',(t2-t1),'s')
             _round+=1
