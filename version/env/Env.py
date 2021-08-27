@@ -86,5 +86,5 @@ class Env(object):
                 self.drawFood()#画食物
             EggTool().layEggs(self)#保存蛋
             t2=time.time()#结束时间
-            self.tk.title('Frog test round:',_round,', time used:',(t2-t1),'s')
+            self.tk.title('Frog test round: %d , time used: %d s'%(_round,t2-t1))
             _round+=1
