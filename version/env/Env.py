@@ -16,7 +16,7 @@ class Env(object):
         #Speed of test
         self.SHOW_SPEED=1
         #Steps of one test round
-        self.STEPS_PER_ROUND=5000
+        self.STEPS_PER_ROUND=2000
 
         self.DELETE_EGGS=True #每次运行是否先删除保存的蛋
         #屏幕的长和宽
@@ -87,4 +87,7 @@ class Env(object):
             EggTool().layEggs(self)#保存蛋
             t2=time.time()#结束时间
             self.tk.title('Frog test round: %d , time used: %d s'%(_round,t2-t1))
+            self.tk.update_idletasks()
+            self.tk.update()
+            time.sleep(0.01)
             _round+=1

@@ -3,7 +3,7 @@
 
 from version.egg.Egg import Egg
 
-import os,json
+import os,pickle
 
 CLASSPATH='C:\\Users\\admin\\Desktop\\AI\\'
 
@@ -16,20 +16,20 @@ class EggTool(object):
             newEggs=[]
             for i in range(env.EGG_QTY):
                 newEggs.append(env.frogs[i].layEgg())
-            with open(CLASSPATH+'eggs.json','w',encoding='utf-8',errors='ignore') as f:
+            with open(CLASSPATH+'eggs.ser','wb') as f:
                 for newEgg in newEggs:
-                    f.write()
+                    pickle.dump(newEgg,f)
             env.eggs=newEggs
-            print("Saved",len(env.eggs),"eggs to file '"+CLASSPATH+"eggs.json"+"'")
+            print("Saved",len(env.eggs),"eggs to file '"+CLASSPATH+"eggs.ser"+"'")
         except IOError as e:
             print(e)
 
     def loadEggs(self,env):
         errorfound=False
         try:
-            with open(CLASSPATH+'eggs.json','r',encoding='utf-8',errors='ignore') as f:
-                env.eggs=f.read()
-            print("Loaded",len(env.eggs),"eggs from file '"+CLASSPATH+"eggs.json"+"'.")
+            with open(CLASSPATH+'eggs.ser','rb') as f:
+                env.eggs=pickle.load(f)
+            print("Loaded",len(env.eggs),"eggs from file '"+CLASSPATH+"eggs.ser"+"'.")
         except Exception as e:
             errorfound=True
             print(e)
@@ -40,5 +40,5 @@ class EggTool(object):
                 env.eggs.append(Egg().createBrandNewEgg())
 
     def deleteEggs(self):
-        print("Delete exist egg file: '"+CLASSPATH+"eggs.json'.")
-        os.remove(CLASSPATH+'eggs.json')
+        print("Delete exist egg file: '"+CLASSPATH+"eggs.ser'.")
+        os.remove(CLASSPATH+'eggs.ser')
