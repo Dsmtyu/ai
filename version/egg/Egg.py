@@ -16,7 +16,7 @@ class Egg(object):
         self.brainRadius=1000
         self.cellgroups=[]
 
-    def createBrandNewEgg(self):
+    def createBrandNewEgg(self):#随即制造一个新的Egg
         egg=Egg()
         for i in range(self.CELL_GROUP_QTY):
             cellGroup=CellGroup()

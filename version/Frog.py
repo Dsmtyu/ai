@@ -41,7 +41,8 @@ class Frog(object):
         self.alive=True#是否活着
         self.allowVariation=False#是否允许变异
         self.moveCount=0#移动计数
-        self.frogImageFile=PhotoImage(CLASSPATH+'frog.gif')#青蛙图像文件
+        self.frogImageDir=CLASSPATH+'frog.gif'#青蛙图像路径
+        self.frogImageFile=PhotoImage(file=self.frogImageDir)#青蛙图像文件
         self.frogImage=canvas.create_image(self.x,self.y,anchor=NW,image=self.frogImageFile)#显示在canvas上的图像
 
         if egg.cellgroups is None:

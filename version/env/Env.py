@@ -30,18 +30,17 @@ class Env(object):
         self.frogs=[]
         self.eggs=[]
 
-        self.tk=tk
-        self.canvas=canvas
+        self.tk=tk#Tk()
+        self.canvas=canvas#Canvas()
 
         print('Abrabrabra!')
         #if self.DELETE_EGGS:
          #   EggTool().deleteEggs()
 
         for i in range(self.ENV_XSIZE):
-            food=[]
+            self.foods.append([])
             for j in range(self.ENV_YSIZE):
-                food.append(0)
-            self.foods.append(food)
+                self.foods[i].append(0)
 
     def rebuildFrogAndFood(self):
         self.frogs.clear()
@@ -49,7 +48,7 @@ class Env(object):
             for j in range(self.ENV_YSIZE):
                 self.foods[i][j]=0
         for i in range(len(self.eggs)):
-            for j in range(4):
+            for j in range(4):#一个Egg生出4个Frog
                 self.frogs.append(Frog(self.ENV_XSIZE/2-45+nextInt(90),self.ENV_YSIZE/2-45+nextInt(90),self.eggs[i],self.canvas))
         print("Created %d frogs"%(4*len(self.eggs)))
         for i in range(self.FOOD_QTY):
@@ -59,8 +58,8 @@ class Env(object):
         for x in range(self.ENV_XSIZE):
             for y in range(self.ENV_YSIZE):
                 if self.foods[x][y]:
-                    food=self.canvas.create_oval(4,4,4,4,fill='black')
-                    self.canvas.move(food,x,y)
+                    foodid=self.canvas.create_oval(2,2,2,2,fill='black')
+                    self.canvas.move(foodid,x,y)
 
     def run(self):
         EggTool().loadEggs(self)
@@ -70,7 +69,8 @@ class Env(object):
             self.rebuildFrogAndFood()
             allDead=False
             for i in range(self.STEPS_PER_ROUND):
-                if allDead:break
+                if allDead:
+                    break
                 allDead=True
                 for frog in self.frogs:
                     if frog.active(self):
