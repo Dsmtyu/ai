@@ -95,6 +95,7 @@ class Env(object):
                     self.tk.update_idletasks()
                     self.tk.update()
                 self.drawFood()#画食物
+                time.sleep(0.1)
             EggTool().layEggs(self)#保存蛋
             t2=time.time()#结束时间
             self.tk.title('Frog test round: %d , time used: %d s'%(_round,t2-t1))

@@ -2,17 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b2954a9f-d2e2-4fc5-ba30-fbeda3388143" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/history/version/.project" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/history/version/Frog.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/history/version/brain/Cell.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/history/version/brain/IO.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/history/version/egg/CellGroup.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/history/version/egg/Egg.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/history/version/egg/Zone.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/history/version/env/Application.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/history/version/env/Env.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/history/version/main.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/history/version/utils/EggTool.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eggs.ser" beforeDir="false" afterPath="$PROJECT_DIR$/eggs.ser" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/history/version1/env/Env.py" beforeDir="false" afterPath="$PROJECT_DIR$/history/version1/env/Env.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/version/env/Env.py" beforeDir="false" afterPath="$PROJECT_DIR$/version/env/Env.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/version/utils/EggTool.py" beforeDir="false" afterPath="$PROJECT_DIR$/version/utils/EggTool.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,11 +47,14 @@
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\admin\Desktop\AI\history" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\admin\Desktop\AI\version" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Python.main">
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="AI" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -79,9 +76,35 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="version1.main" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="AI" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/history/version1" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/history/version1/main.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Python.main" />
+      <item itemvalue="Python.version1.main" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="Python.main" />
+        <item itemvalue="Python.version1.main" />
       </list>
     </recent_temporary>
   </component>
@@ -107,5 +130,16 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/history/version1/env/Application.py</url>
+          <line>3</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

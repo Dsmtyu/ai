@@ -12,7 +12,10 @@ class EggTool(object):
         print('[LAYEGG]:Laid eggs!')
         env.frogs.sort(key=lambda frog:frog.energy,reverse=True)
         print('First frog energy=%d, Last frog energy=%d'%(env.frogs[0].energy,env.frogs[len(env.frogs)-1].energy))
-        print('%d,'%frog.energy for frog in env.frogs)
+        froglist=[]
+        for frog in env.frogs:
+            froglist.append('%s'%frog.energy)
+        print(', '.join(froglist))
         try:
             newEggs=[]
             for i in range(env.EGG_QTY):
