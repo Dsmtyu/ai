@@ -36,8 +36,8 @@ class Env(object):
         self.canvas=canvas#Canvas()
 
         print('Abrabrabra!')
-        #if self.DELETE_EGGS:
-         #   EggTool().deleteEggs()
+        if self.DELETE_EGGS:
+            EggTool().deleteEggs()
 
         for i in range(self.ENV_XSIZE):
             self.foods.append([])
@@ -51,10 +51,12 @@ class Env(object):
         for i in range(self.ENV_XSIZE):
             for j in range(self.ENV_YSIZE):
                 self.foods[i][j]=0#清空食物
+        frogid=1
         for i in range(len(self.eggs)):
             for j in range(4):#一个Egg生出4个Frog
                 self.frogs.append(Frog(self.ENV_XSIZE/2+nextInt(90),self.ENV_YSIZE/2+nextInt(90),self.eggs[i],
-                                       self.tk,self.canvas))
+                                       self.tk,self.canvas,frogid))
+                frogid+=1
         print("Created %d frogs"%(4*len(self.eggs)))
         for i in range(self.FOOD_QTY):
             self.foods[nextInt(self.ENV_XSIZE-3)][nextInt(self.ENV_YSIZE-3)]=True
@@ -82,6 +84,10 @@ class Env(object):
                         allDead=False
                     if frog.alive and frog.moveCount==0 and i>100:#不移动的”懒惰青蛙“死亡
                         frog.alive=False
+                for frog in self.frogs:
+                    if not frog.alive and frog.frogid-frog.died:
+                        print('[DIE]:Frog %d died!'%frog.frogid)
+                        frog.died=frog.frogid
                 if i%self.SHOW_SPEED:#画青蛙会拖慢速度
                     continue
                 for frog in self.frogs:#画青蛙

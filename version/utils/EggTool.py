@@ -9,7 +9,8 @@ CLASSPATH='C:\\Users\\admin\\Desktop\\AI\\'
 
 class EggTool(object):
     def layEggs(self,env):
-        env.frogs.sort(key=lambda frog:frog.energy)
+        print('[LAYEGG]:Laid eggs!')
+        env.frogs.sort(key=lambda frog:frog.energy,reverse=True)
         print('First frog energy=%d, Last frog energy=%d'%(env.frogs[0].energy,env.frogs[len(env.frogs)-1].energy))
         print('%d,'%frog.energy for frog in env.frogs)
         try:
@@ -24,6 +25,7 @@ class EggTool(object):
             print(e)
 
     def loadEggs(self,env):
+        print('[LOADEGG]:Loaded eggs!')
         errorfound=False
         try:
             with open(CLASSPATH+'eggs.ser','rb') as f:
@@ -38,5 +40,6 @@ class EggTool(object):
                 env.eggs.append(Egg().createBrandNewEgg())
 
     def deleteEggs(self):
+        print('[DELETEEGG]:Deleted eggs!')
         print("Delete exist egg file: '"+CLASSPATH+"eggs.ser'.")
         os.remove(CLASSPATH+'eggs.ser')

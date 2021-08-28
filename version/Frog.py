@@ -21,7 +21,7 @@ def nextFloat(): return randint(1,100000)/100000
 def nextInt(number): return randint(1,number)
 
 class Frog(object):
-    def __init__(self,x,y,egg,tk,canvas):
+    def __init__(self,x,y,egg,tk,canvas,frogid):
         self.brainRadius=0.0
         self.cells=[]
         #视觉细胞在脑中的区域，暂时先随便取，以后考虑使用
@@ -37,6 +37,9 @@ class Frog(object):
         self.y=y#青蛙的y坐标
         self.xChange=0#青蛙水平方向的移动
         self.yChange=0#青蛙垂直方向的移动
+        self.change=1
+        self.frogid=frogid
+        self.died=0
         self.egg=egg#蛋
         self.energy=1000#青蛙的能量，能量耗尽时青蛙死亡
         self.tk=tk
@@ -101,38 +104,48 @@ class Frog(object):
                 env.foods[round(self.x)][round(self.y)]=0
                 self.energy+=1000#吃到食物青蛙能量增加1000
                 eatedFood=True
+                print('[EAT]:Frog %d ate food!'%self.frogid)
         if eatedFood: #TODO: 奖励措施未完成
             pass
 
     def _moveUp(self,env):
-        self.yChange=-1
+        self.yChange=-self.change
+        self.y-=self.change
+        print("[MOVE]:Frog %d move up!"%self.frogid)
         if self.y<0 or self.y>=env.ENV_YSIZE:
             self.alive=False
             return None
         self.checkFoodAndEat(env)
 
     def _moveDown(self,env):
-        self.yChange=1
+        print("[MOVE]:Frog %d move down!"%self.frogid)
+        self.yChange=self.change
+        self.y+=self.change
         if self.y<0 or self.y>=env.ENV_YSIZE:
             self.alive=False
             return None
         self.checkFoodAndEat(env)
 
     def _moveLeft(self,env):
-        self.xChange=-1
+        print("[MOVE]:Frog %d move left!"%self.frogid)
+        self.xChange=-self.change
+        self.x-=self.change
         if self.x<0 or self.x>=env.ENV_XSIZE:
             self.alive=False
             return None
         self.checkFoodAndEat(env)
 
     def _moveRight(self,env):
-        self.xChange=1
+        print("[MOVE]:Frog %d move right!"%self.frogid)
+        self.xChange=self.change
+        self.x+=self.change
         if self.x<0 or self.x>=env.ENV_XSIZE:
             self.alive=False
             return None
         self.checkFoodAndEat(env)
 
     def _moveRandom(self,env):
+        print("[MOVE]:Frog %d move random!"%self.frogid)
         rand=nextInt(4)
         if rand==1:self._moveUp(env)
         if rand==2:self._moveDown(env)
@@ -150,6 +163,7 @@ class Frog(object):
         return float(f*(0.95*nextFloat()*0.10))
 
     def layEgg(self):
+        print('[Egg]:Frog %d laid egg!'%self.frogid)
         self.allowVariation=False if nextInt(100)>25 else True#变异率先控制在25%
         #如果不允许变异，下的蛋就等于原来的蛋
         newEgg=Egg()
