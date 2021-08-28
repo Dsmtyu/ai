@@ -17,8 +17,7 @@ class EggTool(object):
             for i in range(env.EGG_QTY):
                 newEggs.append(env.frogs[i].layEgg())
             with open(CLASSPATH+'eggs.ser','wb') as f:
-                for newEgg in newEggs:
-                    pickle.dump(newEgg,f)
+                pickle.dump(newEggs,f)
             env.eggs=newEggs
             print("Saved",len(env.eggs),"eggs to file '"+CLASSPATH+"eggs.ser"+"'")
         except IOError as e:
@@ -32,7 +31,6 @@ class EggTool(object):
             print("Loaded",len(env.eggs),"eggs from file '"+CLASSPATH+"eggs.ser"+"'.")
         except Exception as e:
             errorfound=True
-            print(e)
         if errorfound:
             print("No eggs files '"+CLASSPATH+"' found, created",env.EGG_QTY,"new eggs to do test.")
             env.eggs=[]

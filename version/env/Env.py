@@ -53,7 +53,8 @@ class Env(object):
                 self.foods[i][j]=0#清空食物
         for i in range(len(self.eggs)):
             for j in range(4):#一个Egg生出4个Frog
-                self.frogs.append(Frog(self.ENV_XSIZE/2+nextInt(90),self.ENV_YSIZE/2+nextInt(90),self.eggs[i],self.canvas))
+                self.frogs.append(Frog(self.ENV_XSIZE/2+nextInt(90),self.ENV_YSIZE/2+nextInt(90),self.eggs[i],
+                                       self.tk,self.canvas))
         print("Created %d frogs"%(4*len(self.eggs)))
         for i in range(self.FOOD_QTY):
             self.foods[nextInt(self.ENV_XSIZE-3)][nextInt(self.ENV_YSIZE-3)]=True
@@ -77,19 +78,18 @@ class Env(object):
                     break
                 allDead=True
                 for frog in self.frogs:
-                    #if frog.active(self):
-                     #   allDead=False
+                    if frog.active(self):
+                        allDead=False
                     if frog.alive and frog.moveCount==0 and i>100:#不移动的”懒惰青蛙“死亡
                         frog.alive=False
                 if i%self.SHOW_SPEED:#画青蛙会拖慢速度
                     continue
                 for frog in self.frogs:#画青蛙
                     frog.show()#青蛙移动
+                    self.tk.update_idletasks()
+                    self.tk.update()
                 self.drawFood()#画食物
             EggTool().layEggs(self)#保存蛋
             t2=time.time()#结束时间
             self.tk.title('Frog test round: %d , time used: %d s'%(_round,t2-t1))
-            self.tk.update_idletasks()
-            self.tk.update()
-            time.sleep(0.01)
             _round+=1

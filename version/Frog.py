@@ -14,12 +14,14 @@ from tkinter import *
 
 from random import randint
 
+import time
+
 def nextFloat(): return randint(1,100000)/100000
 
 def nextInt(number): return randint(1,number)
 
 class Frog(object):
-    def __init__(self,x,y,egg,canvas):
+    def __init__(self,x,y,egg,tk,canvas):
         self.brainRadius=0.0
         self.cells=[]
         #视觉细胞在脑中的区域，暂时先随便取，以后考虑使用
@@ -37,6 +39,7 @@ class Frog(object):
         self.yChange=0#青蛙垂直方向的移动
         self.egg=egg#蛋
         self.energy=1000#青蛙的能量，能量耗尽时青蛙死亡
+        self.tk=tk
         self.canvas=canvas#tkinter画布
         self.alive=True#是否活着
         self.allowVariation=False#是否允许变异
