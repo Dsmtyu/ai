@@ -2,7 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b2954a9f-d2e2-4fc5-ba30-fbeda3388143" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/history/version1/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/history/version1/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/version/Frog.py" beforeDir="false" afterPath="$PROJECT_DIR$/version/Frog.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/version/env/Env.py" beforeDir="false" afterPath="$PROJECT_DIR$/version/env/Env.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/version/utils/EggTool.py" beforeDir="false" afterPath="$PROJECT_DIR$/version/utils/EggTool.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,6 +29,9 @@
       <filtered-out-file-type name="TAG" />
       <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
     </file-type-list>
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedIndex" value="1" />
   </component>
   <component name="ProjectId" id="1xFbDbGB7VwOCel9OGEY7n4WG6Q" />
   <component name="ProjectLevelVcsManager">

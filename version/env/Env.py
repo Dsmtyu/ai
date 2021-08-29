@@ -16,7 +16,7 @@ class Env(object):
         #Speed of test
         self.SHOW_SPEED=1
         #Steps of one test round
-        self.STEPS_PER_ROUND=2000
+        self.STEPS_PER_ROUND=1000
 
         self.DELETE_EGGS=True #每次运行是否先删除保存的蛋
         #屏幕的长和宽
@@ -26,7 +26,7 @@ class Env(object):
         self.foods=[] #foods
         #foods[x][y]是一个布尔值，为True代表有食物，为False代表没有食物
 
-        self.FOOD_QTY=5000 #as name
+        self.FOOD_QTY=2000 #as name
         self.EGG_QTY=80 #as name
 
         self.frogs=[] #Frog
@@ -61,12 +61,11 @@ class Env(object):
         for i in range(self.FOOD_QTY):
             self.foods[nextInt(self.ENV_XSIZE-3)][nextInt(self.ENV_YSIZE-3)]=True
 
-    def drawFood(self):#画食物
+    def drawFood(self,canvas):#画食物
         for x in range(self.ENV_XSIZE):
             for y in range(self.ENV_YSIZE):
                 if self.foods[x][y]:
-                    foodid=self.canvas.create_oval(x-2,y-2,x+2,y+2,fill='black')
-                    self.canvas.move(foodid,x,y)
+                    canvas.create_oval(x-2,y-2,x+2,y+2,fill='black')
 
     def run(self):#运行
         EggTool().loadEggs(self)#导入或新建一批Egg
@@ -91,12 +90,11 @@ class Env(object):
                 if i%self.SHOW_SPEED:#画青蛙会拖慢速度
                     continue
                 for frog in self.frogs:#画青蛙
-                    frog.show()#青蛙移动
+                    frog.show(self.canvas)#青蛙移动
                     self.tk.update_idletasks()
                     self.tk.update()
-                self.drawFood()#画食物
-                time.sleep(0.1)
+                self.drawFood(self.canvas)#画食物
             EggTool().layEggs(self)#保存蛋
             t2=time.time()#结束时间
-            self.tk.title('Frog test round: %d , time used: %d s'%(_round,t2-t1))
+            self.tk.title('Frog test round: %d , time used: %s s'%(_round,t2-t1))
             _round+=1

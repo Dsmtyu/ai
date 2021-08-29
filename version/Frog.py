@@ -101,7 +101,7 @@ class Frog(object):
         if self.x>=0 and self.x<env.ENV_XSIZE\
         and self.y>=0 and self.y<env.ENV_YSIZE:
             if env.foods[round(self.x)][round(self.y)]:
-                env.foods[round(self.x)][round(self.y)]=0
+                env.foods[round(self.x)][round(self.y)]=False
                 self.energy+=1000#吃到食物青蛙能量增加1000
                 eatedFood=True
                 #print('[EAT]:Frog %d ate food!'%self.frogid)
@@ -184,7 +184,7 @@ class Frog(object):
             newEgg.cellgroups.append(cellGroup)
         return newEgg
 
-    def show(self):
+    def show(self,canvas):
         if not self.alive:
             return None
-        self.canvas.move(self.frogImage,self.xChange,self.yChange)#对Frog进行移动
+        canvas.move(self.frogImage,self.xChange,self.yChange)#对Frog进行移动
