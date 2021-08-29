@@ -38,8 +38,7 @@ class Frog(object):
         self.xChange=0#青蛙水平方向的移动
         self.yChange=0#青蛙垂直方向的移动
         self.change=1
-        self.frogid=frogid
-        self.died=0
+        self.frogid=frogid#frog编号
         self.egg=egg#蛋
         self.energy=1000#青蛙的能量，能量耗尽时青蛙死亡
         self.tk=tk
@@ -104,7 +103,7 @@ class Frog(object):
                 env.foods[round(self.x)][round(self.y)]=False
                 self.energy+=1000#吃到食物青蛙能量增加1000
                 eatedFood=True
-                #print('[EAT]:Frog %d ate food!'%self.frogid)
+                print('[EAT]:Frog %d ate food!'%self.frogid)
         if eatedFood: #TODO: 奖励措施未完成
             pass
 

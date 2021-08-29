@@ -26,7 +26,7 @@ class Env(object):
         self.foods=[] #foods
         #foods[x][y]是一个布尔值，为True代表有食物，为False代表没有食物
 
-        self.FOOD_QTY=2000 #as name
+        self.FOOD_QTY=5000 #as name
         self.EGG_QTY=80 #as name
 
         self.frogs=[] #Frog
@@ -51,12 +51,10 @@ class Env(object):
         for i in range(self.ENV_XSIZE):
             for j in range(self.ENV_YSIZE):
                 self.foods[i][j]=0#清空食物
-        frogid=1
         for i in range(len(self.eggs)):
             for j in range(4):#一个Egg生出4个Frog
                 self.frogs.append(Frog(self.ENV_XSIZE/2+nextInt(90),self.ENV_YSIZE/2+nextInt(90),self.eggs[i],
-                                       self.tk,self.canvas,frogid))
-                frogid+=1
+                                       self.tk,self.canvas,i*4+j+1))
         print("Created %d frogs"%(4*len(self.eggs)))
         for i in range(self.FOOD_QTY):
             self.foods[nextInt(self.ENV_XSIZE-3)][nextInt(self.ENV_YSIZE-3)]=True
@@ -74,6 +72,7 @@ class Env(object):
             t1=time.time()#开始时间
             self.rebuildFrogAndFood()
             allDead=False#青蛙是否全部死亡
+            diedfrogidlist=[]
             for i in range(self.STEPS_PER_ROUND):
                 if allDead:#全部死亡就可以提前结束
                     break
@@ -83,10 +82,9 @@ class Env(object):
                         allDead=False
                     if frog.alive and frog.moveCount==0 and i>100:#不移动的”懒惰青蛙“死亡
                         frog.alive=False
-                for frog in self.frogs:
-                    if not frog.alive and frog.frogid-frog.died:
+                    if not frog.alive and not (frog.frogid in diedfrogidlist):
                         print('[DIE]:Frog %d died!'%frog.frogid)
-                        frog.died=frog.frogid
+                        diedfrogidlist.append(frog.frogid)
                 if i%self.SHOW_SPEED:#画青蛙会拖慢速度
                     continue
                 for frog in self.frogs:#画青蛙
