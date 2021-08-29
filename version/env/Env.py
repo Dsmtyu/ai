@@ -65,7 +65,7 @@ class Env(object):
         for x in range(self.ENV_XSIZE):
             for y in range(self.ENV_YSIZE):
                 if self.foods[x][y]:
-                    canvas.create_oval(x-2,y-2,x+2,y+2,fill='black')
+                    canvas.create_oval(x,y,x+2,y+2,fill='black')
 
     def run(self):#运行
         EggTool().loadEggs(self)#导入或新建一批Egg
