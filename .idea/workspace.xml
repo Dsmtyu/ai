@@ -2,12 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b2954a9f-d2e2-4fc5-ba30-fbeda3388143" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eggs.ser" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/history/version1/env/Env.py" beforeDir="false" afterPath="$PROJECT_DIR$/history/version1/env/Env.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/version/Frog.py" beforeDir="false" afterPath="$PROJECT_DIR$/version/Frog.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/version/env/Application.py" beforeDir="false" afterPath="$PROJECT_DIR$/version/env/Application.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/version/utils/EggTool.py" beforeDir="false" afterPath="$PROJECT_DIR$/version/utils/EggTool.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/history/version1/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/history/version1/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -131,16 +126,5 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/history/version1/env/Application.py</url>
-          <line>3</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>
