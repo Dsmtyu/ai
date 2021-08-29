@@ -2,11 +2,11 @@
 # Frog是青蛙的本体：
 # 属性：坐标，能量，蛋，是否存活，是否允许变异，移动时间，青蛙图像
 
-from history.version1.brain.Cell import Cell
-from history.version1.brain.IO import Input,Output
-from history.version1.egg.Egg import Egg
-from history.version1.egg.Zone import Zone
-from history.version1.egg.CellGroup import CellGroup
+from version.brain.Cell import Cell
+from version.brain.IO import Input,Output
+from version.egg.Egg import Egg
+from version.egg.Zone import Zone
+from version.egg.CellGroup import CellGroup
 
 CLASSPATH='C:\\Users\\admin\\Desktop\\AI\\'#根目录路径
 
@@ -104,7 +104,7 @@ class Frog(object):
                 env.foods[round(self.x)][round(self.y)]=0
                 self.energy+=1000#吃到食物青蛙能量增加1000
                 eatedFood=True
-                print('[EAT]:Frog %d ate food!'%self.frogid)
+                #print('[EAT]:Frog %d ate food!'%self.frogid)
         if eatedFood: #TODO: 奖励措施未完成
             pass
 
@@ -163,7 +163,7 @@ class Frog(object):
         return float(f*(0.95*nextFloat()*0.10))
 
     def layEgg(self):
-        print('[Egg]:Frog %d laid egg!'%self.frogid)
+        print('[LAYEGG]:Frog %d laid egg!'%self.frogid)
         self.allowVariation=False if nextInt(100)>25 else True#变异率先控制在25%
         #如果不允许变异，下的蛋就等于原来的蛋
         newEgg=Egg()

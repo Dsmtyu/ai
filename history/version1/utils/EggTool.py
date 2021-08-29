@@ -14,8 +14,8 @@ class EggTool(object):
         print('First frog energy=%d, Last frog energy=%d'%(env.frogs[0].energy,env.frogs[len(env.frogs)-1].energy))
         froglist=[]
         for frog in env.frogs:
-            froglist.append('%s'%frog.energy)
-        print(', '.join(froglist))
+            froglist.append('%s:Frog %s'%(frog.energy,frog.frogid))
+        print(',\n'.join(froglist))
         try:
             newEggs=[]
             for i in range(env.EGG_QTY):
@@ -44,5 +44,8 @@ class EggTool(object):
 
     def deleteEggs(self):
         print('[DELETEEGG]:Deleted eggs!')
-        print("Delete exist egg file: '"+CLASSPATH+"eggs.ser'.")
-        os.remove(CLASSPATH+'eggs.ser')
+        try:
+            os.remove(CLASSPATH+'eggs.ser')
+            print("Delete exist egg file: '"+CLASSPATH+"eggs.ser'.")
+        except FileNotFoundError:
+            print("No exist egg file: '"+CLASSPATH+"eggs.ser'.")
