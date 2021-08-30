@@ -16,7 +16,7 @@ class Env(object):
         #Speed of test
         self.SHOW_SPEED=1
         #Steps of one test round
-        self.STEPS_PER_ROUND=1000
+        self.STEPS_PER_ROUND=100
 
         self.DELETE_EGGS=True #每次运行是否先删除保存的蛋
         #屏幕的长和宽
@@ -24,7 +24,9 @@ class Env(object):
         self.ENV_YSIZE=300
 
         self.foods=[] #foods
+        self.foodid=[]
         #foods[x][y]是一个布尔值，为True代表有食物，为False代表没有食物
+        #foodid[x][y]代表当foods[x][y]为True时oval的id，以便使用itemconfig
 
         self.FOOD_QTY=5000 #as name
         self.EGG_QTY=80 #as name
@@ -41,8 +43,10 @@ class Env(object):
 
         for i in range(self.ENV_XSIZE):
             self.foods.append([])
+            self.foodid.append([])
             for j in range(self.ENV_YSIZE):
                 self.foods[i].append(False)
+                self.foodid[i].append(0)
 
     def rebuildFrogAndFood(self):
         #先把背景画成白色
@@ -63,7 +67,9 @@ class Env(object):
         for x in range(self.ENV_XSIZE):
             for y in range(self.ENV_YSIZE):
                 if self.foods[x][y]:
-                    canvas.create_oval(x,y,x+2,y+2,fill='black')
+                    self.foodid[x][y]=canvas.create_oval(x,y,x+2,y+2,outline='black',fill='black')
+                if not self.foods[x][y] and self.foodid[x][y]:
+                    canvas.itemconfig(self.foodid[x][y],outline='white',fill='white')
 
     def run(self):#运行
         EggTool().loadEggs(self)#导入或新建一批Egg
@@ -89,9 +95,9 @@ class Env(object):
                     continue
                 for frog in self.frogs:#画青蛙
                     frog.show(self.canvas)#青蛙移动
-                    self.tk.update_idletasks()
-                    self.tk.update()
                 self.drawFood(self.canvas)#画食物
+                self.tk.update_idletasks()
+                self.tk.update()
             EggTool().layEggs(self)#保存蛋
             t2=time.time()#结束时间
             self.tk.title('Frog test round: %d , time used: %s s'%(_round,t2-t1))

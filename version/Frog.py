@@ -108,16 +108,16 @@ class Frog(object):
             pass
 
     def _moveUp(self,env):
+        #print("[MOVE]:Frog %d move up!"%self.frogid)
         self.yChange=-self.change
         self.y-=self.change
-        print("[MOVE]:Frog %d move up!"%self.frogid)
         if self.y<0 or self.y>=env.ENV_YSIZE:
             self.alive=False
             return None
         self.checkFoodAndEat(env)
 
     def _moveDown(self,env):
-        print("[MOVE]:Frog %d move down!"%self.frogid)
+        #print("[MOVE]:Frog %d move down!"%self.frogid)
         self.yChange=self.change
         self.y+=self.change
         if self.y<0 or self.y>=env.ENV_YSIZE:
@@ -126,7 +126,7 @@ class Frog(object):
         self.checkFoodAndEat(env)
 
     def _moveLeft(self,env):
-        print("[MOVE]:Frog %d move left!"%self.frogid)
+        #print("[MOVE]:Frog %d move left!"%self.frogid)
         self.xChange=-self.change
         self.x-=self.change
         if self.x<0 or self.x>=env.ENV_XSIZE:
@@ -135,7 +135,7 @@ class Frog(object):
         self.checkFoodAndEat(env)
 
     def _moveRight(self,env):
-        print("[MOVE]:Frog %d move right!"%self.frogid)
+        #print("[MOVE]:Frog %d move right!"%self.frogid)
         self.xChange=self.change
         self.x+=self.change
         if self.x<0 or self.x>=env.ENV_XSIZE:
@@ -144,7 +144,7 @@ class Frog(object):
         self.checkFoodAndEat(env)
 
     def _moveRandom(self,env):
-        print("[MOVE]:Frog %d move random!"%self.frogid)
+        #print("[MOVE]:Frog %d move random!"%self.frogid)
         rand=nextInt(4)
         if rand==1:self._moveUp(env)
         if rand==2:self._moveDown(env)
