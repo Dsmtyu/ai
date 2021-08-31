@@ -3,7 +3,7 @@
 
 from history.version1.egg.Egg import Egg
 
-import os,pickle
+import os,pickle,time
 
 CLASSPATH='C:\\Users\\admin\\Desktop\\AI\\'
 
@@ -12,10 +12,12 @@ class EggTool(object):
         print('[LAYEGG]:Laid eggs!')
         env.frogs.sort(key=lambda frog:frog.energy,reverse=True)
         print('First frog energy=%d, Last frog energy=%d'%(env.frogs[0].energy,env.frogs[len(env.frogs)-1].energy))
+        time.sleep(0.5)
         froglist=[]
         for frog in env.frogs:
             froglist.append('%s:Frog %s'%(frog.energy,frog.frogid))
         print(',\n'.join(froglist))
+        time.sleep(0.5)
         try:
             newEggs=[]
             for i in range(env.EGG_QTY):

@@ -16,7 +16,7 @@ class Env(object):
         #Speed of test
         self.SHOW_SPEED=1
         #Steps of one test round
-        self.STEPS_PER_ROUND=2000
+        self.STEPS_PER_ROUND=100
 
         self.DELETE_EGGS=True #每次运行是否先删除保存的蛋
         #屏幕的长和宽
@@ -24,7 +24,9 @@ class Env(object):
         self.ENV_YSIZE=300
 
         self.foods=[] #foods
+        self.foodid=[]
         #foods[x][y]是一个布尔值，为True代表有食物，为False代表没有食物
+        #foodid[x][y]代表当foods[x][y]为True时oval的id，以便使用itemconfig
 
         self.FOOD_QTY=5000 #as name
         self.EGG_QTY=80 #as name
@@ -41,8 +43,10 @@ class Env(object):
 
         for i in range(self.ENV_XSIZE):
             self.foods.append([])
+            self.foodid.append([])
             for j in range(self.ENV_YSIZE):
                 self.foods[i].append(False)
+                self.foodid[i].append(0)
 
     def rebuildFrogAndFood(self):
         #先把背景画成白色
@@ -51,22 +55,21 @@ class Env(object):
         for i in range(self.ENV_XSIZE):
             for j in range(self.ENV_YSIZE):
                 self.foods[i][j]=0#清空食物
-        frogid=1
         for i in range(len(self.eggs)):
             for j in range(4):#一个Egg生出4个Frog
                 self.frogs.append(Frog(self.ENV_XSIZE/2+nextInt(90),self.ENV_YSIZE/2+nextInt(90),self.eggs[i],
-                                       self.tk,self.canvas,frogid))
-                frogid+=1
+                                       self.tk,self.canvas,i*4+j+1))
         print("Created %d frogs"%(4*len(self.eggs)))
         for i in range(self.FOOD_QTY):
             self.foods[nextInt(self.ENV_XSIZE-3)][nextInt(self.ENV_YSIZE-3)]=True
 
-    def drawFood(self):#画食物
+    def drawFood(self,canvas):#画食物
         for x in range(self.ENV_XSIZE):
             for y in range(self.ENV_YSIZE):
                 if self.foods[x][y]:
-                    foodid=self.canvas.create_oval(x-2,y-2,x+2,y+2,fill='black')
-                    self.canvas.move(foodid,x,y)
+                    self.foodid[x][y]=canvas.create_oval(x,y,x+2,y+2,outline='black',fill='black')
+                if not self.foods[x][y] and self.foodid[x][y]:
+                    canvas.itemconfig(self.foodid[x][y],outline='white',fill='white')
 
     def run(self):#运行
         EggTool().loadEggs(self)#导入或新建一批Egg
@@ -75,6 +78,7 @@ class Env(object):
             t1=time.time()#开始时间
             self.rebuildFrogAndFood()
             allDead=False#青蛙是否全部死亡
+            diedfrogidlist=[]
             for i in range(self.STEPS_PER_ROUND):
                 if allDead:#全部死亡就可以提前结束
                     break
@@ -84,19 +88,17 @@ class Env(object):
                         allDead=False
                     if frog.alive and frog.moveCount==0 and i>100:#不移动的”懒惰青蛙“死亡
                         frog.alive=False
-                for frog in self.frogs:
-                    if not frog.alive and frog.frogid-frog.died:
+                    if not frog.alive and not (frog.frogid in diedfrogidlist):
                         print('[DIE]:Frog %d died!'%frog.frogid)
-                        frog.died=frog.frogid
+                        diedfrogidlist.append(frog.frogid)
                 if i%self.SHOW_SPEED:#画青蛙会拖慢速度
                     continue
                 for frog in self.frogs:#画青蛙
-                    frog.show()#青蛙移动
-                    self.tk.update_idletasks()
-                    self.tk.update()
-                self.drawFood()#画食物
-                time.sleep(0.1)
+                    frog.show(self.canvas)#青蛙移动
+                self.drawFood(self.canvas)#画食物
+                self.tk.update_idletasks()
+                self.tk.update()
             EggTool().layEggs(self)#保存蛋
             t2=time.time()#结束时间
-            self.tk.title('Frog test round: %d , time used: %d s'%(_round,t2-t1))
+            self.tk.title('Frog test round: %d , time used: %s s'%(_round,t2-t1))
             _round+=1
