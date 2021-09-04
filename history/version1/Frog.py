@@ -44,6 +44,11 @@ class Frog(object):
         self.tk=tk
         self.canvas=canvas#tkinter画布
         self.alive=True#是否活着
+
+        self.notMovingDeath=False
+        self.runOutOfBoardDeath=False
+        self.gotOut=False
+
         self.allowVariation=False#是否允许变异
         self.moveCount=0#移动计数
         self.frogImageDir=CLASSPATH+'frog.gif'#青蛙图像路径
@@ -83,7 +88,7 @@ class Frog(object):
         if self.x<0 or self.x>=env.ENV_XSIZE\
         or self.y<0 or self.y>=env.ENV_YSIZE:#青蛙的横纵坐标是否出界
             self.alive=False#出界时青蛙死亡
-            return False
+            self.runOutOfBoardDeath=True if not self.gotOut else False
 
         #移动青蛙
         for cell in self.cells:
@@ -113,6 +118,7 @@ class Frog(object):
         self.y-=self.change
         if self.y<0 or self.y>=env.ENV_YSIZE:
             self.alive=False
+            self.runOutOfBoardDeath=True if not self.gotOut else False
             return None
         self.checkFoodAndEat(env)
 
@@ -122,6 +128,7 @@ class Frog(object):
         self.y+=self.change
         if self.y<0 or self.y>=env.ENV_YSIZE:
             self.alive=False
+            self.runOutOfBoardDeath=True if not self.gotOut else False
             return None
         self.checkFoodAndEat(env)
 
@@ -131,6 +138,7 @@ class Frog(object):
         self.x-=self.change
         if self.x<0 or self.x>=env.ENV_XSIZE:
             self.alive=False
+            self.runOutOfBoardDeath=True if not self.gotOut else False
             return None
         self.checkFoodAndEat(env)
 
@@ -140,6 +148,7 @@ class Frog(object):
         self.x+=self.change
         if self.x<0 or self.x>=env.ENV_XSIZE:
             self.alive=False
+            self.runOutOfBoardDeath=True if not self.gotOut else False
             return None
         self.checkFoodAndEat(env)
 
@@ -185,5 +194,14 @@ class Frog(object):
 
     def show(self,canvas):
         if not self.alive:
-            return None
+            if self.notMovingDeath:
+                print('[DIE]:Frog %d died because of not moving!'%self.frogid)
+                self.notMovingDeath=False
+                self.gotOut=True
+            elif self.runOutOfBoardDeath:
+                print('[DIE]:Frog %d died because of running out of board!'%self.frogid)
+                self.runOutOfBoardDeath=False
+                self.gotOut=True
+            else:
+                return None
         canvas.move(self.frogImage,self.xChange,self.yChange)#对Frog进行移动

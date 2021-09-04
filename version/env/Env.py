@@ -47,6 +47,7 @@ class Env(object):
             for j in range(self.ENV_YSIZE):
                 self.foods[i].append(False)
                 self.foodid[i].append(0)
+            EggTool().deleteEggs()
 
     def rebuildFrogAndFood(self):
         #先把背景画成白色
@@ -78,8 +79,8 @@ class Env(object):
             t1=time.time()#开始时间
             self.rebuildFrogAndFood()
             allDead=False#青蛙是否全部死亡
-            diedfrogidlist=[]
             for i in range(self.STEPS_PER_ROUND):
+                self.drawFood(self.canvas)#画食物
                 if allDead:#全部死亡就可以提前结束
                     break
                 allDead=True
@@ -88,14 +89,11 @@ class Env(object):
                         allDead=False
                     if frog.alive and frog.moveCount==0 and i>100:#不移动的”懒惰青蛙“死亡
                         frog.alive=False
-                    if not frog.alive and not (frog.frogid in diedfrogidlist):
-                        print('[DIE]:Frog %d died!'%frog.frogid)
-                        diedfrogidlist.append(frog.frogid)
+                        frog.notMovingDeath=True
                 if i%self.SHOW_SPEED:#画青蛙会拖慢速度
                     continue
                 for frog in self.frogs:#画青蛙
                     frog.show(self.canvas)#青蛙移动
-                self.drawFood(self.canvas)#画食物
                 self.tk.update_idletasks()
                 self.tk.update()
             EggTool().layEggs(self)#保存蛋
