@@ -2,21 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b2954a9f-d2e2-4fc5-ba30-fbeda3388143" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/version/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/history/version1/.project" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/history/version1/Frog.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/history/version1/brain/Cell.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/history/version1/brain/IO.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/history/version1/egg/CellGroup.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/history/version1/egg/Egg.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/history/version1/egg/Zone.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/history/version1/env/Application.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/history/version1/env/Env.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/history/version1/main.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/history/version1/utils/EggTool.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/version/env/Application.py" beforeDir="false" afterPath="$PROJECT_DIR$/version/env/Application.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/version/env/Env.py" beforeDir="false" afterPath="$PROJECT_DIR$/version/env/Env.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/version/utils/EggTool.py" beforeDir="false" afterPath="$PROJECT_DIR$/version/utils/EggTool.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,7 +43,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Python" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
