@@ -99,17 +99,17 @@ class Frog(object):
         eatedFood=False#是否吃掉食物
         if self.x>=0 and self.x<env.ENV_XSIZE\
         and self.y>=0 and self.y<env.ENV_YSIZE:
-            if env.foods[round(self.x)][round(self.y)]:
-                env.foods[round(self.x)][round(self.y)]=False
+            if env.foods[round(self.x)][round(self.y)]==1:
+                env.foods[round(self.x)][round(self.y)]=-1
                 self.energy+=1000#吃到食物青蛙能量增加1000
                 eatedFood=True
-                print('[EAT]:Frog %d ate food!'%self.frogid)
+                #print('[EAT]:Frog %d ate food!'%self.frogid)
         if eatedFood: #TODO: 奖励措施未完成
             pass
 
     def _moveUp(self,env):
         #print("[MOVE]:Frog %d move up!"%self.frogid)
-        self.yChange=-self.change
+        self.yChange-=self.change
         self.y-=self.change
         if self.y<0 or self.y>=env.ENV_YSIZE:
             self.alive=False
@@ -118,7 +118,7 @@ class Frog(object):
 
     def _moveDown(self,env):
         #print("[MOVE]:Frog %d move down!"%self.frogid)
-        self.yChange=self.change
+        self.yChange+=self.change
         self.y+=self.change
         if self.y<0 or self.y>=env.ENV_YSIZE:
             self.alive=False
@@ -127,7 +127,7 @@ class Frog(object):
 
     def _moveLeft(self,env):
         #print("[MOVE]:Frog %d move left!"%self.frogid)
-        self.xChange=-self.change
+        self.xChange-=self.change
         self.x-=self.change
         if self.x<0 or self.x>=env.ENV_XSIZE:
             self.alive=False
@@ -136,7 +136,7 @@ class Frog(object):
 
     def _moveRight(self,env):
         #print("[MOVE]:Frog %d move right!"%self.frogid)
-        self.xChange=self.change
+        self.xChange+=self.change
         self.x+=self.change
         if self.x<0 or self.x>=env.ENV_XSIZE:
             self.alive=False
@@ -151,15 +151,15 @@ class Frog(object):
         if rand==3:self._moveLeft(env)
         if rand==4:self._moveRight(env)
 
-    def percet1(self,f):
+    def percet1(self,f):#1%的变异率
         if not self.allowVariation:
             return f
-        return float(f*(0.99*nextFloat()*0.02))
+        return float(f*(0.99+nextFloat()*0.02))
 
-    def percet5(self,f):
+    def percet5(self,f):#5%的变异率
         if not self.allowVariation:
             return f
-        return float(f*(0.95*nextFloat()*0.10))
+        return float(f*(0.95+nextFloat()*0.10))
 
     def layEgg(self):
         print('[LAYEGG]:Frog %d laid egg!'%self.frogid)
@@ -187,3 +187,5 @@ class Frog(object):
         if not self.alive:
             return None
         canvas.move(self.frogImage,self.xChange,self.yChange)#对Frog进行移动
+        self.xChange=0
+        self.yChange=0

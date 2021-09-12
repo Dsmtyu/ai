@@ -11,7 +11,7 @@ class Application(object):
         self.tk.title('Frog test round: 0, time used: 0s')
         self.tk.geometry("520x550")
         self.canvas=Canvas(self.tk,width=300,height=300,bd=0,highlightthickness=0)
-        self.canvas.pack()
+        self.canvas.place(x=100,y=100)
         self.tk.update()
 
     def main(self):
