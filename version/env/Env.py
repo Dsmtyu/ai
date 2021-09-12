@@ -53,13 +53,15 @@ class Env(object):
         #先把背景画成白色
         self.canvas.create_rectangle(0,0,self.canvas.winfo_width(),self.canvas.winfo_height(),fill='white')
         self.frogs.clear()#清空Frogs
+        frogid=0
         for i in range(self.ENV_XSIZE):
             for j in range(self.ENV_YSIZE):
                 self.foods[i][j]=0#清空食物
         for i in range(len(self.eggs)):
             for j in range(4):#一个Egg生出4个Frog
                 self.frogs.append(Frog(self.ENV_XSIZE/2+nextInt(90),self.ENV_YSIZE/2+nextInt(90),self.eggs[i],
-                                       self.tk,self.canvas,i*4+j+1))
+                                       self.tk,self.canvas,frogid))
+                frogid+=1
         print("Created %d frogs"%(4*len(self.eggs)))
         for i in range(self.FOOD_QTY):
             self.foods[nextInt(self.ENV_XSIZE-3)][nextInt(self.ENV_YSIZE-3)]=True

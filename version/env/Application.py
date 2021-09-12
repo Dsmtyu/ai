@@ -18,5 +18,5 @@ class Application(object):
         env=Env(self.tk,self.canvas)
         try:
             env.run()
-        except TclError as e:
+        except TclError:
             pass
