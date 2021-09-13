@@ -18,3 +18,4 @@
 两张运行图：
 <p><img src="run(pycharm).png"></p>
 <p><img src="run实际效果.png"></p>
+# 谢谢支持！
