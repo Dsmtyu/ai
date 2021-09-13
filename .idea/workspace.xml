@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b2954a9f-d2e2-4fc5-ba30-fbeda3388143" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/version/Frog.py" beforeDir="false" afterPath="$PROJECT_DIR$/version/Frog.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/version/env/Env.py" beforeDir="false" afterPath="$PROJECT_DIR$/version/env/Env.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/version/utils/EggTool.py" beforeDir="false" afterPath="$PROJECT_DIR$/version/utils/EggTool.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eggs.ser" beforeDir="false" afterPath="$PROJECT_DIR$/eggs.ser" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
