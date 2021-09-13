@@ -12,3 +12,9 @@
 相当于一个单细胞“草履虫”，不具备视觉能力，不具备自动找食能力。
 运行速度由于Python语言的本身特性（高级语言运行速度较慢）而略微卡顿，希望理解
 
+运AI\history\version1\main.py可得到结果。(注意：在Pycharm上以根目录为AI运行，否则会显示ImportError!)
+附图一张：
+<p><img src="目录结构.png"></p>
+两张运行图：
+<p><img src="run(pycharm).png"></p>
+<p><img src="run实际效果.png"></p>
