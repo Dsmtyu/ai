@@ -15,8 +15,8 @@ class EggTool(object):
         time.sleep(0.5)
         froglist=[]
         for frog in env.frogs:
-            froglist.append('%s:Frog %s'%(frog.energy,frog.frogid))
-        print(',\n'.join(froglist))
+            froglist.append('%d'%frog.energy)
+        print(','.join(froglist))
         time.sleep(0.5)
         try:
             newEggs=[]

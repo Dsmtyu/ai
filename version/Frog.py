@@ -162,7 +162,6 @@ class Frog(object):
         return float(f*(0.95+nextFloat()*0.10))
 
     def layEgg(self):
-        print('[LAYEGG]:Frog %d laid egg!'%self.frogid)
         self.allowVariation=False if nextInt(100)>25 else True#变异率先控制在25%
         #如果不允许变异，下的蛋就等于原来的蛋
         newEgg=Egg()

@@ -16,9 +16,9 @@ class Env(object):
         #Speed of test
         self.SHOW_SPEED=1
         #Steps of one test round
-        self.STEPS_PER_ROUND=10
+        self.STEPS_PER_ROUND=5
 
-        self.DELETE_EGGS=True #每次运行是否先删除保存的蛋
+        self.DELETE_EGGS=False #每次运行是否先删除保存的蛋
         #屏幕的长和宽
         self.ENV_XSIZE=300
         self.ENV_YSIZE=300
