@@ -2,11 +2,11 @@
 # Frog是青蛙的本体：
 # 属性：坐标，能量，蛋，是否存活，是否允许变异，移动时间，青蛙图像
 
-from version.brain.Cell import Cell
-from version.brain.IO import Input,Output
-from version.egg.Egg import Egg
-from version.egg.Zone import Zone
-from version.egg.CellGroup import CellGroup
+from history.version1.brain.Cell import Cell
+from history.version1.brain.IO import Input,Output
+from history.version1.egg.Egg import Egg
+from history.version1.egg.Zone import Zone
+from history.version1.egg.CellGroup import CellGroup
 
 CLASSPATH='C:\\Users\\admin\\Desktop\\AI\\'#根目录路径
 
@@ -186,6 +186,5 @@ class Frog(object):
         if not self.alive:
             return None
         canvas.move(self.frogImage,self.xChange,self.yChange)#对Frog进行移动
-        #self.tk.update_idletasks()
         self.xChange=0
         self.yChange=0
