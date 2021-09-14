@@ -186,6 +186,6 @@ class Frog(object):
         if not self.alive:
             return None
         canvas.move(self.frogImage,self.xChange,self.yChange)#对Frog进行移动
-        self.tk.update_idletasks()
+        #self.tk.update_idletasks()
         self.xChange=0
         self.yChange=0
