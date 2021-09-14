@@ -1,8 +1,8 @@
 # Env.py
 # Env是青蛙生存的模拟环境，使用tkinter作画
 
-from version.utils.EggTool import EggTool
-from version.Frog import Frog
+from history.version1.utils.EggTool import EggTool
+from history.version1.Frog import Frog
 
 from random import randint
 import time
@@ -90,6 +90,7 @@ class Env(object):
                 for frog in self.frogs:#画青蛙
                     frog.show(self.canvas)#青蛙移动
                 self.tk.update_idletasks()
+                self.tk.update()
             EggTool().layEggs(self)#保存蛋
             t2=time.time()#结束时间
             self.tk.title('Frog test round: %d , time used: %.4f s'%(_round,t2-t1))
