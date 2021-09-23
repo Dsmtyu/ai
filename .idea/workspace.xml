@@ -2,13 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b2954a9f-d2e2-4fc5-ba30-fbeda3388143" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/version/env/BrainStructure.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/eggs.ser" beforeDir="false" afterPath="$PROJECT_DIR$/eggs.ser" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/version/egg/Egg.py" beforeDir="false" afterPath="$PROJECT_DIR$/version/egg/Egg.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/version/egg/Zone.py" beforeDir="false" afterPath="$PROJECT_DIR$/version/egg/Zone.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/version/env/Application.py" beforeDir="false" afterPath="$PROJECT_DIR$/version/env/Application.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/version/env/Env.py" beforeDir="false" afterPath="$PROJECT_DIR$/version/env/Env.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/version/env/BrainStructure.py" beforeDir="false" afterPath="$PROJECT_DIR$/version/env/BrainStructure.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,6 +18,12 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="PUSH_TAGS">
+      <GitPushTagMode>
+        <option name="argument" value="--tags" />
+        <option name="title" value="All" />
+      </GitPushTagMode>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitSEFilterConfiguration">
