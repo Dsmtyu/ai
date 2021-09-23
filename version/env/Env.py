@@ -1,8 +1,8 @@
 # Env.py
 # Env是青蛙生存的模拟环境，使用tkinter作画
 
-from history.version1.utils.EggTool import EggTool
-from history.version1.Frog import Frog
+from version.utils.EggTool import EggTool
+from version.Frog import Frog
 
 from random import randint
 import time
@@ -12,7 +12,7 @@ def nextFloat(): return randint(1,100000)/100000
 def nextInt(number): return randint(1,number)
 
 class Env(object):
-    def __init__(self,tk,canvas):
+    def __init__(self,tk,canvas,app):
         #Speed of test
         self.SHOW_SPEED=1
         #Steps of one test round
@@ -33,6 +33,8 @@ class Env(object):
 
         self.tk=tk#Tk()
         self.canvas=canvas#Canvas()
+
+        self.app=app
 
         print('Abrabrabra!')
         if self.DELETE_EGGS:
@@ -68,7 +70,7 @@ class Env(object):
                 elif self.foods[x][y]==-1:
                     canvas.create_oval(x,y,x+2,y+2,outline='white',fill='white')
 
-    def run(self,app):#运行
+    def run(self):#运行
         EggTool().loadEggs(self)#导入或新建一批Egg
         _round=1#运行次数
         while True:
@@ -92,7 +94,7 @@ class Env(object):
                 self.tk.update_idletasks()
                 self.tk.update()
             EggTool().layEggs(self)#保存蛋
-            app.brain_structure.drawBrain(self.frogs[0])
+            self.app.brain_structure.drawBrain(self.frogs[0])
             t2=time.time()#结束时间
             self.tk.title('Frog test round: %d , time used: %.4f s'%(_round,t2-t1))
             _round+=1

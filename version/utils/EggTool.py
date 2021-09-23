@@ -4,8 +4,9 @@
 from version.egg.Egg import Egg
 
 import os,pickle,time
+from configs import classpath
 
-CLASSPATH='C:\\Users\\admin\\Desktop\\AI\\'
+CLASSPATH=classpath#根目录路径
 
 class EggTool(object):
     def layEggs(self,env):

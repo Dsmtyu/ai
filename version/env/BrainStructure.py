@@ -1,9 +1,10 @@
 import random
 
 class BrainStructure(object):
-    def __init__(self,tk,canvas):
+    def __init__(self,tk,canvas,app):
         self.tk=tk
         self.canvas=canvas
+        self.app=app
         self.colors=['red','orange','yellow','green','blue']
 
     def drawZone(self,z,outline='black',fill='white'):
@@ -13,7 +14,8 @@ class BrainStructure(object):
         )
 
     def drawBrain(self,frog):
-        self.canvas.create_rectangle(0,0,800,800,outline='black',fill='white')
+        print('Draw Frog brain...')
+        self.canvas.create_rectangle(0,0,500,500,outline='black',fill='white')
         self.drawZone(frog.eye,outline='red')
 
         self.drawZone(frog.moveUp,outline='gray')
@@ -23,7 +25,7 @@ class BrainStructure(object):
 
         for cellgroup in frog.egg.cellgroups:
             random.shuffle(self.colors)
-            color=self.colors[1]
+            color=self.colors[0]
             self.canvas.create_line(
                 round(cellgroup.groupInputZone.x),round(cellgroup.groupInputZone.y),
                 round(cellgroup.groupOutputZone.x),round(cellgroup.groupOutputZone.y),

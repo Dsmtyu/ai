@@ -1,20 +1,20 @@
 # Zone.py
 # Zone是一块圆形区域，属性有：圆心坐标，半径
-from version.egg.Egg import Egg
 
 class Zone(object):
     def __init__(self,x=0.0,y=0.0,radius=0.0):
         self.x=x
         self.y=y
         self.radius=radius
+        self.brainLength=500
         if self.x<0:
             self.x=0
         if self.y<0:
             self.y=0
-        if self.x>Egg().brainLength:
-            self.x=Egg().brainLength
-        if self.y>Egg().brainLength:
-            self.y=Egg().brainLength
+        if self.x>self.brainLength:
+            self.x=self.brainLength
+        if self.y>self.brainLength:
+            self.y=self.brainLength
 
     def nearby(self,z):#本体Zone与z这个Zone是否重叠
         distance=self.radius+z.radius
