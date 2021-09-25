@@ -21,11 +21,11 @@ class Application(object):
         self.envtk.update()
         self.braintk.update()
 
-        self.env=Env(self.envtk,self.envcanvas)
         self.brain_structure=BrainStructure(self.braintk,self.braincanvas)
+        self.env=Env(self.envtk,self.envcanvas,self.brain_structure)
 
     def main(self):
         try:
-            self.env.run(self)
+            self.env.run()
         except TclError:
             pass
