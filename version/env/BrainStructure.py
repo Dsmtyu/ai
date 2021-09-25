@@ -34,3 +34,6 @@ class BrainStructure(object):
 
         for cell in frog.cells:
             pass
+
+        self.tk.update_idletasks()
+        self.tk.update()
