@@ -40,7 +40,7 @@ class Frog(object):
         self.change=1
         self.frogid=frogid#frog编号
         self.egg=egg#蛋
-        self.energy=1000#青蛙的能量，能量耗尽时青蛙死亡
+        self.energy=10000#青蛙的能量，能量耗尽时青蛙死亡
         self.tk=tk
         self.canvas=canvas#tkinter画布
         self.alive=True#是否活着
@@ -183,8 +183,8 @@ class Frog(object):
         return newEgg
 
     def show(self,canvas):
-        if not self.alive:
-            return None
+        #if not self.alive:
+        #    return None
         canvas.move(self.frogImage,self.xChange,self.yChange)#对Frog进行移动
         self.xChange=0
         self.yChange=0

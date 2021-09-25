@@ -88,7 +88,8 @@ class Env(object):
                 if i%self.SHOW_SPEED:#画青蛙会拖慢速度
                     continue
                 for frog in self.frogs:#画青蛙
-                    frog.show(self.canvas)#青蛙移动
+                    if frog.alive:
+                        frog.show(self.canvas)#青蛙移动
                 self.tk.update_idletasks()
                 self.tk.update()
             EggTool().layEggs(self)#保存蛋
