@@ -8,7 +8,7 @@ from history.version1.egg.Egg import Egg
 from history.version1.egg.Zone import Zone
 from history.version1.egg.CellGroup import CellGroup
 
-CLASSPATH='C:\\Users\\admin\\Desktop\\AI\\'#根目录路径
+CLASSPATH='C:\\Users\\jack\\Desktop\\AI\\'#根目录路径
 
 from tkinter import *
 
