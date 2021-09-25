@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b2954a9f-d2e2-4fc5-ba30-fbeda3388143" name="Default Changelist" comment="">
+    <list default="true" id="b2954a9f-d2e2-4fc5-ba30-fbeda3388143" name="Default Changelist" comment="Update files">
       <change afterPath="$PROJECT_DIR$/version/env/BrainStructure.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/eggs.ser" beforeDir="false" afterPath="$PROJECT_DIR$/eggs.ser" afterDir="false" />
@@ -135,6 +135,10 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Update files" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update files" />
   </component>
   <component name="WindowStateProjectService">
     <state x="223" y="67" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1632534624801">
