@@ -13,6 +13,7 @@ class BrainStructure(object):
         )
 
     def drawBrain(self,frog):
+        print('Draw Frog Brain...')
         self.canvas.create_rectangle(0,0,800,800,outline='black',fill='white')
         self.drawZone(frog.eye,outline='red')
 
