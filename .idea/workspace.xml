@@ -19,7 +19,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b2954a9f-d2e2-4fc5-ba30-fbeda3388143" name="Default Changelist" comment="">
+    <list default="true" id="b2954a9f-d2e2-4fc5-ba30-fbeda3388143" name="Default Changelist" comment="Update files">
       <change beforePath="$PROJECT_DIR$/eggs.ser" beforeDir="false" afterPath="$PROJECT_DIR$/eggs.ser" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/version/env/BrainStructure.py" beforeDir="false" afterPath="$PROJECT_DIR$/version/env/BrainStructure.py" afterDir="false" />
     </list>
@@ -67,7 +67,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/version/main.py" />
+    <property name="last_opened_file_path" value="D:/Program Files/venv" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
@@ -78,8 +78,8 @@
       <recent name="C:\Users\admin\Desktop\AI\version" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.main">
-    <configuration name="main" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
+  <component name="RunManager">
+    <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="AI" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -100,34 +100,9 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="version1.main" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="AI" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/history/version1" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/history/version1/main.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <list>
-      <item itemvalue="Python.main" />
-      <item itemvalue="Python.version1.main" />
-    </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.version1.main" />
+        <item itemvalue="Python.main" />
       </list>
     </recent_temporary>
   </component>
@@ -154,18 +129,54 @@
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Update files" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update files" />
+  </component>
   <component name="WindowStateProjectService">
-    <state x="223" y="67" width="1089" height="714" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1633090465381">
+    <state x="223" y="67" width="1089" height="714" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1633091319481">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="223" y="67" width="1089" height="714" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824/-1014.-2160.2560.1400@0.0.1536.824" timestamp="1633090465381" />
-    <state x="548" y="167" key="FileChooserDialogImpl" timestamp="1633090462152">
+    <state x="223" y="67" width="1089" height="714" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824/-1014.-2160.2560.1400@0.0.1536.824" timestamp="1633091319481" />
+    <state x="548" y="167" key="FileChooserDialogImpl" timestamp="1633091192539">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="548" y="167" key="FileChooserDialogImpl/0.0.1536.824/-1014.-2160.2560.1400@0.0.1536.824" timestamp="1633090462152" />
-    <state x="270" y="56" key="SettingsEditor" timestamp="1633090241476">
+    <state x="548" y="167" key="FileChooserDialogImpl/0.0.1536.824/-1014.-2160.2560.1400@0.0.1536.824" timestamp="1633091192539" />
+    <state width="1515" height="210" key="GridCell.Tab.0.bottom" timestamp="1633091304549">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="270" y="56" key="SettingsEditor/0.0.1536.824/-1014.-2160.2560.1400@0.0.1536.824" timestamp="1633090241476" />
+    <state width="1515" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824/-1014.-2160.2560.1400@0.0.1536.824" timestamp="1633091304549" />
+    <state width="1515" height="210" key="GridCell.Tab.0.center" timestamp="1633091304549">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1515" height="210" key="GridCell.Tab.0.center/0.0.1536.824/-1014.-2160.2560.1400@0.0.1536.824" timestamp="1633091304549" />
+    <state width="1515" height="210" key="GridCell.Tab.0.left" timestamp="1633091304549">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1515" height="210" key="GridCell.Tab.0.left/0.0.1536.824/-1014.-2160.2560.1400@0.0.1536.824" timestamp="1633091304549" />
+    <state width="1515" height="210" key="GridCell.Tab.0.right" timestamp="1633091304549">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1515" height="210" key="GridCell.Tab.0.right/0.0.1536.824/-1014.-2160.2560.1400@0.0.1536.824" timestamp="1633091304549" />
+    <state x="270" y="56" key="SettingsEditor" timestamp="1633091287520">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="270" y="56" key="SettingsEditor/0.0.1536.824/-1014.-2160.2560.1400@0.0.1536.824" timestamp="1633091287520" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/version/utils/EggTool.py</url>
+          <line>3</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/version/env/Env.py</url>
+          <line>3</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
