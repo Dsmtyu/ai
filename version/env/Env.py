@@ -12,7 +12,7 @@ def nextFloat(): return randint(1,100000)/100000
 def nextInt(number): return randint(1,number)
 
 class Env(object):
-    def __init__(self,tk,canvas):
+    def __init__(self,tk,canvas,app):
         #Speed of test
         self.SHOW_SPEED=1
         #Steps of one test round
@@ -33,6 +33,8 @@ class Env(object):
 
         self.tk=tk#Tk()
         self.canvas=canvas#Canvas()
+
+        self.app=app
 
         print('Abrabrabra!')
         if self.DELETE_EGGS:
@@ -92,7 +94,7 @@ class Env(object):
                 self.tk.update_idletasks()
                 self.tk.update()
             EggTool().layEggs(self)#保存蛋
-            app.brain_structure.drawBrain(self.frogs[0])
+            self.app.brain_structure.drawBrain(self.frogs[0])
             t2=time.time()#结束时间
             self.tk.title('Frog test round: %d , time used: %.4f s'%(_round,t2-t1))
             _round+=1

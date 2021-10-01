@@ -5,7 +5,7 @@ from version.egg.Egg import Egg
 
 import os,pickle,time
 
-CLASSPATH='C:\\Users\\admin\\Desktop\\AI\\'
+CLASSPATH='C:\\Users\\jack\\Desktop\\AI\\'
 
 class EggTool(object):
     def layEggs(self,env):
