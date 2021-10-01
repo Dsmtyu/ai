@@ -12,7 +12,7 @@ def nextFloat(): return randint(1,100000)/100000
 def nextInt(number): return randint(1,number)
 
 class Env(object):
-    def __init__(self,tk,canvas,brain_structure):
+    def __init__(self,tk,canvas):
         #Speed of test
         self.SHOW_SPEED=1
         #Steps of one test round
@@ -33,7 +33,6 @@ class Env(object):
 
         self.tk=tk#Tk()
         self.canvas=canvas#Canvas()
-        self.brain_structure=brain_structure
 
         print('Abrabrabra!')
         if self.DELETE_EGGS:
@@ -69,7 +68,7 @@ class Env(object):
                 elif self.foods[x][y]==-1:
                     canvas.create_oval(x,y,x+2,y+2,outline='white',fill='white')
 
-    def run(self):#运行
+    def run(self,app):#运行
         EggTool().loadEggs(self)#导入或新建一批Egg
         _round=1#运行次数
         while True:
@@ -89,12 +88,11 @@ class Env(object):
                 if i%self.SHOW_SPEED:#画青蛙会拖慢速度
                     continue
                 for frog in self.frogs:#画青蛙
-                    if frog.alive:
-                        frog.show(self.canvas)#青蛙移动
+                    frog.show(self.canvas)#青蛙移动
                 self.tk.update_idletasks()
                 self.tk.update()
             EggTool().layEggs(self)#保存蛋
-            self.brain_structure.drawBrain(self.frogs[0])
+            app.brain_structure.drawBrain(self.frogs[0])
             t2=time.time()#结束时间
             self.tk.title('Frog test round: %d , time used: %.4f s'%(_round,t2-t1))
             _round+=1
