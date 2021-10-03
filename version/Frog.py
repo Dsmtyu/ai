@@ -2,11 +2,11 @@
 # Frog是青蛙的本体：
 # 属性：坐标，能量，蛋，是否存活，是否允许变异，移动时间，青蛙图像
 
-from history.version1.brain.Cell import Cell
-from history.version1.brain.IO import Input,Output
-from history.version1.egg.Egg import Egg
-from history.version1.egg.Zone import Zone
-from history.version1.egg.CellGroup import CellGroup
+from version.brain.Cell import Cell
+from version.brain.IO import Input,Output
+from version.egg.Egg import Egg
+from version.egg.Zone import Zone
+from version.egg.CellGroup import CellGroup
 
 CLASSPATH='C:\\Users\\jack\\Desktop\\AI\\'#根目录路径
 
@@ -40,7 +40,7 @@ class Frog(object):
         self.change=1
         self.frogid=frogid#frog编号
         self.egg=egg#蛋
-        self.energy=1000#青蛙的能量，能量耗尽时青蛙死亡
+        self.energy=10000#青蛙的能量，能量耗尽时青蛙死亡
         self.tk=tk
         self.canvas=canvas#tkinter画布
         self.alive=True#是否活着

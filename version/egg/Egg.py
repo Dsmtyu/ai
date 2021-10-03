@@ -14,7 +14,7 @@ class Egg(object):
     def __init__(self):
         self.CELL_GROUP_QTY=30
         self.brainRadius=1000
-        self.brainLength=800
+        self.brainLength=500
         self.cellgroups=[]
 
     def createBrandNewEgg(self):#随即制造一个新的Egg

@@ -20,8 +20,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b2954a9f-d2e2-4fc5-ba30-fbeda3388143" name="Default Changelist" comment="Update files">
-      <change beforePath="$PROJECT_DIR$/eggs.ser" beforeDir="false" afterPath="$PROJECT_DIR$/eggs.ser" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/version/env/BrainStructure.py" beforeDir="false" afterPath="$PROJECT_DIR$/version/env/BrainStructure.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/version/Frog.py" beforeDir="false" afterPath="$PROJECT_DIR$/version/Frog.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/version/egg/Egg.py" beforeDir="false" afterPath="$PROJECT_DIR$/version/egg/Egg.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/version/egg/Zone.py" beforeDir="false" afterPath="$PROJECT_DIR$/version/egg/Zone.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/version/env/Env.py" beforeDir="false" afterPath="$PROJECT_DIR$/version/env/Env.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -79,7 +82,7 @@
     </key>
   </component>
   <component name="RunManager">
-    <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="main" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <module name="AI" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -100,11 +103,6 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Python.main" />
-      </list>
-    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -142,41 +140,25 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="548" y="167" key="FileChooserDialogImpl/0.0.1536.824/-1014.-2160.2560.1400@0.0.1536.824" timestamp="1633091192539" />
-    <state width="1515" height="210" key="GridCell.Tab.0.bottom" timestamp="1633091304549">
+    <state width="1515" height="170" key="GridCell.Tab.0.bottom" timestamp="1633259539363">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1515" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824/-1014.-2160.2560.1400@0.0.1536.824" timestamp="1633091304549" />
-    <state width="1515" height="210" key="GridCell.Tab.0.center" timestamp="1633091304549">
+    <state width="1515" height="170" key="GridCell.Tab.0.bottom/0.0.1536.824/-1014.-2160.2560.1400@0.0.1536.824" timestamp="1633259539363" />
+    <state width="1515" height="170" key="GridCell.Tab.0.center" timestamp="1633259539363">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1515" height="210" key="GridCell.Tab.0.center/0.0.1536.824/-1014.-2160.2560.1400@0.0.1536.824" timestamp="1633091304549" />
-    <state width="1515" height="210" key="GridCell.Tab.0.left" timestamp="1633091304549">
+    <state width="1515" height="170" key="GridCell.Tab.0.center/0.0.1536.824/-1014.-2160.2560.1400@0.0.1536.824" timestamp="1633259539363" />
+    <state width="1515" height="170" key="GridCell.Tab.0.left" timestamp="1633259539362">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1515" height="210" key="GridCell.Tab.0.left/0.0.1536.824/-1014.-2160.2560.1400@0.0.1536.824" timestamp="1633091304549" />
-    <state width="1515" height="210" key="GridCell.Tab.0.right" timestamp="1633091304549">
+    <state width="1515" height="170" key="GridCell.Tab.0.left/0.0.1536.824/-1014.-2160.2560.1400@0.0.1536.824" timestamp="1633259539362" />
+    <state width="1515" height="170" key="GridCell.Tab.0.right" timestamp="1633259539363">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1515" height="210" key="GridCell.Tab.0.right/0.0.1536.824/-1014.-2160.2560.1400@0.0.1536.824" timestamp="1633091304549" />
-    <state x="270" y="56" key="SettingsEditor" timestamp="1633091287520">
+    <state width="1515" height="170" key="GridCell.Tab.0.right/0.0.1536.824/-1014.-2160.2560.1400@0.0.1536.824" timestamp="1633259539363" />
+    <state x="270" y="56" key="SettingsEditor" timestamp="1633258353378">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="270" y="56" key="SettingsEditor/0.0.1536.824/-1014.-2160.2560.1400@0.0.1536.824" timestamp="1633091287520" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/version/utils/EggTool.py</url>
-          <line>3</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/version/env/Env.py</url>
-          <line>3</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <state x="270" y="56" key="SettingsEditor/0.0.1536.824/-1014.-2160.2560.1400@0.0.1536.824" timestamp="1633258353378" />
   </component>
 </project>

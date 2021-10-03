@@ -1,8 +1,8 @@
 # Env.py
 # Env是青蛙生存的模拟环境，使用tkinter作画
 
-from history.version1.utils.EggTool import EggTool
-from history.version1.Frog import Frog
+from version.utils.EggTool import EggTool
+from version.Frog import Frog
 
 from random import randint
 import time
