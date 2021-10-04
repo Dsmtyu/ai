@@ -22,10 +22,10 @@ class Application(object):
         self.braintk.update()
 
         self.env=Env(self.envtk,self.envcanvas,self)
-        self.brain_structure=BrainStructure(self.braintk,self.braincanvas)
+        self.brain_structure=BrainStructure(self.braintk,self.braincanvas,self)
 
     def main(self):
         try:
-            self.env.run(self)
+            self.env.run()
         except TclError:
             pass

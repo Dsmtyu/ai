@@ -1,9 +1,10 @@
 import random
 
 class BrainStructure(object):
-    def __init__(self,tk,canvas):
+    def __init__(self,tk,canvas,app):
         self.tk=tk
         self.canvas=canvas
+        self.app=app
         self.colors=['red','orange','yellow','green','blue']
 
     def drawZone(self,z,outline='black',fill='white'):

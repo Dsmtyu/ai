@@ -70,7 +70,7 @@ class Env(object):
                 elif self.foods[x][y]==-1:
                     canvas.create_oval(x,y,x+2,y+2,outline='white',fill='white')
 
-    def run(self,app):#运行
+    def run(self):#运行
         EggTool().loadEggs(self)#导入或新建一批Egg
         _round=1#运行次数
         while True:
