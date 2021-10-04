@@ -7,8 +7,9 @@ from version.brain.IO import Input,Output
 from version.egg.Egg import Egg
 from version.egg.Zone import Zone
 from version.egg.CellGroup import CellGroup
+from configs import classpath
 
-CLASSPATH='C:\\Users\\jack\\Desktop\\AI\\'#根目录路径
+CLASSPATH=classpath#根目录路径
 
 from tkinter import *
 
