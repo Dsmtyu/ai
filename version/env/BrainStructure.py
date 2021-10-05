@@ -24,7 +24,7 @@ class BrainStructure(object):
 
         for cellgroup in frog.egg.cellgroups:
             random.shuffle(self.colors)
-            color=self.colors[1]
+            color=self.colors[0]
             self.canvas.create_line(
                 round(cellgroup.groupInputZone.x),round(cellgroup.groupInputZone.y),
                 round(cellgroup.groupOutputZone.x),round(cellgroup.groupOutputZone.y),
