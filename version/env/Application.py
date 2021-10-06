@@ -14,9 +14,9 @@ class Application(object):
         self.envcanvas=Canvas(self.envtk,width=300,height=300,bd=0,highlightthickness=0)
         self.envcanvas.place(x=100,y=100)
         self.braintk=Tk()
-        self.braintk.title('Brain picture')
-        self.braintk.geometry("500x500+600+0")
-        self.braincanvas=Canvas(self.braintk,width=800,height=800,bd=0,highlightthickness=0)
+        self.braintk.title("First frog's brain picture")
+        self.braintk.geometry("500x500+500+0")
+        self.braincanvas=Canvas(self.braintk,width=500,height=500,bd=0,highlightthickness=0)
 
         self.envtk.update()
         self.braintk.update()
