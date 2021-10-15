@@ -1,3 +1,3 @@
 import os
 
-classpath='C:\\Users\\jack\\Desktop\\AI\\'
+classpath='C:\\Users\\admin\\Desktop\\AI\\'
