@@ -183,9 +183,10 @@ class Frog(object):
             newEgg.cellgroups.append(cellGroup)
         return newEgg
 
-    def show(self,canvas):
+    async def show(self,canvas):
         if not self.alive:
             return None
-        canvas.move(self.frogImage,self.xChange,self.yChange)#对Frog进行移动
+        try:await canvas.move(self.frogImage,self.xChange,self.yChange)#对Frog进行移动
+        except TypeError:pass
         self.xChange=0
         self.yChange=0

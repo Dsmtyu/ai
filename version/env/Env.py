@@ -5,18 +5,18 @@ from version.utils.EggTool import EggTool
 from version.Frog import Frog
 
 from random import randint
-import time
+import time,asyncio
 
 def nextFloat(): return randint(1,100000)/100000
 
 def nextInt(number): return randint(1,number)
 
 class Env(object):
-    def __init__(self,tk,canvas,app):
+    def __init__(self,tk,canvas):
         #Speed of test
         self.SHOW_SPEED=1
         #Steps of one test round
-        self.STEPS_PER_ROUND=5
+        self.STEPS_PER_ROUND=10
 
         self.DELETE_EGGS=False #每次运行是否先删除保存的蛋
         #屏幕的长和宽
@@ -33,8 +33,6 @@ class Env(object):
 
         self.tk=tk#Tk()
         self.canvas=canvas#Canvas()
-
-        self.app=app
 
         print('Abrabrabra!')
         if self.DELETE_EGGS:
@@ -71,30 +69,33 @@ class Env(object):
                     canvas.create_oval(x,y,x+2,y+2,outline='white',fill='white')
 
     def run(self):#运行
-        EggTool().loadEggs(self)#导入或新建一批Egg
-        _round=1#运行次数
-        while True:
-            t1=time.time()#开始时间
-            self.rebuildFrogAndFood()
-            allDead=False#青蛙是否全部死亡
-            for i in range(self.STEPS_PER_ROUND):
-                self.drawFood(self.canvas)#画食物
-                if allDead:#全部死亡就可以提前结束
-                    break
-                allDead=True
-                for frog in self.frogs:
-                    if frog.active(self):
-                        allDead=False
-                    if frog.alive and frog.moveCount==0 and i>100:#不移动的”懒惰青蛙“死亡
-                        frog.alive=False
-                if i%self.SHOW_SPEED:#画青蛙会拖慢速度
-                    continue
-                for frog in self.frogs:#画青蛙
-                    frog.show(self.canvas)#青蛙移动
-                self.tk.update_idletasks()
-                self.tk.update()
-            EggTool().layEggs(self)#保存蛋
-            self.app.brain_structure.drawBrain(self.frogs[0])
-            t2=time.time()#结束时间
-            self.tk.title('Frog test round: %d , time used: %.4f s'%(_round,t2-t1))
-            _round+=1
+        try:
+            EggTool().loadEggs(self)#导入或新建一批Egg
+            _round=1#运行次数
+            while True:
+                t1=time.time()#开始时间
+                self.rebuildFrogAndFood()
+                allDead=False#青蛙是否全部死亡
+                for i in range(self.STEPS_PER_ROUND):
+                    self.drawFood(self.canvas)#画食物
+                    if allDead:#全部死亡就可以提前结束
+                        break
+                    allDead=True
+                    for frog in self.frogs:
+                        if frog.active(self):
+                            allDead=False
+                        if frog.alive and frog.moveCount==0 and i>5:#不移动的”懒惰青蛙“死亡
+                            frog.alive=False
+                    if i%self.SHOW_SPEED:#画青蛙会拖慢速度
+                        continue
+                    frogmoves=[frog.show(self.canvas) for frog in self.frogs]
+                    loop=asyncio.get_event_loop()
+                    loop.run_until_complete(asyncio.wait(frogmoves))
+                    self.tk.update_idletasks()
+                    self.tk.update()
+                EggTool().layEggs(self)#保存蛋
+                t2=time.time()#结束时间
+                self.tk.title('Frog test round: %d , time used: %.4f s'%(_round,t2-t1))
+                _round+=1
+        except Exception:
+            pass
