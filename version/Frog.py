@@ -2,11 +2,11 @@
 # Frog是青蛙的本体：
 # 属性：坐标，能量，蛋，是否存活，是否允许变异，移动时间，青蛙图像
 
-from version.brain.Cell import Cell
-from version.brain.IO import Input,Output
-from version.egg.Egg import Egg
-from version.egg.Zone import Zone
-from version.egg.CellGroup import CellGroup
+from history.version1.brain.Cell import Cell
+from history.version1.brain.IO import Input,Output
+from history.version1.egg.Egg import Egg
+from history.version1.egg.Zone import Zone
+from history.version1.egg.CellGroup import CellGroup
 from configs import classpath
 
 CLASSPATH=classpath#根目录路径
@@ -41,7 +41,7 @@ class Frog(object):
         self.change=1
         self.frogid=frogid#frog编号
         self.egg=egg#蛋
-        self.energy=10000#青蛙的能量，能量耗尽时青蛙死亡
+        self.energy=1000#青蛙的能量，能量耗尽时青蛙死亡
         self.tk=tk
         self.canvas=canvas#tkinter画布
         self.alive=True#是否活着
@@ -183,10 +183,9 @@ class Frog(object):
             newEgg.cellgroups.append(cellGroup)
         return newEgg
 
-    async def show(self,canvas):
+    def show(self,canvas):
         if not self.alive:
             return None
-        try:await canvas.move(self.frogImage,self.xChange,self.yChange)#对Frog进行移动
-        except TypeError:pass
+        canvas.move(self.frogImage,self.xChange,self.yChange)#对Frog进行移动
         self.xChange=0
         self.yChange=0
