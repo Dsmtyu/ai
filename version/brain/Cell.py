@@ -6,6 +6,7 @@ class Cell(object):
         self.group=0
         self.inputs=[] #神经元输入区
         self.outputs=[] #神经元输出区
+        self.energy=0.0
 
     def activate(self):
         for xy in self.inputs:
