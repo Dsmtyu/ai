@@ -22,7 +22,7 @@ def nextFloat(): return randint(1,100000)/100000
 def nextInt(number): return randint(1,number)
 
 class Frog(object):
-    def __init__(self,x,y,egg,tk,canvas,frogid):
+    def __init__(self,x,y,egg,tk,canvas):
         self.brainRadius=0.0
         self.cells=[]
         #视觉细胞在脑中的区域，暂时先随便取，以后考虑使用
@@ -39,7 +39,6 @@ class Frog(object):
         self.xChange=0#青蛙水平方向的移动
         self.yChange=0#青蛙垂直方向的移动
         self.change=1
-        self.frogid=frogid#frog编号
         self.egg=egg#蛋
         self.energy=1000#青蛙的能量，能量耗尽时青蛙死亡
         self.tk=tk
@@ -101,51 +100,49 @@ class Frog(object):
         if self.x>=0 and self.x<env.ENV_XSIZE\
         and self.y>=0 and self.y<env.ENV_YSIZE:
             if env.foods[round(self.x)][round(self.y)]==1:
-                env.foods[round(self.x)][round(self.y)]=-1
+                env.foods[round(self.x)][round(self.y)]=0
                 self.energy+=1000#吃到食物青蛙能量增加1000
                 eatedFood=True
-                #print('[EAT]:Frog %d ate food!'%self.frogid)
         if eatedFood: #TODO: 奖励措施未完成
             pass
 
     def _moveUp(self,env):
-        #print("[MOVE]:Frog %d move up!"%self.frogid)
         self.yChange-=self.change
         self.y-=self.change
+        self.moveCount+=1
         if self.y<0 or self.y>=env.ENV_YSIZE:
             self.alive=False
             return None
         self.checkFoodAndEat(env)
 
     def _moveDown(self,env):
-        #print("[MOVE]:Frog %d move down!"%self.frogid)
         self.yChange+=self.change
         self.y+=self.change
+        self.moveCount+=1
         if self.y<0 or self.y>=env.ENV_YSIZE:
             self.alive=False
             return None
         self.checkFoodAndEat(env)
 
     def _moveLeft(self,env):
-        #print("[MOVE]:Frog %d move left!"%self.frogid)
         self.xChange-=self.change
         self.x-=self.change
+        self.moveCount+=1
         if self.x<0 or self.x>=env.ENV_XSIZE:
             self.alive=False
             return None
         self.checkFoodAndEat(env)
 
     def _moveRight(self,env):
-        #print("[MOVE]:Frog %d move right!"%self.frogid)
         self.xChange+=self.change
         self.x+=self.change
+        self.moveCount+=1
         if self.x<0 or self.x>=env.ENV_XSIZE:
             self.alive=False
             return None
         self.checkFoodAndEat(env)
 
     def _moveRandom(self,env):
-        #print("[MOVE]:Frog %d move random!"%self.frogid)
         rand=nextInt(4)
         if rand==1:self._moveUp(env)
         if rand==2:self._moveDown(env)
