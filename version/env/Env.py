@@ -23,6 +23,8 @@ class Env(object):
     ENV_XSIZE=300
     ENV_YSIZE=300
 
+    FROG_BRAIN_LENGTH=1000
+
     foods=[]#foods
     foodid=[]#foodid,用itemconfig调整food显示
 
