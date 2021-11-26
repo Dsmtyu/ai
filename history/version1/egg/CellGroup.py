@@ -6,14 +6,16 @@
 from history.version1.egg.Zone import Zone
 
 class CellGroup(object):
+    groupInputZone=Zone()
+    groupOutputZone=Zone()
+
+    cellInputRadius=0.0
+    cellOutputRadius=0.0
+
+    cellQty=0
+
+    inputQtyPerCell=0
+    outputQtyPerCell=0
+
     def __init__(self):
-        self.groupInputZone=Zone()
-        self.groupOutputZone=Zone()
-
-        self.cellInputRadius=0.0
-        self.cellOutputRadius=0.0
-
-        self.cellQty=0
-        
-        self.inputQtyPerCell=0
-        self.outputQtyPerCell=0
+        pass
