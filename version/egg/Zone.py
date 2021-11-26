@@ -1,11 +1,31 @@
 # Zone.py
 # Zone是一块圆形区域，属性有：圆心坐标，半径
+from configs import *
 
 class Zone(object):
-    def __init__(self,x=0.0,y=0.0,radius=0.0):
-        self.x=x
-        self.y=y
-        self.radius=radius
+    x=0.0
+    y=0.0
+    radius=0.0
+
+    def __init__(self,*args):
+        if len(args)==0:
+            pass
+        if len(args)==1:
+            z=args[0]
+            if not isinstance(z,Zone):
+                raise TypeError
+            self.x=z.x
+            self.y=z.y
+            self.radius=z.radius
+        if len(args)==3:
+            x,y,radius=args
+            self.x=x
+            self.y=y
+            self.radius=radius
+            if x<0:self.x=0
+            if y<0:self.y=0
+            if x>=FROG_BRAIN_LENGTH:self.x=FROG_BRAIN_LENGTH
+            if y>=FROG_BRAIN_LENGTH:self.y=FROG_BRAIN_LENGTH
 
     def nearby(self,z):#本体Zone与z这个Zone是否重叠
         distance=self.radius+z.radius
