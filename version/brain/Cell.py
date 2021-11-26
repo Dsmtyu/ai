@@ -4,6 +4,7 @@
 class Cell(object):
     def __init__(self):
         self.group=0
+        self.energy=0
         self.inputs=[] #神经元输入区
         self.outputs=[] #神经元输出区
 
