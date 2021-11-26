@@ -1,3 +1,5 @@
+from random import *
+
 classpath='C:\\Users\\admin\\Desktop\\AI\\'
 
 # Speed of test
@@ -11,3 +13,7 @@ ENV_YSIZE=300
 FROG_BRAIN_LENGTH=1000
 FOOD_QTY=5000#食物总量
 EGG_QTY=80#蛋总量
+
+def nextFloat(): return randint(1,100000)/100000
+
+def nextInt(number): return randint(1,number)
