@@ -17,3 +17,5 @@ EGG_QTY=80#蛋总量
 def nextFloat(): return randint(1,100000)/100000
 
 def nextInt(number): return randint(1,number)
+
+def percent(number): return nextInt(100)<=number
