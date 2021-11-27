@@ -13,16 +13,14 @@ class EggTool(object):
         print('[LAY EGG]:Laying eggs!')
         env.frogs.sort(key=lambda frog:frog.energy,reverse=True)
         print('First frog energy=%d, Last frog energy=%d'%(env.frogs[0].energy,env.frogs[len(env.frogs)-1].energy))
-        time.sleep(0.5)
         froglist=[]
         for frog in env.frogs:
             froglist.append('%d'%frog.energy)
         print(','.join(froglist))
-        time.sleep(0.5)
         try:
             newEggs=[]
             for i in range(env.EGG_QTY):
-                newEggs.append(env.frogs[i].layEgg())
+                newEggs.append(Egg(env.frogs[i]))
             with open(CLASSPATH+'eggs.ser','wb') as f:
                 pickle.dump(newEggs,f)
             env.eggs=newEggs

@@ -4,55 +4,50 @@
 
 from version.brain.Cell import Cell
 from version.brain.IO import Input,Output
-from version.egg.Egg import Egg
 from version.egg.Zone import Zone
-from version.egg.CellGroup import CellGroup
-from configs import classpath
+from configs import *
 
 CLASSPATH=classpath#根目录路径
 
 from tkinter import *
 
-from random import randint
-
-import time
-
-def nextFloat(): return randint(1,100000)/100000
-
-def nextInt(number): return randint(1,number)
-
 class Frog(object):
-    def __init__(self,x,y,egg,tk,canvas):
-        self.brainRadius=0.0
-        self.cells=[]
-        #视觉细胞在脑中的区域，暂时先随便取，以后考虑使用
-        self.eye=Zone(0,0,300)
-        #运动细胞在脑中的区域，暂时先随便取，以后考虑使用
-        self.moveUp=Zone(500,50,10)
-        self.moveDown=Zone(500,100,10)
-        self.moveLeft=Zone(500,150,10)
-        self.moveRight=Zone(500,200,10)
-        self.moveRandom=Zone(500,300,10)
+    cells=[]#frog的神经元
+    cellGroups=[]
+    organs=[]#frog的器官
+    # 视觉细胞在脑中的区域，暂时先随便取，以后考虑使用
+    eye=Zone(0,0,300)
+    # 运动细胞在脑中的区域，暂时先随便取，以后考虑使用
+    moveUp=Zone(500,50,10)
+    moveDown=Zone(500,100,10)
+    moveLeft=Zone(500,150,10)
+    moveRight=Zone(500,200,10)
+    moveRandom=Zone(500,300,10)
 
-        self.x=x#青蛙的x坐标
-        self.y=y#青蛙的y坐标
-        self.xChange=0#青蛙水平方向的移动
-        self.yChange=0#青蛙垂直方向的移动
-        self.change=1
-        self.egg=egg#蛋
-        self.energy=10000#青蛙的能量，能量耗尽时青蛙死亡
+    x=0  #青蛙的x坐标
+    y=0  #青蛙的y坐标
+    xChange=0  #青蛙水平方向的移动
+    yChange=0  #青蛙垂直方向的移动
+    change=1
+    energy=10000  #青蛙的能量，能量耗尽时青蛙死亡
+    egg=None
+
+    alive=True  #是否活着
+    moveCount=0  #移动计数
+
+    def __init__(self,x,y,egg,tk,canvas):
+        self.x=x
+        self.y=y
+        self.egg=egg
+
         self.tk=tk
-        self.canvas=canvas#tkinter画布
-        self.alive=True#是否活着
-        self.allowVariation=False#是否允许变异
-        self.moveCount=0#移动计数
-        self.frogImageDir=CLASSPATH+'frog.gif'#青蛙图像路径
-        self.frogImageFile=PhotoImage(file=self.frogImageDir)#青蛙图像文件
-        self.frogImage=canvas.create_image(self.x,self.y,anchor=NW,image=self.frogImageFile)#显示在canvas上的图像
+        self.canvas=canvas  #tkinter画布
+        self.frogImageDir=CLASSPATH+'frog.gif'  #青蛙图像路径
+        self.frogImageFile=PhotoImage(file=self.frogImageDir)  #青蛙图像文件
+        self.frogImage=canvas.create_image(self.x,self.y,anchor=NW,image=self.frogImageFile)  #显示在canvas上的图像
 
         if egg.cellgroups is None:
             raise RuntimeError("Illegal egg cellgroups argument!")
-        self.brainRadius=egg.brainRadius
 
         for k in range(len(egg.cellgroups)):
             g=egg.cellgroups[k]
@@ -148,37 +143,6 @@ class Frog(object):
         if rand==2:self._moveDown(env)
         if rand==3:self._moveLeft(env)
         if rand==4:self._moveRight(env)
-
-    def percet1(self,f):#1%的变异率
-        if not self.allowVariation:
-            return f
-        return float(f*(0.99+nextFloat()*0.02))
-
-    def percet5(self,f):#5%的变异率
-        if not self.allowVariation:
-            return f
-        return float(f*(0.95+nextFloat()*0.10))
-
-    def layEgg(self):
-        self.allowVariation=False if nextInt(100)>25 else True#变异率先控制在25%
-        #如果不允许变异，下的蛋就等于原来的蛋
-        newEgg=Egg()
-        newEgg.brainRadius=self.percet5(self.egg.brainRadius)
-        newEgg.cellgroups=[]
-        for i in range(len(self.egg.cellgroups)):
-            cellGroup=CellGroup()
-            oldGp=self.egg.cellgroups[i]
-            cellGroup.groupInputZone=Zone(self.percet5(oldGp.groupInputZone.x),self.percet5(oldGp.groupInputZone.y),
-                                          self.percet5(oldGp.groupInputZone.radius))
-            cellGroup.groupOutputZone=Zone(self.percet5(oldGp.groupInputZone.x),self.percet5(oldGp.groupInputZone.y),
-                                          self.percet5(oldGp.groupInputZone.radius))
-            cellGroup.cellQty=round(self.percet5(oldGp.cellQty))
-            cellGroup.cellInputRadius=self.percet1(oldGp.cellInputRadius)
-            cellGroup.cellOutputRadius=self.percet1(oldGp.cellOutputRadius)
-            cellGroup.inputQtyPerCell=round(self.percet5(oldGp.inputQtyPerCell))
-            cellGroup.outputQtyPerCell=round(self.percet5(oldGp.outputQtyPerCell))
-            newEgg.cellgroups.append(cellGroup)
-        return newEgg
 
     def show(self,canvas):
         if not self.alive:
