@@ -4,7 +4,9 @@
 # -----------------------------------------------------------------------------------------------------------------------
 from version.egg.CellGroup import CellGroup
 from version.egg.OrganDesc import OrganDesc
+from version.egg.Zone import Zone
 from version.brain.Organ import Organ
+from version.Frog import Frog
 from configs import *
 
 class Egg(object):
@@ -19,23 +21,59 @@ class Egg(object):
     def __init__(self,*args):
         if len(args)==0:
             pass
+        if len(args)==1:
+            frog=args[0]
+            if not isinstance(frog,Frog):
+                raise TypeError
+            self.cellGroups=[]
+            for i in range(len(frog.cellGroups)):
+                if frog.cellGroups[i].fat<=0:
+                    if not frog.cellGroups[i].inherit:
+                        continue
+                    if percent(5):
+                        continue
+                oldCellGroup=frog.cellGroups[i]
+                newCellGroup=CellGroup()
+                newCellGroup.groupInputZone=Zone(self.variation(oldCellGroup.groupInputZone.x),
+                                                 self.variation(oldCellGroup.groupInputZone.y),
+                                                 self.variation(oldCellGroup.groupInputZone.radius))
+                newCellGroup.groupOutputZone=Zone(self.variation(oldCellGroup.groupOutputZone.x),
+                                                  self.variation(oldCellGroup.groupOutputZone.y),
+                                                  self.variation(oldCellGroup.groupOutputZone.radius))
+                newCellGroup.cellQty=round(self.variation(oldCellGroup.cellQty))
+                newCellGroup.cellInputRadius=self.variation(oldCellGroup.cellInputRadius)
+                newCellGroup.cellOutputRadius=self.variation(oldCellGroup.cellOutputRadius)
+                newCellGroup.inputQtyPerCell=round(self.variation(oldCellGroup.inputQtyPerCell))
+                newCellGroup.outputQtyPerCell=round(self.variation(oldCellGroup.outputQtyPerCell))
+                newCellGroup.inherit=True
+                self.cellGroups.append(newCellGroup)
+            self.addOrganDescs()
         if len(args)==2:
             xEgg,yEgg=args
             if not isinstance(xEgg,Egg) or not isinstance(yEgg,Egg):
                 raise TypeError
-            cellGroups=[]
+            self.cellGroups=[]
             for i in range(len(xEgg.cellGroups)):
                 oldCellGroup=xEgg.cellGroups[i]
                 newCellGroup=CellGroup(oldCellGroup)
                 newCellGroup.inherit=True
-                cellGroups.append(newCellGroup)
+                self.cellGroups.append(newCellGroup)
             yGroup=yEgg.cellGroups[nextInt(len(yEgg.cellGroups))-1]
-            cellGroups.append(yGroup)
+            self.cellGroups.append(yGroup)
             for i in range(self.randomCellGroupQty):
-                cellGroups.append(CellGroup(FROG_BRAIN_LENGTH,xEgg.randomCellQtyPerGroup,
+                self.cellGroups.append(CellGroup(FROG_BRAIN_LENGTH,xEgg.randomCellQtyPerGroup,
                                             xEgg.randomInputQtyPerCell,xEgg.randomOutputQtyPerCell))
             self.addOrganDescs()
 
+    def variation(self,f):
+        i=nextInt(100)
+        if i<=95:
+            return f
+        if i<=99:
+            rate=0.05
+        else:
+            rate=0.1
+        return float(f*(nextFloat()*2*rate+1-rate))
 
     def createBrandNewEgg(self):#随即制造一个新的Egg
         egg=Egg()
