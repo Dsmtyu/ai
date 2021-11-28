@@ -83,6 +83,8 @@ class Organ(Zone):
 
     def eat(self,frog):
         self.checkAlive(frog)
-        if self.env.foods[frog.x][frog.y]:
-            self.env.foods[frog.x][frog.y]=0
+        x=round(frog.x)
+        y=round(frog.y)
+        if self.env.foods[x][y]:
+            self.env.foods[x][y]=0
             frog.energy+=1000

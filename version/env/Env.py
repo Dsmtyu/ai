@@ -43,7 +43,7 @@ class Env(object):
                 self.foods[i][j]=0#清空食物
         for i in range(len(self.eggs)):
             for j in range(4):#一个Egg生出4个Frog
-                self.frogs.append(Frog(ENV_XSIZE/2+nextInt(90),ENV_YSIZE/2+nextInt(90),self.eggs[i],self.tk,self.canvas))
+                self.frogs.append(Frog(ENV_XSIZE/2+nextInt(90),ENV_YSIZE/2+nextInt(90),self.eggs[i],self,self.tk,self.canvas))
         print("Created %d frogs"%(4*len(self.eggs)))
         for i in range(FOOD_QTY):
             self.foods[nextInt(ENV_XSIZE-3)][nextInt(ENV_YSIZE-3)]=1
@@ -69,7 +69,7 @@ class Env(object):
                     break
                 allDead=True
                 for frog in self.frogs:
-                    if frog.active(self):
+                    if frog.active():
                         allDead=False
                     if frog.alive and frog.moveCount==0 and i>STEPS_PER_ROUND/10:#不移动的”懒惰青蛙“死亡
                         frog.alive=False

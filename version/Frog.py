@@ -36,10 +36,9 @@ class Frog(object):
     alive=True  #是否活着
     moveCount=0  #移动计数
 
-    def __init__(self,x,y,egg,tk,canvas):
+    def __init__(self,x,y,egg,env,tk,canvas):
         self.x=x
         self.y=y
-        self.egg=egg
 
         self.tk=tk
         self.canvas=canvas  #tkinter画布
@@ -47,11 +46,11 @@ class Frog(object):
         self.frogImageFile=PhotoImage(file=self.frogImageDir)  #青蛙图像文件
         self.frogImage=canvas.create_image(self.x,self.y,anchor=NW,image=self.frogImageFile)  #显示在canvas上的图像
 
-        if egg.cellgroups is None:
+        if egg.cellGroups is None:
             raise RuntimeError("Illegal egg cellgroups argument!")
 
-        for k in range(len(egg.cellgroups)):
-            g=egg.cellgroups[k]
+        for k in range(len(egg.cellGroups)):
+            g=egg.cellGroups[k]
             for i in range(g.cellQty):
                 c=Cell()
                 c.inputs=[]
@@ -72,17 +71,17 @@ class Frog(object):
 
         if egg.organDescs is not None:
             for organdesc in egg.organDescs:
-                self.organs.append(Organ(organdesc))
+                self.organs.append(Organ(env,organdesc))
 
     def randomPosInZone(self,z):#在Zone区域中的随机点，即坐标在Zone内，半径为0的一个Zone
         return Zone(z.x-z.radius+z.radius*2*nextFloat(),z.y-z.radius+z.radius*2*nextFloat(),0)
 
-    def active(self,env):#青蛙是否存活
+    def active(self):#青蛙是否存活
         self.energy-=20
         if not self.alive:#青蛙已死亡，返回False
             return False
-        if self.x<0 or self.x>=env.ENV_XSIZE\
-        or self.y<0 or self.y>=env.ENV_YSIZE\
+        if self.x<0 or self.x>=ENV_XSIZE\
+        or self.y<0 or self.y>=ENV_YSIZE\
         or self.energy<0:#青蛙的横纵坐标是否出界;青蛙的能量是否<0
             self.alive=False#出界时青蛙死亡
             return False

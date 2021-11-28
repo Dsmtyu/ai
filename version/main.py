@@ -1,4 +1,4 @@
-from history.version1.env.Application import Application
+from version.env.Application import Application
 
 if __name__ == '__main__':
     app=Application()
