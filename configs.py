@@ -5,7 +5,7 @@ classpath='C:\\Users\\admin\\Desktop\\AI\\'
 # Speed of test
 SHOW_SPEED=1
 # Steps of one test round
-STEPS_PER_ROUND=1000
+STEPS_PER_ROUND=100
 DELETE_EGGS=False#每次运行是否先删除保存的蛋
 # 屏幕的长和宽
 ENV_XSIZE=300

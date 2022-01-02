@@ -13,12 +13,6 @@ CLASSPATH=classpath#根目录路径
 
 from tkinter import *
 
-from random import randint
-
-def nextFloat(): return randint(1,100000)/100000
-
-def nextInt(number): return randint(1,number)
-
 class Frog(object):
     def __init__(self,x,y,egg,tk,canvas):
         self.brainRadius=0.0
@@ -80,6 +74,7 @@ class Frog(object):
         or self.y<0 or self.y>=ENV_YSIZE:#青蛙的横纵坐标是否出界
             self.alive=False#出界时青蛙死亡
             return False
+        return True
 
     def active(self,env):#青蛙是否存活
         if not self.alive:#青蛙已死亡，返回False

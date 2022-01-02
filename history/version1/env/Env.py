@@ -5,12 +5,7 @@ from history.version1.utils.EggTool import EggTool
 from history.version1.Frog import Frog
 
 from configs import *
-from random import randint
 import time
-
-def nextFloat(): return randint(1,100000)/100000
-
-def nextInt(number): return randint(1,number)
 
 class Env(object):
 

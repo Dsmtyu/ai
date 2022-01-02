@@ -4,11 +4,7 @@
 # -----------------------------------------------------------------------------------------------------------------------
 from history.version1.egg.CellGroup import CellGroup
 from history.version1.egg.Zone import Zone
-from random import randint
-
-def nextFloat(): return randint(1,100000)/100000
-
-def nextInt(number): return randint(1,number)
+from configs import *
 
 class Egg(object):
     def __init__(self,CELL_GROUP_QTY=30,brainRadius=1000,cellgroups=None):
