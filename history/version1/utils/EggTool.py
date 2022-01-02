@@ -4,7 +4,7 @@
 from history.version1.egg.Egg import Egg
 
 import os,pickle,time
-from configs import classpath
+from configs import *
 
 CLASSPATH=classpath#根目录路径
 
@@ -21,7 +21,7 @@ class EggTool(object):
         time.sleep(0.5)
         try:
             newEggs=[]
-            for i in range(env.EGG_QTY):
+            for i in range(EGG_QTY):
                 newEggs.append(env.frogs[i].layEgg())
             with open(CLASSPATH+'eggs.ser','wb') as f:
                 pickle.dump(newEggs,f)
@@ -40,9 +40,9 @@ class EggTool(object):
         except Exception as e:
             errorfound=True
         if errorfound:
-            print("No eggs files '"+CLASSPATH+"' found, created",env.EGG_QTY,"new eggs to do test.")
+            print("No eggs files '"+CLASSPATH+"' found, created",EGG_QTY,"new eggs to do test.")
             env.eggs=[]
-            for i in range(env.EGG_QTY):
+            for i in range(EGG_QTY):
                 env.eggs.append(Egg().createBrandNewEgg())
 
     def deleteEggs(self):

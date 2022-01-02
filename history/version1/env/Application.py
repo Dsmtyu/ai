@@ -1,5 +1,5 @@
 # Application.py
-# Application负责项目的启动，关闭等基础服务
+# Application负责项目的启动,关闭等基础服务
 
 from history.version1.env.Env import Env
 

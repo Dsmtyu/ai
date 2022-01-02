@@ -11,12 +11,14 @@ def nextFloat(): return randint(1,100000)/100000
 def nextInt(number): return randint(1,number)
 
 class Egg(object):
-    def __init__(self):
-        self.CELL_GROUP_QTY=30
-        self.brainRadius=1000
-        self.cellgroups=[]
+    def __init__(self,CELL_GROUP_QTY=30,brainRadius=1000,cellgroups=None):
+        if cellgroups is None:
+            cellgroups=[]
+        self.CELL_GROUP_QTY=CELL_GROUP_QTY
+        self.brainRadius=brainRadius
+        self.cellgroups=cellgroups
 
-    def createBrandNewEgg(self):#随即制造一个新的Egg
+    def createBrandNewEgg(self):#随机制造一个新的Egg
         egg=Egg()
         for i in range(self.CELL_GROUP_QTY):
             cellGroup=CellGroup()
