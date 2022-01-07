@@ -7,6 +7,11 @@ class Zone(object):
         self.y=y
         self.radius=radius
 
+    def initByOldZone(self,oldZone):#clone old Zone
+        self.x=oldZone.x
+        self.y=oldZone.y
+        self.radius=oldZone.radius
+
     def nearby(self,z):#本体Zone与z这个Zone是否重叠
         distance=self.radius+z.radius
         return True if abs(self.x-z.x)<distance and abs(self.y-z.y)<distance else False
