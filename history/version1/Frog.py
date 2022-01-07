@@ -119,34 +119,34 @@ class Frog(object):
             return None
         self.checkFoodAndEat(env)
 
-    def percet1(self,f):#1%的变异率
+    def percent1(self,f):#1%的变异率
         if not self.allowVariation:
             return f
         return float(f*(0.99+nextFloat()*0.02))
 
-    def percet5(self,f):#5%的变异率
+    def percent5(self,f):#5%的变异率
         if not self.allowVariation:
             return f
         return float(f*(0.95+nextFloat()*0.10))
 
     def layEgg(self):
-        self.allowVariation=False if nextInt(100)>25 else True#变异率先控制在25%
+        self.allowVariation=percent(25)#变异率先控制在25%
         #如果不允许变异，下的蛋就等于原来的蛋
         newEgg=Egg()
-        newEgg.brainRadius=self.percet5(self.egg.brainRadius)
+        newEgg.brainRadius=self.percent5(self.egg.brainRadius)
         newEgg.cellgroups=[]
         for i in range(len(self.egg.cellgroups)):
             cellGroup=CellGroup()
             oldGp=self.egg.cellgroups[i]
-            cellGroup.groupInputZone=Zone(self.percet5(oldGp.groupInputZone.x),self.percet5(oldGp.groupInputZone.y),
-                                          self.percet5(oldGp.groupInputZone.radius))
-            cellGroup.groupOutputZone=Zone(self.percet5(oldGp.groupInputZone.x),self.percet5(oldGp.groupInputZone.y),
-                                          self.percet5(oldGp.groupInputZone.radius))
-            cellGroup.cellQty=round(self.percet5(oldGp.cellQty))
-            cellGroup.cellInputRadius=self.percet1(oldGp.cellInputRadius)
-            cellGroup.cellOutputRadius=self.percet1(oldGp.cellOutputRadius)
-            cellGroup.inputQtyPerCell=round(self.percet5(oldGp.inputQtyPerCell))
-            cellGroup.outputQtyPerCell=round(self.percet5(oldGp.outputQtyPerCell))
+            cellGroup.groupInputZone=Zone(self.percent5(oldGp.groupInputZone.x),self.percent5(oldGp.groupInputZone.y),
+                                          self.percent5(oldGp.groupInputZone.radius))
+            cellGroup.groupOutputZone=Zone(self.percent5(oldGp.groupInputZone.x),self.percent5(oldGp.groupInputZone.y),
+                                          self.percent5(oldGp.groupInputZone.radius))
+            cellGroup.cellQty=round(self.percent5(oldGp.cellQty))
+            cellGroup.cellInputRadius=self.percent1(oldGp.cellInputRadius)
+            cellGroup.cellOutputRadius=self.percent1(oldGp.cellOutputRadius)
+            cellGroup.inputQtyPerCell=round(self.percent5(oldGp.inputQtyPerCell))
+            cellGroup.outputQtyPerCell=round(self.percent5(oldGp.outputQtyPerCell))
             newEgg.cellgroups.append(cellGroup)
         return newEgg
 
