@@ -14,6 +14,13 @@ FROG_BRAIN_LENGTH=1000
 FOOD_QTY=2000#食物总量
 EGG_QTY=80#蛋总量
 
+HUNGRY=0
+UP=1
+DOWN=2
+LEFT=3
+RIGHT=4
+EAT=5
+
 def nextFloat(): return randint(1,100000)/100000
 
 def nextInt(number): return randint(1,number)

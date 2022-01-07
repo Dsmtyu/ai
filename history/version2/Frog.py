@@ -17,6 +17,8 @@ class Frog(object):
     def __init__(self,x,y,egg,tk,canvas):
         self.brainRadius=0.0
         self.cells=[]
+        self.cellGroups=[]
+        self.organs=[]
         #视觉细胞在脑中的区域，暂时先随便取，以后考虑使用
         self.eye=Zone(0,0,300)
         #运动细胞在脑中的区域，暂时先随便取，以后考虑使用
@@ -48,6 +50,7 @@ class Frog(object):
 
         for k in range(len(egg.cellgroups)):
             g=egg.cellgroups[k]
+            self.cellGroups.append(CellGroup().initByOldCellGroup(g))
             for i in range(g.cellQty):
                 c=Cell()
                 c.inputs=[]
