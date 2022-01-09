@@ -4,6 +4,7 @@
 
 from history.version2.brain.Cell import Cell
 from history.version2.brain.IO import Input,Output
+from history.version2.brain.Organ import Organ
 from history.version2.egg.Egg import Egg
 from history.version2.egg.Zone import Zone
 from history.version2.egg.CellGroup import CellGroup
@@ -15,9 +16,8 @@ from tkinter import *
 
 class Frog(object):
     def __init__(self,x,y,egg,tk,canvas):
-        self.brainRadius=0.0
         self.cells=[]
-        self.cellGroups=[]
+        self.cellgroups=[]
         self.organs=[]
         #视觉细胞在脑中的区域，暂时先随便取，以后考虑使用
         self.eye=Zone(0,0,300)
@@ -46,11 +46,10 @@ class Frog(object):
 
         if egg.cellgroups is None:
             raise RuntimeError("Illegal egg cellgroups argument!")
-        self.brainRadius=egg.brainRadius
 
         for k in range(len(egg.cellgroups)):
             g=egg.cellgroups[k]
-            self.cellGroups.append(CellGroup().initByOldCellGroup(g))
+            self.cellgroups.append(CellGroup().initByOldCellGroup(g))
             for i in range(g.cellQty):
                 c=Cell()
                 c.inputs=[]
@@ -69,6 +68,10 @@ class Frog(object):
                     c.outputs.append(output)
                 self.cells.append(c)
 
+        if egg.organdescs is not None:
+            for organdesc in egg.organdescs:
+                self.organs.append(Organ().initByOrganDesc(organdesc))
+
     def randomPosInZone(self,z):#在Zone区域中的随机点，即坐标在Zone内，半径为0的一个Zone
         return Zone(z.x-z.radius+z.radius*2*nextFloat(),z.y-z.radius+z.radius*2*nextFloat(),0)
 
@@ -80,78 +83,15 @@ class Frog(object):
         return True
 
     def active(self,env):#青蛙是否存活
+        self.energy-=20
         if not self.alive:#青蛙已死亡，返回False
             return False
         if not self.checkalive():
             return False
 
-        #移动青蛙
-        for cell in self.cells:
-            for output in cell.outputs:
-                if self.moveLeft.nearby(output):self.movefrog(env,1)
-                if self.moveRight.nearby(output):self.movefrog(env,2)
-                if self.moveUp.nearby(output):self.movefrog(env,3)
-                if self.moveDown.nearby(output):self.movefrog(env,4)
-        return True
-
-    def checkFoodAndEat(self,env):#如果Frog坐标与Food坐标重合，吃掉它
-        eatedFood=False#是否吃掉食物
-        if self.x>=0 and self.x<ENV_XSIZE\
-        and self.y>=0 and self.y<ENV_YSIZE:
-            if env.foods[round(self.x)][round(self.y)]==1:
-                env.foods[round(self.x)][round(self.y)]=-1
-                self.energy+=1000#吃到食物青蛙能量增加1000
-                eatedFood=True
-        if eatedFood: #TODO: 奖励措施未完成
-            pass
-
-    def movefrog(self,env,number):
-        if number==1:
-            self.xChange-=self.change
-            self.x-=self.change
-        if number==2:
-            self.xChange+=self.change
-            self.x+=self.change
-        if number==3:
-            self.yChange+=self.change
-            self.y+=self.change
-        if number==4:
-            self.yChange-=self.change
-            self.y-=self.change
-        if not self.checkalive():
-            return None
-        self.checkFoodAndEat(env)
-
-    def percent1(self,f):#1%的变异率
-        if not self.allowVariation:
-            return f
-        return float(f*(0.99+nextFloat()*0.02))
-
-    def percent5(self,f):#5%的变异率
-        if not self.allowVariation:
-            return f
-        return float(f*(0.95+nextFloat()*0.10))
-
-    def layEgg(self):
-        self.allowVariation=percent(25)#变异率先控制在25%
-        #如果不允许变异，下的蛋就等于原来的蛋
-        newEgg=Egg()
-        newEgg.brainRadius=self.percent5(self.egg.brainRadius)
-        newEgg.cellgroups=[]
-        for i in range(len(self.egg.cellgroups)):
-            cellGroup=CellGroup()
-            oldGp=self.egg.cellgroups[i]
-            cellGroup.groupInputZone=Zone(self.percent5(oldGp.groupInputZone.x),self.percent5(oldGp.groupInputZone.y),
-                                          self.percent5(oldGp.groupInputZone.radius))
-            cellGroup.groupOutputZone=Zone(self.percent5(oldGp.groupInputZone.x),self.percent5(oldGp.groupInputZone.y),
-                                          self.percent5(oldGp.groupInputZone.radius))
-            cellGroup.cellQty=round(self.percent5(oldGp.cellQty))
-            cellGroup.cellInputRadius=self.percent1(oldGp.cellInputRadius)
-            cellGroup.cellOutputRadius=self.percent1(oldGp.cellOutputRadius)
-            cellGroup.inputQtyPerCell=round(self.percent5(oldGp.inputQtyPerCell))
-            cellGroup.outputQtyPerCell=round(self.percent5(oldGp.outputQtyPerCell))
-            newEgg.cellgroups.append(cellGroup)
-        return newEgg
+        for organ in self.organs:
+            organ.active(self,env)
+        return True if self.checkalive() else False
 
     def show(self):
         if not self.alive:

@@ -6,7 +6,7 @@ from history.version2.egg.Zone import Zone
 from configs import *
 
 class Organ(Zone):
-    def __init__(self,organType,x,y,radius):
+    def __init__(self,organType=None,x=None,y=None,radius=None):
         super(Organ,self).__init__(x,y,radius)
         self.organType=organType
 
@@ -14,19 +14,38 @@ class Organ(Zone):
         super(Organ,self).__init__(organDesc.x,organDesc.y,organDesc.radius)
         self.organType=organDesc.organType
 
-    def active(self,frog):
+    def active(self,frog,env):
         if self.organType==HUNGRY:pass
-        if self.organType==UP:pass
-        if self.organType==DOWN:pass
-        if self.organType==LEFT:pass
-        if self.organType==RIGHT:pass
-        if self.organType==EAT:pass
+        if self.organType==UP:
+            if self.outputActive(frog):
+                frog.y+=1
+                frog.yChange+=1
+        if self.organType==DOWN:
+            if self.outputActive(frog):
+                frog.y-=1
+                frog.yChange-=1
+        if self.organType==LEFT:
+            if self.outputActive(frog):
+                frog.x-=1
+                frog.xChange-=1
+        if self.organType==RIGHT:
+            if self.outputActive(frog):
+                frog.x+=1
+                frog.xChange+=1
+        if self.organType==EAT:
+            if not frog.checkalive():
+                return None
+            x=frog.x
+            y=frog.y
+            if env.foods[x][y]==1:
+                env.foods[x][y]=-1
+                frog.energy+=1000
 
     def outputActive(self,frog):
         for cell in frog.cells:
             for output in cell.outputs:
                 if cell.energy>10 and self.nearby(output):
-                    frog.cellGroups[cell.group].fat+=1
+                    frog.cellgroups[cell.group].fat+=1
                     cell.energy-=10
                     return True
         return False

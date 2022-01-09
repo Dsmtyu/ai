@@ -22,7 +22,7 @@ class EggTool(object):
         try:
             newEggs=[]
             for i in range(EGG_QTY):
-                newEggs.append(env.frogs[i].layEgg())
+                newEggs.append(Egg().initByFrog(env.frogs[i]))
             with open(CLASSPATH+'eggs.ser','wb') as f:
                 pickle.dump(newEggs,f)
             env.eggs=newEggs

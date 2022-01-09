@@ -26,3 +26,8 @@ def nextFloat(): return randint(1,100000)/100000
 def nextInt(number): return randint(1,number)
 
 def percent(number): return nextInt(100)<=number
+
+def vary(number):
+    if percent(95):return number
+    rate=0.1 if percent(40) else 0.05
+    return float(number*(1-rate)+nextFloat()*rate*2)

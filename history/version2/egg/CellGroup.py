@@ -35,12 +35,12 @@ class CellGroup(object):
         self.fat=oldCellGroup.fat
         self.inherit=oldCellGroup.inherit
 
-    def initByRandom(self,brainWidth,randomCellQtyPerGroup,randomInputQtyPerCell,randomOutputQtyPerCell):
+    def initByRandom(self,brainLength,randomCellQtyPerGroup,randomInputQtyPerCell,randomOutputQtyPerCell):
         self.inherit=False
-        self.groupInputZone=Zone(nextFloat()*brainWidth,nextFloat()*brainWidth,
-                                 float(nextFloat()*brainWidth*0.01))
-        self.groupOutputZone=Zone(nextFloat()*brainWidth,nextFloat()*brainWidth,
-                                   float(nextFloat()*brainWidth*0.01))
+        self.groupInputZone=Zone(nextFloat()*brainLength,nextFloat()*brainLength,
+                                 float(nextFloat()*brainLength*0.01))
+        self.groupOutputZone=Zone(nextFloat()*brainLength,nextFloat()*brainLength,
+                                   float(nextFloat()*brainLength*0.01))
         self.cellQty=nextInt(randomCellQtyPerGroup)
         self.cellInputRadius=float(nextFloat()*2+0.001)
         self.cellOutputRadius=float(nextFloat()*2+0.001)
