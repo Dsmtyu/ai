@@ -10,7 +10,6 @@ import time
 class Env(object):
 
     foods=[]#foods
-    foodid=[]#foodid,用itemconfig调整food显示
 
     frogs=[]#Frog
     eggs=[]#Egg
@@ -25,10 +24,8 @@ class Env(object):
 
         for i in range(ENV_XSIZE):
             self.foods.append([])
-            self.foodid.append([])
             for j in range(ENV_YSIZE):
                 self.foods[i].append(0)
-                self.foodid[i].append(0)
 
     def rebuildFrogAndFood(self):
         #先把背景画成白色
@@ -48,9 +45,10 @@ class Env(object):
         for x in range(ENV_XSIZE):
             for y in range(ENV_YSIZE):
                 if self.foods[x][y]==1:
-                    self.foodid[x][y]=canvas.create_oval(x,y,x+2,y+2,outline='black',fill='black')
-                elif self.foodid[x][y]:
-                    canvas.itemconfig(self.foodid[x][y],outline='',fill='')
+                    canvas.create_oval(x,y,x+2,y+2,outline='black',fill='black')
+                elif self.foods[x][y]==-1:
+                    canvas.create_oval(x,y,x+2,y+2,outline='white',fill='white')
+                    self.foods[x][y]=0
 
     def run(self):#运行
         EggTool().loadEggs(self)#导入或新建一批Egg

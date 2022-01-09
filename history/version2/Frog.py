@@ -99,7 +99,7 @@ class Frog(object):
         if self.x>=0 and self.x<ENV_XSIZE\
         and self.y>=0 and self.y<ENV_YSIZE:
             if env.foods[round(self.x)][round(self.y)]==1:
-                env.foods[round(self.x)][round(self.y)]=0
+                env.foods[round(self.x)][round(self.y)]=-1
                 self.energy+=1000#吃到食物青蛙能量增加1000
                 eatedFood=True
         if eatedFood: #TODO: 奖励措施未完成
@@ -155,6 +155,9 @@ class Frog(object):
 
     def show(self):
         if not self.alive:
+            self.frogImageDir=CLASSPATH+'nothing.gif'
+            self.frogImageFile=PhotoImage(file=self.frogImageDir)
+            self.canvas.itemconfig(self.frogImage,image=self.frogImageFile)
             return None
         self.canvas.move(self.frogImage,self.xChange,self.yChange)#对Frog进行移动
         self.xChange=0
