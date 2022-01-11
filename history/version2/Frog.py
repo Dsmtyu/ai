@@ -49,7 +49,9 @@ class Frog(object):
 
         for k in range(len(egg.cellgroups)):
             g=egg.cellgroups[k]
-            self.cellgroups.append(CellGroup().initByOldCellGroup(g))
+            cellGroup=CellGroup()
+            cellGroup.initByOldCellGroup(g)
+            self.cellgroups.append(cellGroup)
             for i in range(g.cellQty):
                 c=Cell()
                 c.inputs=[]
@@ -70,7 +72,9 @@ class Frog(object):
 
         if egg.organdescs is not None:
             for organdesc in egg.organdescs:
-                self.organs.append(Organ().initByOrganDesc(organdesc))
+                organ=Organ()
+                organ.initByOrganDesc(organdesc)
+                self.organs.append(organ)
 
     def randomPosInZone(self,z):#在Zone区域中的随机点，即坐标在Zone内，半径为0的一个Zone
         return Zone(z.x-z.radius+z.radius*2*nextFloat(),z.y-z.radius+z.radius*2*nextFloat(),0)

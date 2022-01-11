@@ -25,15 +25,19 @@ class Egg(object):
         self.cellgroups=[]
         for i in range(len(x.cellgroups)):
             oldCellGroup=x.cellgroups[i]
-            cellGroup=CellGroup().initByOldCellGroup(oldCellGroup)
+            cellGroup=CellGroup()
+            cellGroup.initByOldCellGroup(oldCellGroup)
             cellGroup.inherit=True
             self.cellgroups.append(cellGroup)
         randomY=y.cellgroups[nextInt(len(y.cellgroups))-1]
-        cellGroup=CellGroup().initByOldCellGroup(randomY)
+        cellGroup=CellGroup()
+        cellGroup.initByOldCellGroup(randomY)
         self.cellgroups.append(cellGroup)
         for i in range(self.randomCellGroupQty):
-            self.cellgroups.append(CellGroup().initByRandom(FROG_BRAIN_LENGTH,x.randomCellQtyPerGroup,
-                                                            x.randomInputQtyPerCell,x.randomOutputQtyPerCell))
+            cellGroup=CellGroup()
+            cellGroup.initByRandom(FROG_BRAIN_LENGTH,x.randomCellQtyPerGroup,
+                                   x.randomInputQtyPerCell,x.randomOutputQtyPerCell)
+            self.cellgroups.append(cellGroup)
         self.addOrganDescs()
 
     def initByFrog(self,frog):
@@ -56,11 +60,13 @@ class Egg(object):
             self.cellgroups.append(cellGroup)
         self.addOrganDescs()
 
-    def createBrandNewEgg(self):#随机制造一个新的Egg
+    @staticmethod
+    def createBrandNewEgg():#随机制造一个新的Egg
         egg=Egg()
         for i in range(egg.randomCellGroupQty):
-            cellGroup=CellGroup().initByRandom(FROG_BRAIN_LENGTH,egg.randomCellQtyPerGroup,
-                                               egg.randomInputQtyPerCell,egg.randomOutputQtyPerCell)
+            cellGroup=CellGroup()
+            cellGroup.initByRandom(FROG_BRAIN_LENGTH,egg.randomCellQtyPerGroup,
+                                   egg.randomInputQtyPerCell,egg.randomOutputQtyPerCell)
             egg.cellgroups.append(cellGroup)
         egg.addOrganDescs()
         return egg

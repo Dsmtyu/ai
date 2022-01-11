@@ -35,8 +35,8 @@ class Organ(Zone):
         if self.organType==EAT:
             if not frog.checkalive():
                 return None
-            x=frog.x
-            y=frog.y
+            x=round(frog.x)
+            y=round(frog.y)
             if env.foods[x][y]==1:
                 env.foods[x][y]=-1
                 frog.energy+=1000

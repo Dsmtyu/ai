@@ -22,7 +22,9 @@ class EggTool(object):
         try:
             newEggs=[]
             for i in range(EGG_QTY):
-                newEggs.append(Egg().initByFrog(env.frogs[i]))
+                egg=Egg()
+                egg.initByFrog(env.frogs[i])
+                newEggs.append(egg)
             with open(CLASSPATH+'eggs.ser','wb') as f:
                 pickle.dump(newEggs,f)
             env.eggs=newEggs
@@ -43,7 +45,7 @@ class EggTool(object):
             print("No eggs files '"+CLASSPATH+"' found, created",EGG_QTY,"new eggs to do test.")
             env.eggs=[]
             for i in range(EGG_QTY):
-                env.eggs.append(Egg().createBrandNewEgg())
+                env.eggs.append(Egg.createBrandNewEgg())
 
     def deleteEggs(self):
         print('[DELETE EGG]:Deleting eggs!')
