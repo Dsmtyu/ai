@@ -1,5 +1,6 @@
 # EggTool.py
 # EggTool 对保存Egg的文件进行操作
+# -----------------------------------------------------------------------------------------------------------------------
 
 from history.version2.egg.Egg import Egg
 
@@ -9,7 +10,8 @@ from configs import *
 CLASSPATH=classpath#根目录路径
 
 class EggTool(object):
-    def layEggs(self,env):
+    @staticmethod
+    def layEggs(env):
         print('[LAY EGG]:Laying eggs!')
         env.frogs.sort(key=lambda frog:frog.energy,reverse=True)
         print('First frog energy=%d, Last frog energy=%d'%(env.frogs[0].energy,env.frogs[len(env.frogs)-1].energy))
@@ -32,7 +34,8 @@ class EggTool(object):
         except IOError as e:
             print(e)
 
-    def loadEggs(self,env):
+    @staticmethod
+    def loadEggs(env):
         print('[LOAD EGG]:Loading eggs!')
         errorfound=False
         try:
@@ -47,7 +50,8 @@ class EggTool(object):
             for i in range(EGG_QTY):
                 env.eggs.append(Egg.createBrandNewEgg())
 
-    def deleteEggs(self):
+    @staticmethod
+    def deleteEggs():
         print('[DELETE EGG]:Deleting eggs!')
         try:
             os.remove(CLASSPATH+'eggs.ser')

@@ -17,30 +17,34 @@ class Egg(object):
     organdescs=[]
 
     def __init__(self):
-        pass
+        pass#default constructor
 
     def initByXY(self,x,y):
+        #模拟XY染色体,不能做简单加法,会撑暴内存的,现在每次只随机加一个Y的Cellgroup进来,这也不太好,因为基因会越加越多,只好用用进废退原则来加大淘汰率
         if not isinstance(x,Egg) or not isinstance(y,Egg):
             raise TypeError
         self.cellgroups=[]
         for i in range(len(x.cellgroups)):
-            oldCellGroup=x.cellgroups[i]
+            oldCellGroup:CellGroup=x.cellgroups[i]
             cellGroup=CellGroup()
-            cellGroup.initByOldCellGroup(oldCellGroup)
+            cellGroup.initByOldCellGroup(oldCellGroup=oldCellGroup)
             cellGroup.inherit=True
             self.cellgroups.append(cellGroup)
         randomY=y.cellgroups[nextInt(len(y.cellgroups))-1]
         cellGroup=CellGroup()
-        cellGroup.initByOldCellGroup(randomY)
+        cellGroup.initByOldCellGroup(oldCellGroup=randomY)
         self.cellgroups.append(cellGroup)
         for i in range(self.randomCellGroupQty):
             cellGroup=CellGroup()
-            cellGroup.initByRandom(FROG_BRAIN_LENGTH,x.randomCellQtyPerGroup,
-                                   x.randomInputQtyPerCell,x.randomOutputQtyPerCell)
+            cellGroup.initByRandom(brainLength=FROG_BRAIN_LENGTH,
+                                   randomCellQtyPerGroup=x.randomCellQtyPerGroup,
+                                   randomInputQtyPerCell=x.randomInputQtyPerCell,
+                                   randomOutputQtyPerCell=x.randomOutputQtyPerCell)
             self.cellgroups.append(cellGroup)
         self.addOrganDescs()
 
-    def initByFrog(self,frog):
+    #create egg from frog
+    def initByFrog(self,frog):#青蛙下蛋,蛋的基因生成遵循用进废退,随机变异两个原则
         for i in range(len(frog.cellgroups)):
             if frog.cellgroups[i].fat<=0:
                 if not frog.cellgroups[i].inherit:continue#从未激活过的神经元,并且就是本轮随机生成的,丢弃之
@@ -60,13 +64,16 @@ class Egg(object):
             self.cellgroups.append(cellGroup)
         self.addOrganDescs()
 
+    #create a brand new Egg
     @staticmethod
-    def createBrandNewEgg():#随机制造一个新的Egg
+    def createBrandNewEgg():#无中生有,随机制造一个新的Egg
         egg=Egg()
         for i in range(egg.randomCellGroupQty):
             cellGroup=CellGroup()
-            cellGroup.initByRandom(FROG_BRAIN_LENGTH,egg.randomCellQtyPerGroup,
-                                   egg.randomInputQtyPerCell,egg.randomOutputQtyPerCell)
+            cellGroup.initByRandom(brainLength=FROG_BRAIN_LENGTH,
+                                   randomCellQtyPerGroup=egg.randomCellQtyPerGroup,
+                                   randomInputQtyPerCell=egg.randomInputQtyPerCell,
+                                   randomOutputQtyPerCell=egg.randomOutputQtyPerCell)
             egg.cellgroups.append(cellGroup)
         egg.addOrganDescs()
         return egg

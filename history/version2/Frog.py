@@ -1,6 +1,9 @@
 # Frog.py
 # Frog是青蛙的本体：
 # 属性:坐标,能量,蛋,是否存活,是否允许变异,移动时间,青蛙图像
+# Frog=brain+organ,but now let's only focus on brain,organs are too hard
+# 青蛙由脑细胞和器官组成,目前脑细胞可以变异,进化,遗传,由电脑自动生成神经网络,但是器官在蛋里硬编码,不许进化,将来可以考虑器官的进化
+# -----------------------------------------------------------------------------------------------------------------------
 
 from history.version2.brain.Cell import Cell
 from history.version2.brain.IO import Input,Output
@@ -15,7 +18,7 @@ CLASSPATH=classpath#根目录路径
 from tkinter import *
 
 class Frog(object):
-    def __init__(self,x,y,egg,tk,canvas):
+    def __init__(self,x,y,egg,tk:Tk,canvas:Canvas):
         self.cells=[]
         self.cellgroups=[]
         self.organs=[]
@@ -28,16 +31,16 @@ class Frog(object):
         self.moveRight=Zone(500,200,10)
         self.moveRandom=Zone(500,300,10)
 
-        self.x=x#青蛙的x坐标
-        self.y=y#青蛙的y坐标
+        self.x=x#frog在env中的x坐标
+        self.y=y#frog在env中的y坐标
         self.xChange=0#青蛙水平方向的移动
         self.yChange=0#青蛙垂直方向的移动
         self.change=1
         self.egg=egg#蛋
-        self.energy=10000#青蛙的能量，能量耗尽时青蛙死亡
+        self.energy=10000#青蛙的能量,能量为0则死掉
         self.tk=tk
         self.canvas=canvas#tkinter画布
-        self.alive=True#是否活着
+        self.alive=True#是否活着,设为false表示青蛙死掉了,将不参与任何计算和显示,以节省时间
         self.allowVariation=False#是否允许变异
         self.moveCount=0#移动计数
         self.frogImageDir=CLASSPATH+'frog.gif'#青蛙图像路径
@@ -48,25 +51,25 @@ class Frog(object):
             raise RuntimeError("Illegal egg cellgroups argument!")
 
         for k in range(len(egg.cellgroups)):
-            g=egg.cellgroups[k]
+            oldCellGroup:CellGroup=egg.cellgroups[k]
             cellGroup=CellGroup()
-            cellGroup.initByOldCellGroup(g)
+            cellGroup.initByOldCellGroup(oldCellGroup)
             self.cellgroups.append(cellGroup)
-            for i in range(g.cellQty):
+            for i in range(oldCellGroup.cellQty):
                 c=Cell()
                 c.inputs=[]
-                for j in range(g.inputQtyPerCell):
+                for j in range(oldCellGroup.inputQtyPerCell):
                     input=Input()
                     input.cell=c
-                    Zone().copyXY(self.randomPosInZone(g.groupInputZone),input)
-                    input.radius=g.cellInputRadius
+                    Zone().copyXY(fromZone=self.randomPosInZone(zone=oldCellGroup.groupInputZone),toZone=input)
+                    input.radius=oldCellGroup.cellInputRadius
                     c.inputs.append(input)
                 c.outputs=[]
-                for j in range(g.outputQtyPerCell):
+                for j in range(oldCellGroup.outputQtyPerCell):
                     output=Output()
                     output.cell=c
-                    Zone().copyXY(self.randomPosInZone(g.groupOutputZone),output)
-                    output.radius=g.cellOutputRadius
+                    Zone().copyXY(fromZone=self.randomPosInZone(zone=oldCellGroup.groupOutputZone),toZone=output)
+                    output.radius=oldCellGroup.cellOutputRadius
                     c.outputs.append(output)
                 self.cells.append(c)
 
@@ -76,12 +79,13 @@ class Frog(object):
                 organ.initByOrganDesc(organdesc)
                 self.organs.append(organ)
 
-    def randomPosInZone(self,z):#在Zone区域中的随机点，即坐标在Zone内，半径为0的一个Zone
-        return Zone(z.x-z.radius+z.radius*2*nextFloat(),z.y-z.radius+z.radius*2*nextFloat(),0)
+    def randomPosInZone(self,zone):#在Zone区域中的随机点，即坐标在Zone内，半径为0的一个Zone
+        return Zone(zone.x-zone.radius+zone.radius*2*nextFloat(),zone.y-zone.radius+zone.radius*2*nextFloat(),0)
 
     def checkalive(self):
         if self.x<0 or self.x>=ENV_XSIZE\
-        or self.y<0 or self.y>=ENV_YSIZE:#青蛙的横纵坐标是否出界
+        or self.y<0 or self.y>=ENV_YSIZE\
+        or self.energy<0:#青蛙的横纵坐标是否出界,青蛙的能量是否耗尽
             self.alive=False#出界时青蛙死亡
             return False
         return True

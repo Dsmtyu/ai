@@ -3,6 +3,7 @@
 # 只需要在egg里定义一组cellGroup就行了，不需要将海量的一个个的神经元串行化存放到egg里，这样一来Frog就不能"永生"了，因为每一个egg都不等同于
 # 它的母体，而且每一次测试，一些复杂的条件反射的建立都必须从头开始训练，在项目后期，有可能每个frog生命的一半时间都花在重新建立条件反射的学习过程中。
 # -----------------------------------------------------------------------------------------------------------------------
+
 from history.version2.egg.Zone import Zone
 from configs import *
 
@@ -25,8 +26,10 @@ class CellGroup(object):
         pass
 
     def initByOldCellGroup(self,oldCellGroup):#clone old cellgroup
-        self.groupInputZone=Zone().initByOldZone(oldCellGroup.groupInputZone)
-        self.groupOutputZone=Zone().initByOldZone(oldCellGroup.groupOutputZone)
+        self.groupInputZone=Zone()
+        self.groupInputZone.initByOldZone(oldZone=oldCellGroup.groupInputZone)
+        self.groupOutputZone=Zone()
+        self.groupOutputZone.initByOldZone(oldZone=oldCellGroup.groupOutputZone)
         self.cellInputRadius=oldCellGroup.cellInputRadius
         self.cellOutputRadius=oldCellGroup.cellOutputRadius
         self.cellQty=oldCellGroup.cellQty
@@ -37,10 +40,10 @@ class CellGroup(object):
 
     def initByRandom(self,brainLength,randomCellQtyPerGroup,randomInputQtyPerCell,randomOutputQtyPerCell):
         self.inherit=False
-        self.groupInputZone=Zone(nextFloat()*brainLength,nextFloat()*brainLength,
-                                 float(nextFloat()*brainLength*0.01))
-        self.groupOutputZone=Zone(nextFloat()*brainLength,nextFloat()*brainLength,
-                                   float(nextFloat()*brainLength*0.01))
+        self.groupInputZone=Zone(x=nextFloat()*brainLength,y=nextFloat()*brainLength,
+                                 radius=float(nextFloat()*brainLength*0.01))
+        self.groupOutputZone=Zone(x=nextFloat()*brainLength,y=nextFloat()*brainLength,
+                                   radius=float(nextFloat()*brainLength*0.01))
         self.cellQty=nextInt(randomCellQtyPerGroup)
         self.cellInputRadius=float(nextFloat()*2+0.001)
         self.cellOutputRadius=float(nextFloat()*2+0.001)
