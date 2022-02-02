@@ -26,13 +26,13 @@
 <p><img src="run(pycharm).png"></p>
 <p><img src="run实际效果.png"></p>
 
-## 重要参数|PARAMETERS
+## 重要参数|Parametres
 在根目录下的configs.py中有一些重要参数，请勿随意更改
 ```python
 # Speed of test
 SHOW_SPEED=1
 # Steps of one test round
-STEPS_PER_ROUND=10
+STEPS_PER_ROUND=100
 DELETE_EGGS=False#每次运行是否先删除保存的蛋
 # 屏幕的长和宽
 ENV_XSIZE=300
