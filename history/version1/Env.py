@@ -22,7 +22,7 @@ class Env(object):
 
         print('Abrabrabra!')
         if DELETE_EGGS:
-            EggTool().deleteEggs()
+            EggTool.deleteEggs()
 
         for i in range(ENV_XSIZE):
             self.foods.append([])
@@ -53,7 +53,7 @@ class Env(object):
                     self.foods[x][y]=0
 
     def run(self):#运行
-        EggTool().loadEggs(self)#导入或新建一批Egg
+        EggTool.loadEggs(self)#导入或新建一批Egg
         _round=1#运行次数
         while True:
             t1=time.time()#开始时间
@@ -75,7 +75,7 @@ class Env(object):
                     frog.show()#青蛙移动
                 self.tk.update_idletasks()
                 self.tk.update()
-            EggTool().layEggs(self)#保存蛋
+            EggTool.layEggs(self)#保存蛋
             t2=time.time()#结束时间
             self.tk.title('Frog test round: %d , time used: %.4f s'%(_round,t2-t1))
             _round+=1

@@ -1,5 +1,5 @@
 from random import *
-import os
+from enum import Enum,unique
 
 classpath='C:/Users/admin/Desktop/AI/'
 
@@ -15,13 +15,6 @@ FROG_BRAIN_LENGTH=1000
 FOOD_QTY=2000#食物总量
 EGG_QTY=80#蛋总量
 
-HUNGRY=0
-UP=1
-DOWN=2
-LEFT=3
-RIGHT=4
-EAT=5
-
 def nextFloat()->float: return randint(1,100000)/100000
 
 def nextInt(number:int)->int: return randint(1,number)
@@ -32,3 +25,10 @@ def vary(number):
     if percent(95):return number
     rate=0.1 if percent(20) else 0.05
     return float(number*(1-rate)+nextFloat()*rate*2)
+
+@unique
+class Direction(Enum):
+    LEFT=1
+    RIGHT=2
+    UP=3
+    DOWN=4

@@ -4,13 +4,14 @@
 from history.version1.egg.Egg import Egg
 
 import pickle,time
+import os
 from configs import *
 
 CLASSPATH=classpath+'history/version1/'#保存蛋文件的目录路径
 
 class EggTool(object):
     @staticmethod
-    def layEggs(self,env):
+    def layEggs(env):
         print('[LAY EGG]:Laying eggs!')
         env.frogs.sort(key=lambda frog:frog.energy,reverse=True)
         print('First frog energy=%d, Last frog energy=%d'%(env.frogs[0].energy,env.frogs[len(env.frogs)-1].energy))
@@ -32,7 +33,7 @@ class EggTool(object):
             print(e)
 
     @staticmethod
-    def loadEggs(self,env):
+    def loadEggs(env):
         print('[LOAD EGG]:Loading eggs!')
         errorfound=False
         try:
@@ -48,7 +49,7 @@ class EggTool(object):
                 env.eggs.append(Egg().createBrandNewEgg)
 
     @staticmethod
-    def deleteEggs(self):
+    def deleteEggs():
         print('[DELETE EGG]:Deleting eggs!')
         try:
             os.remove(CLASSPATH+'eggs.ser')

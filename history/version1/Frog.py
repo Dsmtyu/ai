@@ -106,21 +106,21 @@ class Frog(object):
             pass
 
     def movefrog(self,env,number):
-        if number==1:
+        if Direction(number)==Direction.LEFT:
             self.xChange-=self.change
             self.x-=self.change
-        if number==2:
+        if Direction(number)==Direction.RIGHT:
             self.xChange+=self.change
             self.x+=self.change
-        if number==3:
+        if Direction(number)==Direction.UP:
             self.yChange+=self.change
             self.y+=self.change
-        if number==4:
+        if Direction(number)==Direction.DOWN:
             self.yChange-=self.change
             self.y-=self.change
         if not self.checkalive():
             return None
-        self.checkFoodAndEat(env)
+        self.checkFoodAndEat(env=env)
 
     def percent1(self,f:float):#变异1%
         if not self.allowVariation:
