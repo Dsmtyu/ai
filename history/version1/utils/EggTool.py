@@ -1,14 +1,15 @@
-# EggTool.py
-# EggTool 对保存Egg的文件进行操作
-
+#EggTool.py
+#EggTool 对保存Egg的文件进行操作
+#-----------------------------------------------------------------------------------------------------------------------
 from history.version1.egg.Egg import Egg
 
-import os,pickle,time
+import pickle,time
 from configs import *
 
-CLASSPATH=classpath#根目录路径
+CLASSPATH=classpath+'history/version1/'#保存蛋文件的目录路径
 
 class EggTool(object):
+    @staticmethod
     def layEggs(self,env):
         print('[LAY EGG]:Laying eggs!')
         env.frogs.sort(key=lambda frog:frog.energy,reverse=True)
@@ -30,6 +31,7 @@ class EggTool(object):
         except IOError as e:
             print(e)
 
+    @staticmethod
     def loadEggs(self,env):
         print('[LOAD EGG]:Loading eggs!')
         errorfound=False
@@ -43,8 +45,9 @@ class EggTool(object):
             print("No eggs files '"+CLASSPATH+"' found, created",EGG_QTY,"new eggs to do test.")
             env.eggs=[]
             for i in range(EGG_QTY):
-                env.eggs.append(Egg().createBrandNewEgg())
+                env.eggs.append(Egg().createBrandNewEgg)
 
+    @staticmethod
     def deleteEggs(self):
         print('[DELETE EGG]:Deleting eggs!')
         try:

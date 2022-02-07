@@ -1,7 +1,7 @@
-# Egg.py
-# Egg 蛋存在的目的是为了以最小的字节数串行化存储Frog,它是Frog的生成算法描述，而不是Frog本身，这样一来Frog就不能"永生"了，因为每一个egg都不等同于
-# 它的母体，而且每一次测试，大部分条件反射的建立都必须从头开始训练，类似于人类，无论人类社会有多聪明，婴儿始终是一张白纸，需要花大量的时间从头学习。
-# -----------------------------------------------------------------------------------------------------------------------
+#Egg.py
+#Egg 蛋存在的目的是为了以最小的字节数串行化存储Frog,它是Frog的生成算法描述，而不是Frog本身，这样一来Frog就不能"永生"了，因为每一个egg都不等同于
+#它的母体，而且每一次测试，大部分条件反射的建立都必须从头开始训练，类似于人类，无论人类社会有多聪明，婴儿始终是一张白纸，需要花大量的时间从头学习。
+#-----------------------------------------------------------------------------------------------------------------------
 from history.version1.egg.CellGroup import CellGroup
 from history.version1.egg.Zone import Zone
 from configs import *
@@ -18,10 +18,10 @@ class Egg(object):
         egg=Egg()
         for i in range(self.CELL_GROUP_QTY):
             cellGroup=CellGroup()
-            cellGroup.groupInputZone=Zone(nextFloat()*egg.brainRadius,nextFloat()*egg.brainRadius,
-                                          float(nextFloat()*egg.brainRadius*0.01))
-            cellGroup.groupOutputZone=Zone(nextFloat()*egg.brainRadius,nextFloat()*egg.brainRadius,
-                                          float(nextFloat()*egg.brainRadius*0.01))
+            cellGroup.groupInputZone=Zone(x=nextFloat()*egg.brainRadius,y=nextFloat()*egg.brainRadius,
+                                          radius=float(nextFloat()*egg.brainRadius*0.01))
+            cellGroup.groupOutputZone=Zone(x=nextFloat()*egg.brainRadius,y=nextFloat()*egg.brainRadius,
+                                          radius=float(nextFloat()*egg.brainRadius*0.01))
             cellGroup.cellQty=nextInt(10)
             cellGroup.cellInputRadius=float(nextFloat()*0.001)
             cellGroup.cellOutputRadius=float(nextFloat()*0.001)

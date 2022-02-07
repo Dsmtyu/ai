@@ -1,11 +1,13 @@
-# Env.py
-# Env是青蛙生存的模拟环境.使用tkinter作画
-
+#Env.py
+#Env是青蛙生存的模拟环境.使用tkinter作画
+#-----------------------------------------------------------------------------------------------------------------------
 from history.version1.utils.EggTool import EggTool
 from history.version1.Frog import Frog
 
 from configs import *
+
 import time
+from tkinter import *
 
 class Env(object):
 
@@ -14,7 +16,7 @@ class Env(object):
     frogs=[]#Frog
     eggs=[]#Egg
 
-    def __init__(self,tk,canvas):
+    def __init__(self,tk:Tk,canvas:Canvas):
         self.tk=tk#Tk()
         self.canvas=canvas#Canvas()
 

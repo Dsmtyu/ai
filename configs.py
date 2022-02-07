@@ -1,6 +1,7 @@
 from random import *
+import os
 
-classpath='C:\\Users\\admin\\Desktop\\AI\\'
+classpath='C:/Users/admin/Desktop/AI/'
 
 # Speed of test
 SHOW_SPEED=1
@@ -12,7 +13,7 @@ ENV_XSIZE=300
 ENV_YSIZE=300
 FROG_BRAIN_LENGTH=1000
 FOOD_QTY=2000#食物总量
-EGG_QTY=20#蛋总量
+EGG_QTY=80#蛋总量
 
 HUNGRY=0
 UP=1

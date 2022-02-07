@@ -1,8 +1,7 @@
-# IO.py
-# IO Input&Output
-# 这两个类继承了Zone，也就是说它们都是一块区域；
-# Input是细胞输入区，Output是细胞输出区
-
+#IO.py
+#IO Input&Output
+#Input是细胞输入区,Output是细胞输出区
+#-----------------------------------------------------------------------------------------------------------------------
 from history.version1.brain.Cell import Cell
 from history.version1.egg.Zone import Zone
 

@@ -14,7 +14,7 @@ CLASSPATH=classpath#根目录路径
 from tkinter import *
 
 class Frog(object):
-    def __init__(self,x,y,egg,tk,canvas):
+    def __init__(self,x,y,egg,tk:Tk,canvas:Canvas):
         self.brainRadius=0.0
         self.cells=[]
         #视觉细胞在脑中的区域，暂时先随便取，以后考虑使用
@@ -66,8 +66,8 @@ class Frog(object):
                     c.outputs.append(output)
                 self.cells.append(c)
 
-    def randomPosInZone(self,z):#在Zone区域中的随机点，即坐标在Zone内，半径为0的一个Zone
-        return Zone(z.x-z.radius+z.radius*2*nextFloat(),z.y-z.radius+z.radius*2*nextFloat(),0)
+    def randomPosInZone(self,zone:Zone):#在Zone区域中的随机点，即坐标在Zone内，半径为0的一个Zone
+        return Zone(zone.x-zone.radius+zone.radius*2*nextFloat(),zone.y-zone.radius+zone.radius*2*nextFloat(),0)
 
     def checkalive(self):
         if self.x<0 or self.x>=ENV_XSIZE\
@@ -85,14 +85,17 @@ class Frog(object):
         #移动青蛙
         for cell in self.cells:
             for output in cell.outputs:
-                if self.moveLeft.nearby(output):self.movefrog(env,1)
-                if self.moveRight.nearby(output):self.movefrog(env,2)
-                if self.moveUp.nearby(output):self.movefrog(env,3)
-                if self.moveDown.nearby(output):self.movefrog(env,4)
+                if self.moveLeft.nearby(output):self.movefrog(env=env,number=1)
+                if self.moveRight.nearby(output):self.movefrog(env=env,number=2)
+                if self.moveUp.nearby(output):self.movefrog(env=env,number=3)
+                if self.moveDown.nearby(output):self.movefrog(env=env,number=4)
+                if self.moveRandom.nearby(output):
+                    number=nextInt(4)
+                    self.movefrog(env=env,number=number)
         return True
 
     def checkFoodAndEat(self,env):#如果Frog坐标与Food坐标重合，吃掉它
-        eatedFood=False#是否吃掉食物
+        eatedFood:bool=False#是否吃掉食物
         if self.x>=0 and self.x<ENV_XSIZE\
         and self.y>=0 and self.y<ENV_YSIZE:
             if env.foods[round(self.x)][round(self.y)]==1:
@@ -119,12 +122,12 @@ class Frog(object):
             return None
         self.checkFoodAndEat(env)
 
-    def percent1(self,f):#1%的变异率
+    def percent1(self,f:float):#变异1%
         if not self.allowVariation:
             return f
         return float(f*(0.99+nextFloat()*0.02))
 
-    def percent5(self,f):#5%的变异率
+    def percent5(self,f:float):#变异5%
         if not self.allowVariation:
             return f
         return float(f*(0.95+nextFloat()*0.10))
@@ -138,10 +141,10 @@ class Frog(object):
         for i in range(len(self.egg.cellgroups)):
             cellGroup=CellGroup()
             oldGp=self.egg.cellgroups[i]
-            cellGroup.groupInputZone=Zone(self.percent5(oldGp.groupInputZone.x),self.percent5(oldGp.groupInputZone.y),
-                                          self.percent5(oldGp.groupInputZone.radius))
-            cellGroup.groupOutputZone=Zone(self.percent5(oldGp.groupInputZone.x),self.percent5(oldGp.groupInputZone.y),
-                                          self.percent5(oldGp.groupInputZone.radius))
+            cellGroup.groupInputZone=Zone(x=self.percent5(oldGp.groupInputZone.x),y=self.percent5(oldGp.groupInputZone.y),
+                                          radius=self.percent5(oldGp.groupInputZone.radius))
+            cellGroup.groupOutputZone=Zone(x=self.percent5(oldGp.groupInputZone.x),y=self.percent5(oldGp.groupInputZone.y),
+                                          radius=self.percent5(oldGp.groupInputZone.radius))
             cellGroup.cellQty=round(self.percent5(oldGp.cellQty))
             cellGroup.cellInputRadius=self.percent1(oldGp.cellInputRadius)
             cellGroup.cellOutputRadius=self.percent1(oldGp.cellOutputRadius)

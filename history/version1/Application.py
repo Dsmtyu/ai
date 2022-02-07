@@ -1,8 +1,7 @@
-# Application.py
-# Application负责项目的启动,关闭等基础服务
-# -----------------------------------------------------------------------------------------------------------------------
-
-from history.version2.env.Env import Env
+#Application.py
+#Application负责项目的启动,关闭等基础服务
+#-----------------------------------------------------------------------------------------------------------------------
+from history.version1.Env import Env
 
 from tkinter import *
 
@@ -17,9 +16,8 @@ class Application(object):
         self.tk.update()
 
     def main(self):
-        print('Starting Process......')
         env=Env(self.tk,self.canvas)
         try:
             env.run()
         except TclError:
-            print('Ending Process......')
+            pass
