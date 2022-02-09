@@ -6,8 +6,8 @@
 from history.version1.egg.Zone import Zone
 
 class CellGroup(object):
-    groupInputZone=Zone()
-    groupOutputZone=Zone()
+    groupInputZone:Zone=Zone()
+    groupOutputZone:Zone=Zone()
 
     cellInputRadius:float=0.0
     cellOutputRadius:float=0.0

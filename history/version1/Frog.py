@@ -14,69 +14,79 @@ CLASSPATH=classpath#根目录路径
 from tkinter import *
 
 class Frog(object):
-    def __init__(self,x,y,egg,tk:Tk,canvas:Canvas):
-        self.brainRadius=0.0
-        self.cells=[]
-        #视觉细胞在脑中的区域，暂时先随便取，以后考虑使用
-        self.eye=Zone(0,0,300)
-        #运动细胞在脑中的区域，暂时先随便取，以后考虑使用
-        self.moveUp=Zone(500,50,10)
-        self.moveDown=Zone(500,100,10)
-        self.moveLeft=Zone(500,150,10)
-        self.moveRight=Zone(500,200,10)
-        self.moveRandom=Zone(500,300,10)
+    brainRadius: float=0.0
+    cells:list[Cell]=[]
+    #视觉细胞在脑中的区域，暂时先随便取，以后考虑使用
+    eye:Zone=Zone(0,0,300)
+    #运动细胞在脑中的区域，暂时先随便取，以后考虑使用
+    moveUpZone:Zone=Zone(500,50,10)
+    moveDownZone:Zone=Zone(500,100,10)
+    moveLeftZone:Zone=Zone(500,150,10)
+    moveRightZone:Zone=Zone(500,200,10)
+    moveRandomZone:Zone=Zone(500,300,10)
 
-        self.x=x#青蛙的x坐标
-        self.y=y#青蛙的y坐标
-        self.xChange=0#青蛙水平方向的移动
-        self.yChange=0#青蛙垂直方向的移动
-        self.change=1
-        self.egg=egg#蛋
-        self.energy=10000#青蛙的能量，能量耗尽时青蛙死亡
+    x:float=0#青蛙的x坐标
+    y:float=0#青蛙的y坐标
+
+    xChange:int=0#青蛙水平方向的移动
+    yChange:int=0#青蛙垂直方向的移动
+    change:int=1#青蛙一次移动的最小步长
+
+    energy:int=10000  #青蛙的能量，能量耗尽时青蛙死亡
+
+    alive:bool=True  #是否活着
+    allowVariation:bool=False  #是否允许变异
+    moveCount:int=0  #移动计数
+
+
+    def __init__(self,x:float,y:float,egg:Egg,tk:Tk,canvas:Canvas):
+        self.x=x
+        self.y=y
+
+        self.egg:Egg=egg#蛋
+
         self.tk=tk
         self.canvas=canvas#tkinter画布
-        self.alive=True#是否活着
-        self.allowVariation=False#是否允许变异
-        self.moveCount=0#移动计数
-        self.frogImageDir=CLASSPATH+'frog.gif'#青蛙图像路径
-        self.frogImageFile=PhotoImage(file=self.frogImageDir)#青蛙图像文件
-        self.frogImage=canvas.create_image(self.x,self.y,anchor=NW,image=self.frogImageFile)#显示在canvas上的图像
+
+        self.frogImageDir=CLASSPATH+'frog.gif'  #青蛙图像路径
+        self.frogImageFile=PhotoImage(file=self.frogImageDir)  #青蛙图像文件
+        self.frogImage=self.canvas.create_image(self.x,self.y,anchor=NW,image=self.frogImageFile)  #显示在canvas上的图像
 
         if egg.cellgroups is None:
             raise RuntimeError("Illegal egg cellgroups argument!")
         self.brainRadius=egg.brainRadius
 
         for k in range(len(egg.cellgroups)):
-            g=egg.cellgroups[k]
-            for i in range(g.cellQty):
-                c=Cell()
+            cellGroup=egg.cellgroups[k]
+            for i in range(cellGroup.cellQty):
+                c:Cell=Cell()
                 c.inputs=[]
-                for j in range(g.inputQtyPerCell):
-                    input=Input()
-                    input.cell=c
-                    Zone().copyXY(self.randomPosInZone(g.groupInputZone),input)
-                    input.radius=g.cellInputRadius
-                    c.inputs.append(input)
                 c.outputs=[]
-                for j in range(g.outputQtyPerCell):
-                    output=Output()
+                for j in range(cellGroup.inputQtyPerCell):
+                    input:Input=Input()
+                    input.cell=c
+                    Zone().copyXY(self.randomPosInZone(cellGroup.groupInputZone),input)
+                    input.radius=cellGroup.cellInputRadius
+                    c.inputs.append(input)
+                for j in range(cellGroup.outputQtyPerCell):
+                    output:Output=Output()
                     output.cell=c
-                    Zone().copyXY(self.randomPosInZone(g.groupOutputZone),output)
-                    output.radius=g.cellOutputRadius
+                    Zone().copyXY(self.randomPosInZone(cellGroup.groupOutputZone),output)
+                    output.radius=cellGroup.cellOutputRadius
                     c.outputs.append(output)
                 self.cells.append(c)
 
-    def randomPosInZone(self,zone:Zone):#在Zone区域中的随机点，即坐标在Zone内，半径为0的一个Zone
+    def randomPosInZone(self,zone:Zone)->Zone:#在Zone区域中的随机点，即坐标在Zone内，半径为0的一个Zone
         return Zone(zone.x-zone.radius+zone.radius*2*nextFloat(),zone.y-zone.radius+zone.radius*2*nextFloat(),0)
 
-    def checkalive(self):
+    def checkalive(self)->bool:
         if self.x<0 or self.x>=ENV_XSIZE\
         or self.y<0 or self.y>=ENV_YSIZE:#青蛙的横纵坐标是否出界
             self.alive=False#出界时青蛙死亡
             return False
         return True
 
-    def active(self,env):#青蛙是否存活
+    def active(self,env)->bool:#青蛙是否存活
         if not self.alive:#青蛙已死亡，返回False
             return False
         if not self.checkalive():
@@ -85,11 +95,11 @@ class Frog(object):
         #移动青蛙
         for cell in self.cells:
             for output in cell.outputs:
-                if self.moveLeft.nearby(output):self.movefrog(env=env,number=1)
-                if self.moveRight.nearby(output):self.movefrog(env=env,number=2)
-                if self.moveUp.nearby(output):self.movefrog(env=env,number=3)
-                if self.moveDown.nearby(output):self.movefrog(env=env,number=4)
-                if self.moveRandom.nearby(output):
+                if self.moveLeftZone.nearby(output):self.movefrog(env=env,number=1)
+                if self.moveRightZone.nearby(output):self.movefrog(env=env,number=2)
+                if self.moveUpZone.nearby(output):self.movefrog(env=env,number=3)
+                if self.moveDownZone.nearby(output):self.movefrog(env=env,number=4)
+                if self.moveRandomZone.nearby(output):
                     number=nextInt(4)
                     self.movefrog(env=env,number=number)
         return True
@@ -122,15 +132,11 @@ class Frog(object):
             return None
         self.checkFoodAndEat(env=env)
 
-    def percent1(self,f:float):#变异1%
-        if not self.allowVariation:
-            return f
-        return float(f*(0.99+nextFloat()*0.02))
+    def percent1(self,f:float)->float:#变异1%
+        return f if not self.allowVariation else float(f*(0.99+nextFloat()*0.02))
 
-    def percent5(self,f:float):#变异5%
-        if not self.allowVariation:
-            return f
-        return float(f*(0.95+nextFloat()*0.10))
+    def percent5(self,f:float)->float:#变异5%
+        return f if not self.allowVariation else float(f*(0.95+nextFloat()*0.10))
 
     def layEgg(self):
         self.allowVariation=percent(25)#变异率先控制在25%
@@ -140,16 +146,18 @@ class Frog(object):
         newEgg.cellgroups=[]
         for i in range(len(self.egg.cellgroups)):
             cellGroup=CellGroup()
-            oldGp=self.egg.cellgroups[i]
-            cellGroup.groupInputZone=Zone(x=self.percent5(oldGp.groupInputZone.x),y=self.percent5(oldGp.groupInputZone.y),
-                                          radius=self.percent5(oldGp.groupInputZone.radius))
-            cellGroup.groupOutputZone=Zone(x=self.percent5(oldGp.groupInputZone.x),y=self.percent5(oldGp.groupInputZone.y),
-                                          radius=self.percent5(oldGp.groupInputZone.radius))
-            cellGroup.cellQty=round(self.percent5(oldGp.cellQty))
-            cellGroup.cellInputRadius=self.percent1(oldGp.cellInputRadius)
-            cellGroup.cellOutputRadius=self.percent1(oldGp.cellOutputRadius)
-            cellGroup.inputQtyPerCell=round(self.percent5(oldGp.inputQtyPerCell))
-            cellGroup.outputQtyPerCell=round(self.percent5(oldGp.outputQtyPerCell))
+            oldCellGroup:CellGroup=self.egg.cellgroups[i]
+            cellGroup.groupInputZone=Zone(x=self.percent5(oldCellGroup.groupInputZone.x),
+                                          y=self.percent5(oldCellGroup.groupInputZone.y),
+                                          radius=self.percent5(oldCellGroup.groupInputZone.radius))
+            cellGroup.groupOutputZone=Zone(x=self.percent5(oldCellGroup.groupInputZone.x),
+                                           y=self.percent5(oldCellGroup.groupInputZone.y),
+                                          radius=self.percent5(oldCellGroup.groupInputZone.radius))
+            cellGroup.cellQty=round(self.percent5(oldCellGroup.cellQty))
+            cellGroup.cellInputRadius=self.percent1(oldCellGroup.cellInputRadius)
+            cellGroup.cellOutputRadius=self.percent1(oldCellGroup.cellOutputRadius)
+            cellGroup.inputQtyPerCell=round(self.percent5(oldCellGroup.inputQtyPerCell))
+            cellGroup.outputQtyPerCell=round(self.percent5(oldCellGroup.outputQtyPerCell))
             newEgg.cellgroups.append(cellGroup)
         return newEgg
 

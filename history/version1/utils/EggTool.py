@@ -46,7 +46,7 @@ class EggTool(object):
             print("No eggs files '"+CLASSPATH+"' found, created",EGG_QTY,"new eggs to do test.")
             env.eggs=[]
             for i in range(EGG_QTY):
-                env.eggs.append(Egg().createBrandNewEgg)
+                env.eggs.append(Egg.createBrandNewEgg())
 
     @staticmethod
     def deleteEggs():

@@ -2,6 +2,7 @@
 #Env是青蛙生存的模拟环境.使用tkinter作画
 #-----------------------------------------------------------------------------------------------------------------------
 from history.version1.utils.EggTool import EggTool
+from history.version1.egg.Egg import Egg
 from history.version1.Frog import Frog
 
 from configs import *
@@ -11,10 +12,10 @@ from tkinter import *
 
 class Env(object):
 
-    foods=[]#foods
+    foods:list[list]=[]#foods
 
-    frogs=[]#Frog
-    eggs=[]#Egg
+    frogs:list[Frog]=[]#Frog
+    eggs:list[Egg]=[]#Egg
 
     def __init__(self,tk:Tk,canvas:Canvas):
         self.tk=tk#Tk()
@@ -43,13 +44,13 @@ class Env(object):
         for i in range(FOOD_QTY):
             self.foods[nextInt(ENV_XSIZE-3)][nextInt(ENV_YSIZE-3)]=1
 
-    def drawFood(self,canvas):#画食物
+    def drawFood(self):#画食物
         for x in range(ENV_XSIZE):
             for y in range(ENV_YSIZE):
                 if self.foods[x][y]==1:
-                    canvas.create_oval(x,y,x+2,y+2,outline='black',fill='black')
+                    self.canvas.create_oval(x,y,x+2,y+2,outline='black',fill='black')
                 elif self.foods[x][y]==-1:
-                    canvas.create_oval(x,y,x+2,y+2,outline='white',fill='white')
+                    self.canvas.create_oval(x,y,x+2,y+2,outline='white',fill='white')
                     self.foods[x][y]=0
 
     def run(self):#运行
@@ -60,7 +61,7 @@ class Env(object):
             self.rebuildFrogAndFood()
             allDead=False#青蛙是否全部死亡
             for i in range(STEPS_PER_ROUND):
-                self.drawFood(self.canvas)#画食物
+                self.drawFood()#画食物
                 if allDead:#全部死亡就可以提前结束
                     break
                 allDead=True

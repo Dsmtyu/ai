@@ -7,16 +7,16 @@ from tkinter import *
 
 class Application(object):
     def __init__(self):
-        self.tk=Tk()
+        self.tk:Tk=Tk()
         self.tk.title('Frog test round: 0, time used: 0s')
         self.tk.geometry("520x550")
-        self.canvas=Canvas(self.tk,width=300,height=300,bd=0,highlightthickness=0)
+        self.canvas:Canvas=Canvas(self.tk,width=300,height=300,bd=0,highlightthickness=0)
         self.canvas.pack()
         self.canvas.place(x=100,y=100)
         self.tk.update()
 
     def main(self):
-        env=Env(self.tk,self.canvas)
+        env:Env=Env(self.tk,self.canvas)
         try:
             env.run()
         except TclError:

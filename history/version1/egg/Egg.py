@@ -8,15 +8,15 @@ from configs import *
 
 class Egg(object):
     def __init__(self,CELL_GROUP_QTY=30,brainRadius=1000,cellgroups=None):
-        if cellgroups is None:
-            cellgroups=[]
-        self.CELL_GROUP_QTY=CELL_GROUP_QTY
-        self.brainRadius=brainRadius
-        self.cellgroups=cellgroups
+        if cellgroups is None:cellgroups=[]
+        self.CELL_GROUP_QTY:int=CELL_GROUP_QTY
+        self.brainRadius:float=brainRadius
+        self.cellgroups:list[CellGroup]=cellgroups
 
-    def createBrandNewEgg(self):#随机制造一个新的Egg
+    @staticmethod
+    def createBrandNewEgg():#随机制造一个新的Egg
         egg=Egg()
-        for i in range(self.CELL_GROUP_QTY):
+        for i in range(egg.CELL_GROUP_QTY):
             cellGroup=CellGroup()
             cellGroup.groupInputZone=Zone(x=nextFloat()*egg.brainRadius,y=nextFloat()*egg.brainRadius,
                                           radius=float(nextFloat()*egg.brainRadius*0.01))
