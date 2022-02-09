@@ -38,7 +38,7 @@ class Env(object):
             for j in range(ENV_YSIZE):
                 self.foods[i][j]=0#清空食物
         for i in range(len(self.eggs)):
-            for j in range(4):#一个Egg生出4个Frog
+            for j in range(FROG_PER_EGG):
                 self.frogs.append(Frog(ENV_XSIZE/2+nextInt(90),ENV_YSIZE/2+nextInt(90),self.eggs[i],self.tk,self.canvas))
         print("Created %d frogs"%(4*len(self.eggs)))
         for i in range(FOOD_QTY):
