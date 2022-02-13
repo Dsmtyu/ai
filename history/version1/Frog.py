@@ -78,7 +78,8 @@ class Frog(object):
 
     def checkalive(self)->bool:
         if self.x<0 or self.x>=ENV_XSIZE\
-        or self.y<0 or self.y>=ENV_YSIZE:#青蛙的横纵坐标是否出界
+        or self.y<0 or self.y>=ENV_YSIZE\
+        or self.energy<0:#青蛙的横纵坐标是否出界
             self.alive=False#出界时青蛙死亡
             return False
         return True
@@ -88,7 +89,7 @@ class Frog(object):
             return False
         if not self.checkalive():
             return False
-
+        self.energy-=500
         #移动青蛙
         for cell in self.cells:
             for output in cell.outputs:

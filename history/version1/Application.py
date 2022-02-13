@@ -4,12 +4,13 @@
 from history.version1.Env import Env
 
 from tkinter import *
+import logging;logging.basicConfig(level=logging.INFO)
 
 class Application(object):
     def __init__(self):
         self.tk:Tk=Tk()
-        self.tk.title('Frog test round: 0, time used: 0s')
-        self.tk.geometry("520x550")
+        self.tk.title('Frog test round 0')
+        self.tk.geometry("500x500")
         self.canvas:Canvas=Canvas(self.tk,width=300,height=300,bd=0,highlightthickness=0)
         self.canvas.pack()
         self.canvas.place(x=100,y=100)
