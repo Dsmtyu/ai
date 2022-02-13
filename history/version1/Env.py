@@ -12,7 +12,7 @@ from tkinter import *
 
 class Env(object):
 
-    foods:list[list]=[]#foods
+    foods:list[list[bool]]=[]#foods
 
     frogs:list[Frog]=[]#Frog
     eggs:list[Egg]=[]#Egg
@@ -28,7 +28,7 @@ class Env(object):
         for i in range(ENV_XSIZE):
             self.foods.append([])
             for j in range(ENV_YSIZE):
-                self.foods[i].append(0)
+                self.foods[i].append(False)
 
     def rebuildFrogAndFood(self):
         #先把背景画成白色
@@ -36,22 +36,19 @@ class Env(object):
         self.frogs.clear()#清空Frogs
         for i in range(ENV_XSIZE):
             for j in range(ENV_YSIZE):
-                self.foods[i][j]=0#清空食物
+                self.foods[i][j]=False#清空食物
         for i in range(len(self.eggs)):
             for j in range(FROG_PER_EGG):
                 self.frogs.append(Frog(ENV_XSIZE/2+nextInt(90),ENV_YSIZE/2+nextInt(90),self.eggs[i],self.tk,self.canvas))
-        print("Created %d frogs"%(4*len(self.eggs)))
+        print("Created %d frogs"%(FROG_PER_EGG*len(self.eggs)))
         for i in range(FOOD_QTY):
-            self.foods[nextInt(ENV_XSIZE-3)][nextInt(ENV_YSIZE-3)]=1
+            self.foods[nextInt(ENV_XSIZE-3)][nextInt(ENV_YSIZE-3)]=True
 
     def drawFood(self):#画食物
         for x in range(ENV_XSIZE):
             for y in range(ENV_YSIZE):
-                if self.foods[x][y]==1:
+                if self.foods[x][y]:
                     self.canvas.create_oval(x,y,x+2,y+2,outline='black',fill='black')
-                elif self.foods[x][y]==-1:
-                    self.canvas.create_oval(x,y,x+2,y+2,outline='white',fill='white')
-                    self.foods[x][y]=0
 
     def run(self):#运行
         EggTool.loadEggs(self)#导入或新建一批Egg
@@ -61,7 +58,6 @@ class Env(object):
             self.rebuildFrogAndFood()
             allDead=False#青蛙是否全部死亡
             for i in range(STEPS_PER_ROUND):
-                self.drawFood()#画食物
                 if allDead:#全部死亡就可以提前结束
                     break
                 allDead=True
@@ -72,8 +68,10 @@ class Env(object):
                         frog.alive=False
                 if i%SHOW_SPEED:#画青蛙会拖慢速度
                     continue
+                self.canvas.create_rectangle(0,0,self.canvas.winfo_width(),self.canvas.winfo_height(),fill='white')
+                self.drawFood()#画食物
                 for frog in self.frogs:#画青蛙
-                    frog.show()#青蛙移动
+                    frog.show(self.canvas)#青蛙移动
                 self.tk.update_idletasks()
                 self.tk.update()
             EggTool.layEggs(self)#保存蛋

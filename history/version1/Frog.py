@@ -28,8 +28,6 @@ class Frog(object):
     x:float=0#青蛙的x坐标
     y:float=0#青蛙的y坐标
 
-    xChange:int=0#青蛙水平方向的移动
-    yChange:int=0#青蛙垂直方向的移动
     change:int=1#青蛙一次移动的最小步长
 
     energy:int=10000  #青蛙的能量，能量耗尽时青蛙死亡
@@ -50,7 +48,6 @@ class Frog(object):
 
         self.frogImageDir=CLASSPATH+'frog.gif'  #青蛙图像路径
         self.frogImageFile=PhotoImage(file=self.frogImageDir)  #青蛙图像文件
-        self.frogImage=self.canvas.create_image(self.x,self.y,anchor=NW,image=self.frogImageFile)  #显示在canvas上的图像
 
         if egg.cellgroups is None:
             raise RuntimeError("Illegal egg cellgroups argument!")
@@ -108,8 +105,8 @@ class Frog(object):
         eatedFood:bool=False#是否吃掉食物
         if self.x>=0 and self.x<ENV_XSIZE\
         and self.y>=0 and self.y<ENV_YSIZE:
-            if env.foods[round(self.x)][round(self.y)]==1:
-                env.foods[round(self.x)][round(self.y)]=-1
+            if env.foods[round(self.x)][round(self.y)] is True:
+                env.foods[round(self.x)][round(self.y)]=False
                 self.energy+=1000#吃到食物青蛙能量增加1000
                 eatedFood=True
         if eatedFood: #TODO: 奖励措施未完成
@@ -117,16 +114,12 @@ class Frog(object):
 
     def movefrog(self,env,number):
         if Direction(number)==Direction.LEFT:
-            self.xChange-=self.change
             self.x-=self.change
         if Direction(number)==Direction.RIGHT:
-            self.xChange+=self.change
             self.x+=self.change
         if Direction(number)==Direction.UP:
-            self.yChange+=self.change
             self.y+=self.change
         if Direction(number)==Direction.DOWN:
-            self.yChange-=self.change
             self.y-=self.change
         if not self.checkalive():
             return None
@@ -161,12 +154,7 @@ class Frog(object):
             newEgg.cellgroups.append(cellGroup)
         return newEgg
 
-    def show(self):
+    def show(self,canvas:Canvas):
         if not self.alive:
-            self.frogImageDir=CLASSPATH+'nothing.gif'
-            self.frogImageFile=PhotoImage(file=self.frogImageDir)
-            self.canvas.itemconfig(self.frogImage,image=self.frogImageFile)
             return None
-        self.canvas.move(self.frogImage,self.xChange,self.yChange)#对Frog进行移动
-        self.xChange=0
-        self.yChange=0
+        canvas.create_image(self.x,self.y,anchor=NW,image=self.frogImageFile)
