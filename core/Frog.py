@@ -17,17 +17,16 @@ class Frog(object):
     brainRadius: float=0.0
     cells:list[Cell]=[]
     #视觉细胞在脑中的区域,暂时先随便取,以后考虑使用
-    eye:Zone=Zone(50,250,50)
+    eye:Zone=Zone(100,400,100)
     #饥饿的感收区在脑中的坐标,暂时先随便取,以后再考虑放到蛋里去进化
-    hungry:Zone=Zone(200,50,50)
+    hungry:Zone=Zone(300,100,100)
     #进食奖励的感收区在脑中的坐标,暂时先随便取,以后再考虑放到蛋里去进化
     happy:Zone=Zone(200,450,50)
     #运动细胞在脑中的区域,暂时先随便取,以后考虑使用
-    moveUpZone:Zone=Zone(500,100,10)
-    moveDownZone:Zone=Zone(500,400,10)
-    moveLeftZone:Zone=Zone(400,250,10)
-    moveRightZone:Zone=Zone(600,250,10)
-    moveRandomZone:Zone=Zone(500,250,10)
+    moveUpZone:Zone=Zone(700,100,40)
+    moveDownZone:Zone=Zone(700,400,40)
+    moveLeftZone:Zone=Zone(650,250,40)
+    moveRightZone:Zone=Zone(750,250,40)
 
     x:float=0#青蛙的x坐标
     y:float=0#青蛙的y坐标
@@ -100,9 +99,6 @@ class Frog(object):
                 if self.moveRightZone.nearby(output):self.movefrog(env=env,number=2)
                 if self.moveUpZone.nearby(output):self.movefrog(env=env,number=3)
                 if self.moveDownZone.nearby(output):self.movefrog(env=env,number=4)
-                if self.moveRandomZone.nearby(output):
-                    number=nextInt(4)
-                    self.movefrog(env=env,number=number)
         return True
 
     def checkFoodAndEat(self,env):#如果Frog坐标与Food坐标重合，吃掉它

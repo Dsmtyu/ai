@@ -3,7 +3,6 @@
 #-----------------------------------------------------------------------------------------------------------------------
 
 from tkinter import *
-from random import *
 
 from configs import *
 
@@ -18,10 +17,10 @@ class BrainStructure(object):
         self.rate=FROG_BRAIN_DISPLAY_LENGTH/FROG_BRAIN_LENGTH
 
     def drawZone(self,zone:Zone,outline:str='black',fill:str=''):
-        self.canvas.create_rectangle(round((zone.x-zone.radius/2)*self.rate),
-                                     round((zone.y-zone.radius/2)*self.rate),
-                                     round((zone.x+zone.radius/2)*self.rate),
-                                     round((zone.y+zone.radius/2)*self.rate),
+        self.canvas.create_rectangle(round((zone.x-zone.radius)*self.rate),
+                                     round((zone.y-zone.radius)*self.rate),
+                                     round((zone.x+zone.radius)*self.rate),
+                                     round((zone.y+zone.radius)*self.rate),
                                      fill=fill,outline=outline)
 
     def drawLine(self,fromZone:Zone,toZone:Zone):
@@ -37,7 +36,6 @@ class BrainStructure(object):
         self.drawZone(frog.moveDownZone)
         self.drawZone(frog.moveLeftZone)
         self.drawZone(frog.moveRightZone)
-        self.drawZone(frog.moveRandomZone)
 
         for cellgroup in frog.egg.cellgroups:
             shuffle(self.colors)
