@@ -27,10 +27,10 @@
 
 运行AI\history\version1\main.py可得到结果。(注意：在Pycharm上以根目录为AI运行，否则会显示ImportError!)
 附图一张：
-<p><img src="目录结构.png"></p>
+![](目录结构.png)
 两张运行图：
-<p><img src="run(pycharm).png"></p>
-<p><img src="run实际效果.png"></p>
+![](run(pycharm).png)
+![](run实际效果.png)
 
 ## 重要参数|Parameters
 在根目录下的configs.py中有一些重要参数，请勿随意更改
